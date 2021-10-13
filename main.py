@@ -8,20 +8,18 @@ from subprocess import call
 import os.path
 import pickle
 def clear():
-    # check and make call for specific operating system
-    _ = call(os.system('clear') if os.name =='posix' else os.system('cls'))
+  _ = os.system('clear') if os.name == 'posix' else  os.system('cls')
 
 match_string="https://steamcommunity.com/market/listings/"
 remove_string="https://www.deviantart.com/users/outgoing?"
 url2="https://steamcommunity.com/market/listings/753/"
 appid=int(753)                                                              #url[] stores all the urls to get links from
-url=["https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamprofile?order=this-month","https://www.deviantart.com/tag/steamprofile?order=most-recent","https://www.deviantart.com/tag/steamprofile?order=this-week"]
+url=["https://www.deviantart.com/tag/steamprofile?order=this-week","https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamprofile?order=this-month","https://www.deviantart.com/tag/steamprofile?order=most-recent"]
 main="https://www.deviantart.com/tag/steamprofiledesign?page="
 #generates follow up urls for custom urls 
 #recommended to run once 
 #for i in range(1,10):
 #   url.append(f'https://www.deviantart.com/tag/steamprofiledesign?page={str(i)}')
-
 #Checking for files
 if (not os.path.isfile('links.pkl')):
     with open('links.pkl', 'wb') as fp:
@@ -37,7 +35,7 @@ with open('links.pkl', "rb") as txtfile:
 
 with open('data.json') as json_file:  
     data = json.load(json_file)                                               #has the data from prev searches stored in this 
-
+clear()
 #get_item(item_name ) should be non url encoded url like
 # example get_item("https://steamcommunity.com/market/listings/753/746850-Chinatown" ) returns :₹ 269.36  ( {currency} value )
 def get_item(item):
@@ -122,9 +120,10 @@ for i in steamlink:
                 json_file.write(json.dumps(new))
     except TypeError: 
         pass
- 
+clear()
+clear()
 with open('data.json',"w",encoding='utf-8') as json_file:                       # Finally writing the data to file
     json_file.write(json.dumps(data))
-
-with open('links.pkl', "rb") as txtfile:                                        # Pickling the final links to file
+with open('links.pkl', "wb") as txtfile:                                        # Pickling the final links to file
     pickle.dump(onlylinks, txtfile)
+print("Check /new.json For Latest data")
