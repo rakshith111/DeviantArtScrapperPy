@@ -18,7 +18,7 @@ url=["https://www.deviantart.com/tag/steamprofile?order=this-week","https://www.
 main="https://www.deviantart.com/tag/steamprofiledesign?page="
 #generates follow up urls for custom urls 
 #recommended to run once 
-#for i in range(1,10):
+# for i in range(1,10):
 #   url.append(f'https://www.deviantart.com/tag/steamprofiledesign?page={str(i)}')
 #Checking for files
 if (not os.path.isfile('links.pkl')):
@@ -99,9 +99,11 @@ for i in data_keys:                                                           # 
     except ValueError:
         print(i+" Already exists")
 clear()
-print(10*'#')
+clear()
+clear()
+print(10*'#'+"copy from '[' \n∨∨∨∨∨")
 print(steamlink)
-print(10*'#')
+print(10*'#'+"Till the end of braces ']' ^^^^^^^")
 ############################################## till here and pass the array of steam links to the next array##############################
 #steamlink=
 new={}
@@ -120,8 +122,6 @@ for i in steamlink:
                 json_file.write(json.dumps(new))
     except TypeError: 
         pass
-clear()
-clear()
 with open('data.json',"w",encoding='utf-8') as json_file:                       # Finally writing the data to file
     json_file.write(json.dumps(data))
 with open('links.pkl', "wb") as txtfile:                                        # Pickling the final links to file
