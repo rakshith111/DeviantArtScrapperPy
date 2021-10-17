@@ -7,6 +7,8 @@
 <code>pickle </code> <br>
 <code>selenium </code> <br>
 <code>webdriver_manager</code></br>
+<code>json2html</code></br>
+
 
 <details>
   <summary>How to install requirements</summary>
@@ -15,7 +17,7 @@
   <strong><code>pip install beautifulsoup4</code></strong><br>
   <strong><code>pip install requests</code></strong><br>
   <strong><code>pip install urllib3</code></strong><br>
-  <strong><code>pickle is a default package</code></strong><br>
+  <strong><code>pip install json2html</code></strong><br>
   <strong><code>pip install selenium</code></strong><br>
   <strong><code>pip install webdriver-manager</code></strong><br>
 </details>
