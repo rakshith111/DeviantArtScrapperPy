@@ -37,7 +37,7 @@ remove_string="https://www.deviantart.com/users/outgoing?"
 
 #############################################################comment from here#####################################################
 #                                                                              #url[] stores all the urls to get art links from infiniteurl[] also has infinite scrollable pages to fix that 
-infiniteurl=["https://www.deviantart.com/tag/steamprofile"]     #,"https://www.deviantart.com/tag/steamartwork","https://www.deviantart.com/tag/steamshowcaseprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamprofile?order=most-recent"]
+infiniteurl=["https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamartwork","https://www.deviantart.com/tag/steamshowcaseprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamprofile?order=most-recent"]
 driver = webdriver.Chrome(ChromeDriverManager().install())
 for devianturl in infiniteurl:
     print("Accessing Devient gallery page "+ devianturl)                        
@@ -59,7 +59,7 @@ driver.close()
 print("Links extracted ="+str(len(alldata)))
 alldata=list(set(alldata))  
 
-url=["https://www.deviantart.com/tag/steamprofile?order=this-week"] #,"https://www.deviantart.com/tag/steamprofiledesigns?order=this-week","https://www.deviantart.com/tag/steamprofile?order=this-month"]
+url=["https://www.deviantart.com/tag/steamprofile?order=this-week","https://www.deviantart.com/tag/steamprofiledesigns?order=this-week","https://www.deviantart.com/tag/steamprofile?order=this-month"]
 
 main="https://www.deviantart.com/tag/steamprofiledesign?page="
 #generates follow up urls for custom urls 
