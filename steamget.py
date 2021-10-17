@@ -4,11 +4,19 @@ from time import sleep
 import requests
 from urllib.parse import unquote
 url2="https://steamcommunity.com/market/listings/753/"
-appid=int(753) 
-#get_item(item_name ) should be non url encoded url like
-# example get_item("https://steamcommunity.com/market/listings/753/746850-Chinatown" ) returns :₹ 269.36  ( {currency} value )
+appid=int(753)  
 def get_item(item):
-        
+         """
+    Takes a steamurl and returns its price
+    example  returns :
+    Parameters:
+    jsonfile (url): Should be a non url encoded steamurl and non
+    example:- get_item("https://steamcommunity.com/market/listings/753/746850-Chinatown" )
+  
+    Result:
+    returns a string
+        ( {currency} value )  example:- returns ₹ 269.36  
+    """
         item=item.replace(url2,"")
         market_hash_name= unquote(item)
         url = f'https://steamcommunity.com/market/priceoverview/?country=US&currency=24&appid={appid}&market_hash_name={market_hash_name}'
