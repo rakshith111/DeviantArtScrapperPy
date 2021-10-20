@@ -17,7 +17,7 @@ def clear():
 #Checking for files
 if (not os.path.isfile('links.pkl')):
     with open('links.pkl', 'wb') as fp:
-        nam=["https://www.deviantart.com/leithon/art/Girl-Pink-Forest-Steam-Profile-Design-882872778","https://www.deviantart.com/mahaka11/art/Zero-Two-Steam-Artwork-Profile-animated-732063179"]
+        nam=["Blank","Blank1"]
         pickle.dump(nam, fp)
 if (not os.path.isfile('data.json')):
     with open('data.json', 'w') as fp:
