@@ -36,28 +36,28 @@ match_string="https://steamcommunity.com/market/listings/"
 remove_string="https://www.deviantart.com/users/outgoing?"
 
 #############################################################comment from here#####################################################
-#                                                                              #url[] stores all the urls to get art links from infiniteurl[] also has infinite scrollable pages to fix that 
-# infiniteurl=["https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamartwork","https://www.deviantart.com/tag/steamshowcaseprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamprofile?order=most-recent"]
-# driver = webdriver.Chrome(ChromeDriverManager().install())
-# for devianturl in infiniteurl:
-#     print("Accessing Deviant gallery page "+ devianturl)                        
-#     driver.maximize_window()
-#     driver.get(devianturl)                                                    
-#     pagedata=driver.page_source 
-#     ScrollNumber = 8
-#     while ScrollNumber!=0:
-#         driver.execute_script("window.scrollTo(1,document.body.scrollHeight)")  #Scrolls to the bottom of the page 
-#         ScrollNumber-=1
-#         sleep(3)
-#     sleep(4)                                                                    
-#     pagedata=driver.page_source                                                
-#     soup = BeautifulSoup(pagedata,'html.parser')                                   #Parsing the htmldata to get required links 
-#     for deviantdata in soup.findAll('a',{'data-hook':"deviation_link"}):
-#         hrefval=deviantdata.get('href')
-#         alldata.append(hrefval)               
-# driver.close() 
-# print("Links extracted ="+str(len(alldata)))
-# alldata=list(set(alldata))  
+#url[] stores all the urls to get art links from infiniteurl[] also has infinite scrollable pages to fix that 
+infiniteurl=["https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamartwork","https://www.deviantart.com/tag/steamshowcaseprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamprofile?order=most-recent"]
+driver = webdriver.Chrome(ChromeDriverManager().install())
+for devianturl in infiniteurl:
+    print("Accessing Deviant gallery page "+ devianturl)                        
+    driver.maximize_window()
+    driver.get(devianturl)                                                    
+    pagedata=driver.page_source 
+    ScrollNumber = 8
+    while ScrollNumber!=0: 
+        driver.execute_script("window.scrollTo(1,document.body.scrollHeight)")  #Scrolls to the bottom of the page 
+        ScrollNumber-=1
+        sleep(3)
+    sleep(4)                                                                    
+    pagedata=driver.page_source                                                
+    soup = BeautifulSoup(pagedata,'html.parser')                                   #Parsing the htmldata to get required links 
+    for deviantdata in soup.findAll('a',{'data-hook':"deviation_link"}):
+        hrefval=deviantdata.get('href')
+        alldata.append(hrefval)               
+driver.close() 
+print("Links extracted ="+str(len(alldata)))
+alldata=list(set(alldata))  
 
 mainurls=["https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamartworkdesign","https://www.deviantart.com/tag/steamartwork","https://www.deviantart.com/tag/steamshowcaseprofile","https://www.deviantart.com/tag/steamprofiledesign"]
 url=[]
@@ -80,7 +80,7 @@ for devianturl in url:
 alldata=list(set(alldata))                                                   
 #                                                                             #stores all the steam links                                                                        
 for artworkurls in alldata:
-    if (not ( artworkurls in onlylinks)):                                     #visiting each pages to check for steam link brute force*        
+    if (artworkurls not in onlylinks):                                     #visiting each pages to check for steam link brute force*        
         print("Accessing ArtWork page "+ artworkurls)
         onlylinks.append(artworkurls)
         page = requests.get(artworkurls)  
@@ -93,7 +93,7 @@ onlylinks=list(set(onlylinks))
 steamlink=list(set(steamlink))                                               
 data_keys=data.keys()                                                         #gets all the links from file
 
-for steamlinks in data_keys:                                                           # if Url is previously stored in .json this removes it from the current steamlink[]
+for steamlinks in data_keys:                                                  # if Url is previously stored in .json this removes it from the current steamlink[]
     try:
         steamlink.remove(steamlinks)
     except ValueError:
@@ -112,7 +112,7 @@ for link in steamlink:
         if(not "NA" in price ):
             price=price.replace('₹','').replace(',','')
             price=float(price)
-            if(price >=120.00):                                                 #Appends only if value is greater than 120
+            if(price >=60.00):                                                 #Appends only if value is greater than 60
                 new[link]=price
                 data[link]=price
             #data now has merged data from file and new appends to it 
@@ -128,9 +128,8 @@ with open('data.json',"w",encoding='utf-8') as json_file:
 
 with open('links.pkl', "wb") as txtfile:                                        # Pickling the final links to file
     pickle.dump(onlylinks, txtfile)
+for links in steamlink:
+    print(links)
 htmlgen("data.json")
 htmlgen("new.json")
-clear()
-clear()
-clear()
 print("Check new.html For Latest data")

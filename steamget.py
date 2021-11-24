@@ -17,6 +17,7 @@ def get_item(item):
         returns a string
             ( {currency} value )  example:- returns ₹ 269.36  
         """
+        print(item)
         item=item.replace(url2,"")
         market_hash_name= unquote(item)
         url = f'https://steamcommunity.com/market/priceoverview/?country=US&currency=24&appid={appid}&market_hash_name={market_hash_name}'
