@@ -18,6 +18,5 @@
   <strong><code>pip install requests</code></strong><br>
   <strong><code>pip install urllib3</code></strong><br>
   <strong><code>pip install json2html</code></strong><br>
-  <strong><code>pip install selenium</code></strong><br>
   <strong><code>pip install webdriver-manager</code></strong><br>
 </details>
