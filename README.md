@@ -5,7 +5,6 @@
 <code>beautifulsoup4</code> <br>
 <code>requests </code> <br>
 <code>pickle </code> <br>
-<code>selenium </code> <br>
 <code>webdriver_manager</code></br>
 <code>json2html</code></br>
 
