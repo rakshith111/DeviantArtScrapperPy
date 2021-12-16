@@ -13,3 +13,8 @@ def urlextractor(url):
         nextpage=[]
         nextpage.append(int(1))
         return nextpage
+def remove_filter(steamurl):
+  posifilter = steamurl.find('?filter')
+  if posifilter == -1:
+    return steamurl
+  return steamurl[:posifilter]
