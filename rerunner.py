@@ -39,8 +39,8 @@ if(len(failedlinks)>0):
     with open('failed.pkl', "wb") as txtfile:                                        # Pickling the final links to file
         pickle.dump(failedlinks, txtfile)
     failedlinks=list(set(failedlinks))
-else:
-    htmlgen("data.json")
-    htmlgen("new.json")
-    print("Check new.html For Latest data")
+
+htmlgen("data.json")
+htmlgen("new.json")
+print("Check new.html For Latest data")
 

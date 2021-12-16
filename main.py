@@ -130,3 +130,4 @@ for links in steamlink:
     print(links)
 
 import rerunner
+rerunner
