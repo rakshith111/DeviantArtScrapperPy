@@ -46,10 +46,10 @@ data_keys=data.keys()
 
 #generates follow up urls for custom urls 
 mainurls=["https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamartworkdesign","https://www.deviantart.com/tag/steamartwork","https://www.deviantart.com/tag/steamshowcaseprofile","https://www.deviantart.com/tag/steamprofiledesign"]
-# for u in mainurls:
-#     url.append(u+"?order=this-month")
-#     url.append(u+"?order=this-week")
-#     url.append(u+"?order=most-recent")
+for u in mainurls:
+    url.append(u+"?order=this-month")
+    url.append(u+"?order=this-week")
+    url.append(u+"?order=most-recent")
 infiniteurl=["https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamartwork","https://www.deviantart.com/tag/steamshowcaseprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamprofile?order=most-recent"]
 
 url+=infiniteurl
@@ -60,7 +60,7 @@ for devianturl in url:
     print("Accessing Deviant gallery page "+ devianturl)               
     NextBtnClicker = 1
     nexts=urlextractor(devianturl)
-    while NextBtnClicker<=2 and nexts[0]!=1:
+    while NextBtnClicker<=7 and nexts[0]!=1:
         print(f"Accessing page {NextBtnClicker}....")
         nexts=urlextractor(devianturl+nexts[0])
         main_page = requests.get(devianturl+nexts[0])                                    
