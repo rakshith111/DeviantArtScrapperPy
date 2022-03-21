@@ -15,7 +15,6 @@ class extract:
         (data)       data.json: contains all visited steam links with prices , if the steam link appears again in another art page its price will be updated
         (url)        links.txt: list of all the links to check with
         
-        
         '''
         #check if files exists or not and create it
         if (not os.path.isfile('links.pkl')):
