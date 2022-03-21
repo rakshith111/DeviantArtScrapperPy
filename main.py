@@ -1,13 +1,11 @@
-from bs4 import BeautifulSoup
 import requests
 import json
-from json2html import *
-import os
-from urlextractor import *
 import os.path
-from htmgeny import htmlgen
 import pickle
 from steamget import get_item
+from bs4 import BeautifulSoup
+from htmgeny import htmlgen
+from urlextractor import *
 
 #Checking for files
 if (not os.path.isfile('links.pkl')):
@@ -44,15 +42,12 @@ with open('data.json') as json_file:
     data = json.load(json_file)                                               #has the data from prev searches stored in this 
 data_keys=data.keys()
 
-#generates follow up urls for custom urls 
-mainurls=["https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamartworkdesign","https://www.deviantart.com/tag/steamartwork","https://www.deviantart.com/tag/steamshowcaseprofile","https://www.deviantart.com/tag/steamprofiledesign"]
-for u in mainurls:
-    url.append(u+"?order=this-month")
-    url.append(u+"?order=this-week")
-    url.append(u+"?order=most-recent")
-infiniteurl=["https://www.deviantart.com/tag/steamprofile","https://www.deviantart.com/tag/steamartwork","https://www.deviantart.com/tag/steamshowcaseprofile","https://www.deviantart.com/tag/steamprofiledesigns","https://www.deviantart.com/tag/steamprofile?order=most-recent"]
+#opens the link.txt add custom urls there 
+import json
+with open ("links.txt",'r') as f:
+    url=json.loads(f.read())
 
-url+=infiniteurl
+
 #stores page data in the url[]  links only like www.deviantart.com/ artist name /art/ artwork name
 for devianturl in url:
     devianturls=list(set(devianturls))  
@@ -60,7 +55,8 @@ for devianturl in url:
     print("Accessing Deviant gallery page "+ devianturl)               
     NextBtnClicker = 1
     nexts=urlextractor(devianturl)
-    while NextBtnClicker<=7 and nexts[0]!=1:
+    while NextBtnClicker<=5 and nexts[0]!=1:
+        nexts=urlextractor(devianturl)
         print(f"Accessing page {NextBtnClicker}....")
         nexts=urlextractor(devianturl+nexts[0])
         main_page = requests.get(devianturl+nexts[0])                                    
@@ -69,6 +65,7 @@ for devianturl in url:
             hrefval=deviantdata.get('href')
             devianturls.append(hrefval)    
         NextBtnClicker+=1
+        sleep(2)
 
 devianturls=list(set(devianturls))   
 
