@@ -1,3 +1,4 @@
+from zoneinfo import available_timezones
 import requests
 import json
 import os.path
@@ -15,8 +16,9 @@ remove_string=scapper.remove_string
 url=scapper.urls
 data=scapper.data
 data_keys=scapper.data_keys
-steamlink=[]   
-devianturls=set()                                                               #consists of all deviant urls
+
+steamlink={}   
+devianturls=set()                                                             
 new={}
 newhtmldict={}
 
@@ -44,32 +46,30 @@ for devianturl in url:
         NextBtnClicker+=1
         sleep(2)
 
-
-print("Links extracted ="+str(len(devianturls)))                           #stores all the steam links                                                                        
-for artworkurls in devianturls:
-    if (artworkurls not in visited):                                     #visiting each pages to check for steam link , now only checks for previously non visited       
+availablelinks=devianturls-visited   
+print(f"Links extracted ={len(devianturls)}\n Accessing {len(availablelinks)} links...")                                                             
+for artworkurls in availablelinks:
         print("Accessing ArtWork page "+ artworkurls)
-        visited.append(artworkurls)
+        visited.add(artworkurls)
         page = requests.get(artworkurls)  
         soup = BeautifulSoup(page.content, 'html.parser')                    
         for pagedata in soup.findAll('a',{'class':"external"}):
             hrefval=pagedata.get('href')                                    
             if match_string in hrefval:                                       #match string has the steammarket link
                 hrefval=remove_filter(hrefval)
-                steamlink.append(hrefval.replace(remove_string,""))           #deviant external link is stripped and if matches its added into this set
+                steamlink.add(hrefval.replace(remove_string,""))           #deviant external link is stripped and if matches its added into this set
+                                            
 
-visited=list(set(visited))                                                
-steamlink=list(set(steamlink))                                               
-
-print(str(len(steamlink))+" steam links extracted")
-c=0
-if(len(steamlink)>0):
-    for steamlinks in data_keys:                                                  # if Url is previously stored in .json this removes it from the current steamlink[]
-        try:
-            steamlink.remove(steamlinks)
-        except ValueError:
-            c+=1
-    print(str(c)+" Duplicates have been removed")
+print(f"{len(steamlink)} steam links extracted")
+#DUplicate remover not nessary for steam links as price might change
+# c=0
+# if(len(steamlink)>0):
+#     for steamlinks in data_keys:                                                  # if Url is previously stored in .json this removes it from the current steamlink[]
+#         try:
+#             steamlink.remove(steamlinks)
+#         except ValueError:
+#             c+=1
+#     print(str(c)+" Duplicates have been removed")
 print("\n\n\nIF program Breakes \n")
 print(10*'#'+"copy from '[' \n∨∨∨∨∨")
 print(steamlink)
