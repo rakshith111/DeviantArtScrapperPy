@@ -1,13 +1,13 @@
 import json,os,pickle
 
-class extract:
+class basic:
     visited=[]
     failedlinks=[]
     data=dict()
     match_string="https://steamcommunity.com/market/listings/"
     remove_string="https://www.deviantart.com/users/outgoing?"
-    url=[]
-   # data_keys=[]
+    urls=[]
+    data_keys=[]
     def __init__(self) -> None:
         '''
         (visited)    links.pkl:consists of previously visited deviantart page links so that they arent visited more than once
@@ -23,7 +23,8 @@ class extract:
                 pickle.dump(init, pf)
         if (not os.path.isfile('failed.pkl')):
             with open('failed.pkl', 'wb') as pf:
-                init=["https://steamcommunity.com/market/listings/753/447850-Void","https://steamcommunity.com/market/listings/753/554660-Puzzle%20Poker%20Card"]
+                init=["https://steamcommunity.com/market/listings/753/447850-Void",
+                      "https://steamcommunity.com/market/listings/753/554660-Puzzle%20Poker%20Card"]
                 pickle.dump(init, pf)
         if (not os.path.isfile('data.json')):
             with open('data.json', 'w') as jf:
@@ -35,6 +36,7 @@ class extract:
             self.failedlinks = pickle.load(file)        
         with open('data.json') as json_file:  
             self.data = json.load(json_file)                                              
-       # self.data_keys=data.keys()
+            self.data_keys=self.data.keys()
         with open ("links.txt",'r') as file:
-            self.url=json.loads(file.read())
+            self.urls=json.loads(file.read())
+        

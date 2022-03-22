@@ -6,74 +6,50 @@ from steamget import get_item
 from bs4 import BeautifulSoup
 from htmgeny import htmlgen
 from urlextractor import *
-
-#Checking for files
-if (not os.path.isfile('links.pkl')):
-    with open('links.pkl', 'wb') as fp:
-        init=["Blank","Blank1"]
-        pickle.dump(init, fp)
-if (not os.path.isfile('failed.pkl')):
-    with open('failed.pkl', 'wb') as fp:
-        init=["https://steamcommunity.com/market/listings/753/447850-Void","https://steamcommunity.com/market/listings/753/554660-Puzzle%20Poker%20Card"]
-        pickle.dump(init, fp)
-if (not os.path.isfile('data.json')):
-    with open('data.json', 'w') as fp:
-        fp.write(json.dumps({"LINKS": "values"}))
-
-
-#pickling to load previous data
-onlylinks=[]
-#url[] stores all the urls to get art links from infiniteurl[] also has infinite scrollable pages to fix that 
-url=[]
-failedlinks=[]
+from begin import basic
+scapper=basic()
+visited=scapper.visited
+failedlinks=scapper.failedlinks
+match_string=scapper.match_string
+remove_string=scapper.remove_string
+url=scapper.urls
+data=scapper.data
+data_keys=scapper.data_keys
 steamlink=[]   
-devianturls=[]                                                                #consists of all deviant urls
+devianturls=set()                                                               #consists of all deviant urls
 new={}
 newhtmldict={}
 
-match_string="https://steamcommunity.com/market/listings/"
-remove_string="https://www.deviantart.com/users/outgoing?"
-
-with open('failed.pkl', "rb") as txtfile:
-    failedlinks = pickle.load(txtfile)
-with open('links.pkl', "rb") as txtfile:
-    onlylinks = pickle.load(txtfile)
-with open('data.json') as json_file:  
-    data = json.load(json_file)                                               #has the data from prev searches stored in this 
-data_keys=data.keys()
-
-#opens the link.txt add custom urls there 
-import json
-with open ("links.txt",'r') as f:
-    url=json.loads(f.read())
-
-
 #stores page data in the url[]  links only like www.deviantart.com/ artist name /art/ artwork name
 for devianturl in url:
-    devianturls=list(set(devianturls))  
-    print("Current data "+str(len(devianturls)))
-    print("Accessing Deviant gallery page "+ devianturl)               
+    print("Accessing Deviant gallery page "+ devianturl)          
     NextBtnClicker = 1
-    nexts=urlextractor(devianturl)
-    while NextBtnClicker<=5 and nexts[0]!=1:
-        nexts=urlextractor(devianturl)
+    page=requests.get(devianturl)
+    page_cookie=page.cookies
+    soup = BeautifulSoup(page.content, 'html.parser')  
+    for deviantdata in soup.findAll('a',{'data-hook':"deviation_link"}):
+            hrefval=deviantdata.get('href')
+            devianturls.add(hrefval)
+    nexts=urlextractor(devianturl,page_cookie)
+    while NextBtnClicker<=2 and nexts:
         print(f"Accessing page {NextBtnClicker}....")
-        nexts=urlextractor(devianturl+nexts[0])
-        main_page = requests.get(devianturl+nexts[0])                                    
+        joinedurl=devianturl+"&"+nexts
+        main_page = requests.get(joinedurl,cookies=page_cookie)
+        mp_cookie=main_page.cookies     
         soup = BeautifulSoup(main_page.content, 'html.parser')                                          
         for deviantdata in soup.findAll('a',{'data-hook':"deviation_link"}):
             hrefval=deviantdata.get('href')
-            devianturls.append(hrefval)    
+            devianturls.add(hrefval)
+        nexts=urlextractor(joinedurl,mp_cookie)
         NextBtnClicker+=1
         sleep(2)
 
-devianturls=list(set(devianturls))   
 
 print("Links extracted ="+str(len(devianturls)))                           #stores all the steam links                                                                        
 for artworkurls in devianturls:
-    if (artworkurls not in onlylinks):                                     #visiting each pages to check for steam link , now only checks for previously non visited       
+    if (artworkurls not in visited):                                     #visiting each pages to check for steam link , now only checks for previously non visited       
         print("Accessing ArtWork page "+ artworkurls)
-        onlylinks.append(artworkurls)
+        visited.append(artworkurls)
         page = requests.get(artworkurls)  
         soup = BeautifulSoup(page.content, 'html.parser')                    
         for pagedata in soup.findAll('a',{'class':"external"}):
@@ -82,7 +58,7 @@ for artworkurls in devianturls:
                 hrefval=remove_filter(hrefval)
                 steamlink.append(hrefval.replace(remove_string,""))           #deviant external link is stripped and if matches its added into this set
 
-onlylinks=list(set(onlylinks))                                                
+visited=list(set(visited))                                                
 steamlink=list(set(steamlink))                                               
 
 print(str(len(steamlink))+" steam links extracted")
@@ -122,7 +98,7 @@ with open('failed.pkl', "wb") as txtfile:                                       
     pickle.dump(failedlinks, txtfile)
 failedlinks=list(set(failedlinks))
 with open('links.pkl', "wb") as txtfile:                                        # Pickling the final links to file
-    pickle.dump(onlylinks, txtfile)
+    pickle.dump(visited, txtfile)
 for links in steamlink:
     print(links)
 
