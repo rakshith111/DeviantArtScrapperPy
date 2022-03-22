@@ -1,18 +1,22 @@
-import re
 from time import sleep
 import requests
 from lxml import html
 def urlextractor(url):
+    '''
+    accepts a deviant url , searches for the next page cursor , and returns the cursor part 
+    if no next page  or any other error returns 0
+    '''
+    print("FROM URL EX "+url)
     try:
         page = requests.get(url)
+        print(page)
+        open("asd.html",'wb').write(page.content)  
         sleep(0.5)
         pagedata=html.fromstring(page.content)
         nextpage=pagedata.xpath('//*[text()="Next"]//@href')
-        return nextpage[0]
+        return nextpage[0].split("&")[1]
     except IndexError:
-        nextpage=[]
-        nextpage.append(int(1))
-        return nextpage
+       return 0
 def remove_filter(steamurl):
   posifilter = steamurl.find('?filter')
   if posifilter == -1:
