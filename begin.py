@@ -1,13 +1,15 @@
 import json,os,pickle
 
 class basic:
-    visited=[]
-    failedlinks=[]
+    visited=set()
     data=dict()
-    match_string="https://steamcommunity.com/market/listings/"
-    remove_string="https://www.deviantart.com/users/outgoing?"
+    latest=[]
+    failedlinks=[]
     urls=[]
     data_keys=[]
+    match_string="https://steamcommunity.com/market/listings/"
+    remove_string="https://www.deviantart.com/users/outgoing?"
+    
     def __init__(self) -> None:
         '''
         (visited)    links.pkl:consists of previously visited deviantart page links so that they arent visited more than once
@@ -39,4 +41,16 @@ class basic:
             self.data_keys=self.data.keys()
         with open ("links.txt",'r') as file:
             self.urls=json.loads(file.read())
-        
+
+    def writer(self):
+        with open('new.json',"w",encoding='utf-8') as json_file:           
+            json_file.write(json.dumps(self.latest))
+        with open('data.json',"w",encoding='utf-8') as json_file:                      
+            json_file.write(json.dumps(self.data))
+        with open('failed.pkl', "wb") as txtfile:                                        
+            pickle.dump(self.failedlinks, txtfile)
+        with open('links.pkl', "wb") as txtfile:                                       
+            pickle.dump(self.visited, txtfile)
+        print("Done")
+    def rerunner(self):
+        pass
