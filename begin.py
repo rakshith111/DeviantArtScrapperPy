@@ -1,6 +1,8 @@
 import json,os,pickle
-
-class basic:
+from htmgeny import htmlgen
+from urlextractor import remove_filter
+from steamget import get_item
+class scrapper:
     visited=set()
     data=dict()
     latest=[]
@@ -51,6 +53,30 @@ class basic:
             pickle.dump(self.failedlinks, txtfile)
         with open('links.pkl', "wb") as txtfile:                                       
             pickle.dump(self.visited, txtfile)
+        htmlgen("data.json")
+        htmlgen("new.json")
+        print("Check new.html For Latest data")
         print("Done")
     def rerunner(self):
-        pass
+        if(len(self.failedlinks)>0):
+            print("\n Re-Running missed items\n\n")
+            for link in self.failedlinks:
+                link=remove_filter(link)
+                try:
+                    price=get_item(link)
+                    if(not "NA" in price ):
+                        price=price.replace('₹','').replace(',','')
+                        price=float(price)
+                        if(price >=60.00):                                                 #Appends only if value is greater than 60
+                            self.new[link]=price
+                            self.data[link]=price
+                        self.failedlinks.remove(link)
+                except TypeError:
+                    self.failedlinks.append(link)
+                    print(link+" failed ")
+                    pass
+        with open('data.json',"w",encoding='utf-8') as json_file:                      
+            json_file.write(json.dumps(self.data))
+        failedlinks=list(set(failedlinks))
+        with open('failed.pkl', "wb") as file:                                        # Pickling the final links to file
+            pickle.dump(failedlinks, file)

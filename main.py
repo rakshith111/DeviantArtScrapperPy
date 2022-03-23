@@ -6,8 +6,8 @@ from steamget import get_item
 from bs4 import BeautifulSoup
 from htmgeny import htmlgen
 from urlextractor import *
-from begin import basic
-scapper=basic()
+from begin import scrapper
+scapper=scrapper()
 visited=scapper.visited
 failedlinks=scapper.failedlinks
 match_string=scapper.match_string
@@ -77,6 +77,5 @@ for link in steamlink:
         failedlinks.append(link)
         print(link+"failed ")
         pass
-
-import rerunner
-rerunner
+scapper.writer()
+scapper.rerunner()
