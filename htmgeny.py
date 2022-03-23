@@ -7,9 +7,9 @@ def htmlgen(jsonfile):
   
     Parameters:
     jsonfile (filepath): should be a path to file 
-  
     Result:
     A html page is generated and opened 
+    Note: A defualt brower must be set by windows 
     """
     with open(jsonfile) as json_file:  
         data =json.load(json_file) 
