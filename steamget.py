@@ -1,14 +1,14 @@
 import json
 import time
 from time import sleep
+from httpx import stream
 import requests
 from urllib.parse import unquote
-url2="https://steamcommunity.com/market/listings/753/"
-appid=int(753)  
-def get_item(item):
+import re
+
+def get_item(steamurl):
         """
         Takes a steamurl and returns its price
-        example  returns :
         Parameters:
         jsonfile (url): Should be a non url encoded steamurl and non
         example:- get_item("https://steamcommunity.com/market/listings/753/746850-Chinatown" )
@@ -16,20 +16,23 @@ def get_item(item):
         Result:
         returns a string
             ( {currency} value )  example:- returns ₹ 269.36  
+
         """
-        print(item)
-        item=item.replace(url2,"")
-        market_hash_name= unquote(item)
-        url = f'https://steamcommunity.com/market/priceoverview/?country=US&currency=24&appid={appid}&market_hash_name={market_hash_name}'
+        patforid=("/[\d]+/")
+        patforname=("/[\d]+-[\w]+")
+        appid=re.findall(patforid,steamurl)
+        patforname=re.findall(patforname,steamurl)
+        market_hash_name= unquote(steamurl)
+        url = f'https://steamcommunity.com/market/priceoverview/?country=US&currency=24&appid={appid[0].replace("/","")}&market_hash_name={patforname[0].replace("/","")}'
         time.sleep(2)
         resp = requests.get(url)
         try:
             steamjsondata=json.loads(resp.content)
-            if resp.ok:   
-                print(steamjsondata)        
-                print(market_hash_name)   
+            if resp.ok:
                 steamjsondata=json.loads(resp.content)
+                
                 if steamjsondata["lowest_price"] :                                     #if item exits  returns price
+                    print(f'Got Price : { steamjsondata["lowest_price"]} Steamurl:{market_hash_name}  ')
                     return steamjsondata["lowest_price"]
                 else:
                     return "NA"
@@ -37,7 +40,7 @@ def get_item(item):
                     print(steamjsondata+" "+resp.url)
                     print("going to sleep for 5 sec")
                     time.sleep(5)
-                    get_item(item)   
+                    get_item(steamurl)   
         except KeyError:
                 return "NA"
                 
