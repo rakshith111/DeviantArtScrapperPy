@@ -20,8 +20,9 @@ latest=scapper.latest
 steamlink=set()  
 devianturls=set()                                                             
 newhtmldict={}
+availablelinks=set()
 
-#stores page data in the url[]  links only like www.deviantart.com/ artist name /art/ artwork name
+
 for devianturl in url:
     print("Accessing Deviant gallery page "+ devianturl)          
     NextBtnClicker = 1
@@ -32,7 +33,7 @@ for devianturl in url:
             hrefval=deviantdata.get('href')
             devianturls.add(hrefval)
     nexts=urlextractor(devianturl,page_cookie)
-    while NextBtnClicker<=2 and nexts:
+    while NextBtnClicker<=1 and nexts:                                                              #Change 2 to any number less than 5 after inital run
         print(f"Accessing page {NextBtnClicker}....")
         joinedurl=devianturl+"&"+nexts
         main_page = requests.get(joinedurl,cookies=page_cookie)
@@ -44,11 +45,10 @@ for devianturl in url:
         nexts=urlextractor(joinedurl,mp_cookie)
         NextBtnClicker+=1
         sleep(2)
-
 availablelinks=devianturls-visited   
-print(f"Links extracted ={len(devianturls)}\n Accessing {len(availablelinks)} links...")                                                             
+print(f"Links extracted ={len(devianturls)} \nAccessing {len(availablelinks)} links...")                                                             
 for artworkurls in availablelinks:
-        print("Accessing ArtWork page "+ artworkurls)
+        #print("Accessing ArtWork page "+ artworkurls)
         visited.add(artworkurls)
         page = requests.get(artworkurls)  
         soup = BeautifulSoup(page.content, 'html.parser')                    
@@ -61,8 +61,8 @@ for artworkurls in availablelinks:
 print(f"{len(steamlink)} steam links extracted")
 
 with open ("laststeam.txt","w") as f:
-    json.dumps(steamlink,f)
-print("Current Steam links saved to file : laststeam.txt \n Run it with another prog if the script breaks ")
+    json.dump(list(steamlink),f)
+print("Current Steam links saved to file : laststeam.txt \nRun it with another prog if the script breaks ")
 for link in steamlink:
     try:
         price=get_item(link)
@@ -75,7 +75,7 @@ for link in steamlink:
             # Finally writing the data to file
     except TypeError: 
         failedlinks.append(link)
-        print(link+"failed ")
+        print(link+" failed ")
         pass
 scapper.writer()
 scapper.rerunner()

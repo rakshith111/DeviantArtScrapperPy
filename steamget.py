@@ -19,10 +19,10 @@ def get_item(steamurl):
 
         """
         patforid=("/[\d]+/")
-        patforname=("/[\d]+-[\w]+")
+        patforname=("/[\d]+-[\w%()-]+")
         appid=re.findall(patforid,steamurl)
         patforname=re.findall(patforname,steamurl)
-        market_hash_name= unquote(steamurl)
+
         url = f'https://steamcommunity.com/market/priceoverview/?country=US&currency=24&appid={appid[0].replace("/","")}&market_hash_name={patforname[0].replace("/","")}'
         time.sleep(2)
         resp = requests.get(url)
@@ -32,13 +32,13 @@ def get_item(steamurl):
                 steamjsondata=json.loads(resp.content)
                 
                 if steamjsondata["lowest_price"] :                                     #if item exits  returns price
-                    print(f'Got Price : { steamjsondata["lowest_price"]} Steamurl:{market_hash_name}  ')
+                    print(f'Got Price : { steamjsondata["lowest_price"]} Steamurl:{steamurl}  ')
                     return steamjsondata["lowest_price"]
                 else:
                     return "NA"
             else:
-                    print(steamjsondata+" "+resp.url)
-                    print("going to sleep for 5 sec")
+                    print(resp.url+" going to sleep for 5 sec ")
+                    print(steamjsondata)
                     time.sleep(5)
                     get_item(steamurl)   
         except KeyError:

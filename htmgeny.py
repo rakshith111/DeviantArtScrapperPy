@@ -14,12 +14,12 @@ def htmlgen(jsonfile):
     with open(jsonfile) as json_file:  
         data =json.load(json_file) 
     keys=data.keys()
-    newhtmldict={}
+    latesthtmldict={}
     for key in keys:
         k=f'<a href="{key}">{key}</a>'
-        newhtmldict[k]=data[key]
+        latesthtmldict[k]=data[key]
     name=jsonfile.split('.')
-    htmltabel = json2html.convert(json = newhtmldict,escape=False)
+    htmltabel = json2html.convert(json = latesthtmldict,escape=False)
     writefile= open(f"{name[0]}.html","w")
     writefile.write("<center>"+htmltabel+"</center></div>")
     writefile.close()
