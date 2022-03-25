@@ -19,7 +19,7 @@ def get_item(steamurl):
 
         """
         patforid=("/[\d]+/")
-        patforname=("/[\d]+-[\w%()-]+")
+        patforname=("/[\d]+-[\w%()-'!$%&*+,-./:;<=>?@[\]^_`{|}~]+")
         appid=re.findall(patforid,steamurl)
         patforname=re.findall(patforname,steamurl)
 
