@@ -1,11 +1,18 @@
-import json,os,pickle,re
+import json,os,pickle,re,requests
+from zoneinfo import available_timezones
+from bs4 import BeautifulSoup
 from htmgeny import htmlgen
-from urlextractor import remove_filter
+from urlextractor import *
 from steamget import get_item
 class scrapper:
+    devianturls=set()
+    availablelinks=set()
+    availcount=10
+    currcount=0
     visited=set()
     data=dict()
     latest=dict()
+    steamlinks=set() 
     failedlinks=[]
     urls=[]
     data_keys=[]
@@ -60,9 +67,7 @@ class scrapper:
         if(len(self.failedlinks)>0):
             print("\n Re-Running missed items\n\n")
             for link in self.failedlinks:
-                link=remove_filter(link)
-
-                
+                link=remove_filter(link)               
                 try:
                     price=get_item(link)
                     if(not "NA" in price ):
@@ -84,3 +89,96 @@ class scrapper:
         htmlgen("latest.json")
         print("Check latest.html For Latest data")
         print("Done")
+    def D_link_extractor(self):
+        for devianturl in self.urls:
+            print("Accessing Deviant gallery page "+ devianturl)          
+            NextBtnClicker = 1
+            page=requests.get(devianturl)
+            page_cookie=page.cookies
+            soup = BeautifulSoup(page.content, 'html.parser')  
+            for deviantdata in soup.findAll('a',{'data-hook':"deviation_link"}):
+                    hrefval=deviantdata.get('href')
+                    self.devianturls.add(hrefval)
+        nexts=urlextractor(devianturl,page_cookie)
+        while NextBtnClicker<=1 and nexts:                                                              #Change 2 to any number less than 5 after inital run
+            print(f"Accessing page {NextBtnClicker}....")
+            joinedurl=devianturl+"&"+nexts
+            main_page = requests.get(joinedurl,cookies=page_cookie)
+            mp_cookie=main_page.cookies     
+            soup = BeautifulSoup(main_page.content, 'html.parser')                                          
+            for deviantdata in soup.findAll('a',{'data-hook':"deviation_link"}):
+                hrefval=deviantdata.get('href')
+                self.devianturls.add(hrefval)
+            nexts=urlextractor(joinedurl,mp_cookie)
+            NextBtnClicker+=1
+            sleep(2)
+        self.availablelinks=self.devianturls-self.visited   
+        print(f"Links extracted ={len(self.devianturls)} \nAccessing {len(self.availablelinks)} links...")
+        with open ("lastavaailable.txt","w") as f:
+            json.dump(list(self.availablelinks),f)
+    def S_link_extractor(self):
+        for index,artworkurls in enumerate(self.availablelinks):
+            print(f"Accessing ArtWork page {index}")
+            self.visited.add(artworkurls)
+            page = requests.get(artworkurls)  
+            soup = BeautifulSoup(page.content, 'html.parser')                    
+            for pagedata in soup.findAll('a',{'class':"external"}):
+                hrefval=pagedata.get('href')                                    
+                if self.match_string in hrefval:                                       #match string has the steammarket link
+                    hrefval=remove_filter(hrefval)
+                    self.steamlinks.add(hrefval.replace(self.remove_string,""))              #deviant external link is stripped and if matches its added into this set                                     
+        print(f"{len(self.steamlinks)} steam links extracted")
+        self.availcount=len(self.steamlinks)
+        self.availablelinks=set()
+        with open ("lastavaailable.txt","w") as f:
+            json.dump(list(self.availablelinks),f)
+        with open ("laststeam.txt","w") as f:
+            json.dump(list(self.steamlinks),f)
+        print("Current Steam links saved to file : laststeam.txt \nRun it with another prog if the script breaks ")
+    def pricefetch(self):
+        while(self.currcount<self.availcount):
+            for link in self.steamlinks:
+                try:
+                    price=get_item(link)
+                    self.currcount+=1
+                    if(not "NA" in price ):
+                        price=float(re.findall("[\d]+.[\d]+",price)[0])
+                        if(price >=100.00):                                                 #Appends only if value is greater than 100
+                            self.latest[link]=price
+                            self.data[link]=price
+                except TypeError: 
+                    self.failedlinks.append(link)
+                    print(link+" failed ")
+                    pass
+            self.steamlinks=set()
+            with open ("laststeam.txt","w") as f:
+                json.dump(list(self.steamlinks),f)
+
+scapper=scrapper()
+visited=scapper.visited
+failedlinks=scapper.failedlinks
+match_string=scapper.match_string
+remove_string=scapper.remove_string
+url=scapper.urls
+data=scapper.data
+data_keys=scapper.data_keys
+latest=scapper.latest
+availablelinks=scapper.availablelinks
+steamlinks=scapper.steamlinks
+if (os.path.getsize("lastavaailable.txt"))>2:
+    with open("lastavaailable.txt","r") as f:
+        availablelinks=set(json.loads(f.read()))
+else:
+    scapper.D_link_extractor()
+if (os.path.getsize("laststeam.txt"))>2:
+    with open("laststeam.txt","r") as f:
+        steamlinks=set(json.loads(f.read()))
+else:
+    scapper.S_link_extractor()
+
+scapper.pricefetch()
+scapper.rerunner()
+
+
+
+scapper.writer()
