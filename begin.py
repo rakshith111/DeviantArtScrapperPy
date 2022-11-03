@@ -1,9 +1,9 @@
 import json,os,pickle,re,requests
-from zoneinfo import available_timezones
+
 from bs4 import BeautifulSoup
-from htmgeny import htmlgen
-from urlextractor import *
-from steamget import get_item
+from libs.htmgeny import htmlgen
+from libs.urlextractor import *
+from libs.steamget import get_item
 class scrapper:
     devianturls=set()
     availablelinks=set()
@@ -40,6 +40,9 @@ class scrapper:
         if (not os.path.isfile('data.json')):
             with open('data.json', 'w') as jf:
                 jf.write(json.dumps({"LINKS": "values"}))
+        if (not os.path.isfile('lastavaailable.txt')):
+            with open('lastavaailable.txt', 'w') as jf:
+               jf.write("")
         #if files exist retrieve data
         with open('links.pkl', "rb") as file:
             self.visited = set(pickle.load(file))
