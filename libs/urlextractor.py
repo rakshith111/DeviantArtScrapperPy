@@ -4,7 +4,7 @@ from lxml import html
 #from random import randint
 def urlextractor(url,cookie):
     '''
-    accepts a deviant url along with its parent cookie, searches for the next page cursor , and returns the cursor part 
+    Accepts a deviant url along with its parent cookie, searches for the next page cursor , and returns the cursor part 
     if no next page  or any other error returns 0
     '''
     try:
@@ -15,6 +15,7 @@ def urlextractor(url,cookie):
         return nextpage[0].split("&")[1]
     except IndexError:
        return 0
+       
 def remove_filter(steamurl):
   posifilter = steamurl.find('?filter')
   if posifilter == -1:
