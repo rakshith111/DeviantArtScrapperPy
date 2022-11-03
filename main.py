@@ -31,17 +31,14 @@ class scrapper:
         '''
 
         current=[]
-        # page = requests.get(
-        #    "https://www.deviantart.com/tag/steamprofile?order=this-month")
-        # page_cookie = page.cookies
+        page = requests.get(
+           "https://www.deviantart.com/tag/steamprofile?order=this-month")
+        page_cookie = page.cookies
         
-        # soup = BeautifulSoup(page.content, 'html.parser')
-        # with open("temp.html", "w", encoding='utf8') as file:
-        #     file.write(page.text)
+        soup = BeautifulSoup(page.content, 'html.parser')
+        with open("temp.html", "w", encoding='utf8') as file:
+            file.write(page.text)
 
-        with open("2nd.htm", 'r', encoding='utf8') as f:
-                    filepage = f.read()
-        soup = BeautifulSoup(filepage,features="lxml")
         for deviantdata in soup.findAll('div', {'class': "mWr4e"}):
             hrefval = deviantdata.select(
                 'a[data-hook="deviation_link"]')[0]['href']
