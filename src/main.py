@@ -47,7 +47,7 @@ class scrapper:
         :param nextpage: int - Number of pages to visit
         :return: - list of all the art page links
 
-        | Accepts a deviant url and searches for the steam links in the art pages
+        | Accepts a deviant url and searches for the sub deviant art links
         | Then next page cursor is searched and the function is called again with the next page url
         | each page returns 24 links, then 24*nextpage links will be returned
         | so if nexpage is 2 then 48 links are returned
