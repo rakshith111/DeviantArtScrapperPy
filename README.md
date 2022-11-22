@@ -1,6 +1,7 @@
 # DeviantArtScrapperPy
-## (Under development)
-#### Scraps deviantart pages for Steambackground artworks prices for potential $$
+## Scraps Deviant Art pages for steam links for potential $$$
+:warning: **(Under development)** :warning:
+
 ## Requirements 
 
 <code>beautifulsoup4</code> <br>
@@ -13,4 +14,4 @@
 
 ## Read the docs locally
 ### Run in terminal
-<code> python -m http.server -d docs/build/html </code>
+<code> python -m http.server -d docs </code>
