@@ -155,6 +155,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../changeOlog.html">CHANGE-O-LOG</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../begin.html">begin module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../libs.html">libs package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../main.html">main module</a></li>
@@ -279,14 +280,17 @@
             <span class="n">deviantartpages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hrefval</span><span class="p">)</span>
         <span class="c1"># will retrive 24 urls</span>
         <span class="n">NextBtnClicker</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp.html&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
         <span class="n">nexts</span> <span class="o">=</span> <span class="n">urlextractor</span><span class="o">.</span><span class="n">nextcursor</span><span class="p">(</span><span class="n">baseurl</span><span class="p">,</span> <span class="n">page_cookie</span><span class="p">)</span>
         <span class="k">while</span> <span class="n">NextBtnClicker</span> <span class="o">&lt;=</span> <span class="n">nextpage</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">nexts</span><span class="p">:</span>
 
             <span class="n">joinedurl</span> <span class="o">=</span> <span class="s2">&quot;https://www.deviantart.com&quot;</span><span class="o">+</span><span class="n">nexts</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accessing page </span><span class="si">{</span><span class="n">NextBtnClicker</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> =</span><span class="si">{</span><span class="n">joinedurl</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accessing page </span><span class="si">{</span><span class="n">NextBtnClicker</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">joinedurl</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
             <span class="n">main_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">joinedurl</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">page_cookie</span><span class="p">)</span>
             <span class="n">mp_cookie</span> <span class="o">=</span> <span class="n">main_page</span><span class="o">.</span><span class="n">cookies</span>
             <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">main_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+            
             <span class="k">for</span> <span class="n">deviantdata</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s2">&quot;mWr4e&quot;</span><span class="p">}):</span>
                 <span class="n">hrefval</span> <span class="o">=</span> <span class="n">deviantdata</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
                     <span class="s1">&#39;a[data-hook=&quot;deviation_link&quot;]&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;href&#39;</span><span class="p">]</span>
@@ -316,7 +320,8 @@
                 <span class="n">hrefval</span> <span class="o">=</span> <span class="n">pagedata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">match_string</span> <span class="ow">in</span> <span class="n">hrefval</span><span class="p">:</span>  <span class="c1"># match string has the steammarket link</span>
                     <span class="n">hrefval</span> <span class="o">=</span> <span class="n">urlextractor</span><span class="o">.</span><span class="n">remove_filter</span><span class="p">(</span><span class="n">hrefval</span><span class="p">)</span>
-                    <span class="n">steamlink</span> <span class="o">=</span> <span class="p">(</span><span class="n">hrefval</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remove_string</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span></div></div>
+                    <span class="n">steamlink</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">hrefval</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remove_string</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+                    <span class="k">return</span> <span class="n">steamlink</span></div></div>
 
                 <span class="c1">#     if steamlink:</span>
                 <span class="c1">#         self.deviantxsteamdf = self.deviantxsteamdf.append(</span>
@@ -332,11 +337,13 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-    <span class="c1"># k=(scrapper().deviant_scrapper_pages(&quot;https://www.deviantart.com/tag/steamprofile&quot;,2))</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="n">scrapper</span><span class="p">()</span>
-    <span class="n">k</span><span class="o">.</span><span class="n">steamlinks_scrapper</span><span class="p">(</span>
-        <span class="p">[</span><span class="s2">&quot;https://www.deviantart.com/xieon08/art/Shora-Steam-Artwork-Animated-903885045&quot;</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">((</span><span class="n">k</span><span class="p">))</span>
+    <span class="n">getsubpages</span><span class="o">=</span><span class="p">(</span><span class="n">scrapper</span><span class="p">()</span><span class="o">.</span><span class="n">deviant_scrapper_pages</span><span class="p">(</span><span class="s2">&quot;https://www.deviantart.com/tag/steamprofile&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">getsubpages</span><span class="p">)</span>
+    <span class="n">getsteamliks</span> <span class="o">=</span> <span class="n">scrapper</span><span class="p">()</span>
+   <span class="c1"># pp=getsteamliks.steamlinks_scrapper(</span>
+      <span class="c1">#  [&quot;https://www.deviantart.com/xieon08/art/Shora-Steam-Artwork-Animated-903885045&quot;])</span>
+   <span class="c1"># print(pp)</span>
+<span class="c1"># no steam url https://www.deviantart.com/dryrel/art/CP2077-Rainy-Day-Animated-Steam-Artwork-936861222</span>
 </pre></div>
         </article>
       </div>

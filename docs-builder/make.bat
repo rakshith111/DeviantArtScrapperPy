@@ -8,7 +8,10 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 set SOURCEDIR=source
-set BUILDDIR=../
+set BUILDDIR=../docs
+
+
+
 
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
@@ -24,12 +27,12 @@ if errorlevel 9009 (
 )
 
 if "%1" == "" goto help
-
-%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+REM runs the base commands and saved files at docs folder directly instead of docs/html
+%SPHINXBUILD% %SOURCEDIR% %BUILDDIR% 
 goto end
 
 :help
-%SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+%SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% 
 
 :end
 popd

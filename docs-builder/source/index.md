@@ -7,12 +7,10 @@
 ```{warning}
 Module under heavy development
 ```
-
+## Contents:
 ```{toctree}
-:caption: 'Contents:'
 :maxdepth: 1
 
-begin
-libs
-main
+changeOlog
+Modules
 ```

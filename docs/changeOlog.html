@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="main module" href="main.html" /><link rel="prev" title="begin module" href="begin.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="CURRENT MODULES" href="Modules.html" /><link rel="prev" title="Welcome to DeviantArtScrapper’s documentation!" href="index.html" />
 
     <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
-        <title>libs package - DeviantArtScrapper 0.0.1 documentation</title>
+        <title>CHANGE-O-LOG - DeviantArtScrapper 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -154,12 +154,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="changeOlog.html">CHANGE-O-LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="begin.html">begin module</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">libs package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+  <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">CHANGE-O-LOG</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="libs.html">libs package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -194,104 +196,32 @@
           </label>
         </div>
         <article role="main">
-          <section id="libs-package">
-<h1>libs package<a class="headerlink" href="#libs-package" title="Permalink to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="module-libs.steamget">
-<span id="libs-steamget-module"></span><h2>libs.steamget module<a class="headerlink" href="#module-libs.steamget" title="Permalink to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="libs.steamget.get_item">
-<span class="sig-prename descclassname"><span class="pre">libs.steamget.</span></span><span class="sig-name descname"><span class="pre">get_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/steamget.html#get_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.steamget.get_item" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>steamurl</strong> – str - Steam url</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str -  price of the item</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>get_item(”<a class="reference external" href="https://steamcommunity.com/market/listings/753/746850-Chinatown">https://steamcommunity.com/market/listings/753/746850-Chinatown</a>” )</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>returns ₹ 269.36  (price of the item)</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Takes a steamurl and returns its price</div>
-</div>
-</dd></dl>
-
-</section>
-<section id="module-libs.urlextractor">
-<span id="libs-urlextractor-module"></span><h2>libs.urlextractor module<a class="headerlink" href="#module-libs.urlextractor" title="Permalink to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="libs.urlextractor.nextcursor">
-<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">nextcursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseurl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/urlextractor.html#nextcursor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.nextcursor" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>baseurl</strong> – str - Deviant art page url</p></li>
-<li><p><strong>cookie</strong> – cookie - cookie of the parent page</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str - next page cursor</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>“/tag/steamprofile?cursor=MTQwYWI2MjA9NCY1OTBhY2FkMD03MiZkMTc0YjZiYz1OJTJGQQ”</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Accepts a deviant url along with its parent cookie, searches for the next page cursor , and returns the cursor part </div>
-<div class="line">if no next page  or any other error returns 0</div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="libs.urlextractor.remove_filter">
-<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">remove_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/urlextractor.html#remove_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.remove_filter" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>steamurl</strong> – str - Steam url</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str - Steam url without filter tag</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Accepts a steam url and removes the filter part of the url and returns the url</div>
-<div class="line">Some urls have a filter part which is not needed for the program to work, this function removes the filter part and returns the url</div>
-</div>
-</dd></dl>
-
-</section>
-<section id="libs-htmgeny-module">
-<h2>libs.htmgeny module<a class="headerlink" href="#libs-htmgeny-module" title="Permalink to this heading">#</a></h2>
+          <section id="change-o-log">
+<h1>CHANGE-O-LOG<a class="headerlink" href="#change-o-log" title="Permalink to this heading">#</a></h1>
+<p>Any notable changes to this project that I deem necessary will be documented in this file.</p>
+<section id="id1">
+<h2>0.0.1 - 29/11/2021<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Deprecated - need to update</p>
-<p>Only kept as a reference as pandas will use different methods</p>
+<p>DeviantArt Website Changes
+Added a login system to the website, which kinda broke the scraper.</p>
+<ul class="simple">
+<li><p>Need to find a way to login to the website.</p></li>
+</ul>
 </div>
-<span class="target" id="module-libs.htmgeny"></span><dl class="py function">
-<dt class="sig sig-object py" id="libs.htmgeny.htmlgen">
-<span class="sig-prename descclassname"><span class="pre">libs.htmgeny.</span></span><span class="sig-name descname"><span class="pre">htmlgen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jsonfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/htmgeny.html#htmlgen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmgeny.htmlgen" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>jsonfile</strong> – str - json file name(path)</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Generates and opens a html file for the given jsonfile </div>
-<div class="line">A html page is generated and opened.</div>
-<div class="line">Note: A defualt brower must be set by windows </div>
-</div>
-</dd></dl>
-
+</section>
+<section id="id2">
+<h2>0.0.1 - 22/11/2021<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Changed the way the program is structured. Now it is a module, and the main program is in the <code class="docutils literal notranslate"><span class="pre">main.py</span></code> file.</p></li>
+<li><p>Add sphinx doc gen</p></li>
+<li><p>Updated Documentation</p></li>
+<li><p>Generate Documentation (docs/build/html)</p></li>
+<li><p>Updated File initialization</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -300,23 +230,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="main.html">
+          <a class="next-page" href="Modules.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">main module</div>
+                <div class="title">CURRENT MODULES</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="begin.html">
+          <a class="prev-page" href="index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">begin module</div>
+                <div class="title">Home</div>
                 
               </div>
             </a>
@@ -352,19 +282,10 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">libs package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-libs.steamget">libs.steamget module</a><ul>
-<li><a class="reference internal" href="#libs.steamget.get_item"><code class="docutils literal notranslate"><span class="pre">get_item()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-libs.urlextractor">libs.urlextractor module</a><ul>
-<li><a class="reference internal" href="#libs.urlextractor.nextcursor"><code class="docutils literal notranslate"><span class="pre">nextcursor()</span></code></a></li>
-<li><a class="reference internal" href="#libs.urlextractor.remove_filter"><code class="docutils literal notranslate"><span class="pre">remove_filter()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#libs-htmgeny-module">libs.htmgeny module</a><ul>
-<li><a class="reference internal" href="#libs.htmgeny.htmlgen"><code class="docutils literal notranslate"><span class="pre">htmlgen()</span></code></a></li>
+<li><a class="reference internal" href="#">CHANGE-O-LOG</a><ul>
+<li><a class="reference internal" href="#id1">0.0.1 - 29/11/2021</a></li>
+<li><a class="reference internal" href="#id2">0.0.1 - 22/11/2021</a><ul>
+<li><a class="reference internal" href="#changed">Changed</a></li>
 </ul>
 </li>
 </ul>

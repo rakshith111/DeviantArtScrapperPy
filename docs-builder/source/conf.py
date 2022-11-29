@@ -38,7 +38,7 @@ html_theme = 'furo'
 pygments_style = "sphinx"
 pygments_dark_style = "monokai"
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode',
-              'myst_parser', 'sphinx.ext.napoleon']
+              'myst_parser']
 autoclass_content = 'both' #add __init__ to the list of functions to document
 
 

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="main module" href="main.html" /><link rel="prev" title="begin module" href="begin.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs package" href="libs.html" /><link rel="prev" title="CHANGE-O-LOG" href="changeOlog.html" />
 
     <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
-        <title>libs package - DeviantArtScrapper 0.0.1 documentation</title>
+        <title>CURRENT MODULES - DeviantArtScrapper 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -154,12 +154,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="changeOlog.html">CHANGE-O-LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="begin.html">begin module</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">libs package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="libs.html">libs package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -188,111 +190,72 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="libs-package">
-<h1>libs package<a class="headerlink" href="#libs-package" title="Permalink to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="module-libs.steamget">
-<span id="libs-steamget-module"></span><h2>libs.steamget module<a class="headerlink" href="#module-libs.steamget" title="Permalink to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="libs.steamget.get_item">
-<span class="sig-prename descclassname"><span class="pre">libs.steamget.</span></span><span class="sig-name descname"><span class="pre">get_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/steamget.html#get_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.steamget.get_item" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>steamurl</strong> – str - Steam url</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str -  price of the item</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>get_item(”<a class="reference external" href="https://steamcommunity.com/market/listings/753/746850-Chinatown">https://steamcommunity.com/market/listings/753/746850-Chinatown</a>” )</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>returns ₹ 269.36  (price of the item)</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Takes a steamurl and returns its price</div>
-</div>
-</dd></dl>
-
-</section>
-<section id="module-libs.urlextractor">
-<span id="libs-urlextractor-module"></span><h2>libs.urlextractor module<a class="headerlink" href="#module-libs.urlextractor" title="Permalink to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="libs.urlextractor.nextcursor">
-<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">nextcursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseurl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/urlextractor.html#nextcursor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.nextcursor" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>baseurl</strong> – str - Deviant art page url</p></li>
-<li><p><strong>cookie</strong> – cookie - cookie of the parent page</p></li>
+          <section id="current-modules">
+<h1>CURRENT MODULES<a class="headerlink" href="#current-modules" title="Permalink to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Current Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="libs.html">libs package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="libs.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libs.html#module-libs.steamget">libs.steamget module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libs.html#libs.steamget.get_item"><code class="docutils literal notranslate"><span class="pre">get_item()</span></code></a></li>
 </ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str - next page cursor</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>“/tag/steamprofile?cursor=MTQwYWI2MjA9NCY1OTBhY2FkMD03MiZkMTc0YjZiYz1OJTJGQQ”</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Accepts a deviant url along with its parent cookie, searches for the next page cursor , and returns the cursor part </div>
-<div class="line">if no next page  or any other error returns 0</div>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libs.html#module-libs.urlextractor">libs.urlextractor module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libs.html#libs.urlextractor.nextcursor"><code class="docutils literal notranslate"><span class="pre">nextcursor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="libs.html#libs.urlextractor.remove_filter"><code class="docutils literal notranslate"><span class="pre">remove_filter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libs.html#libs-htmgeny-module">libs.htmgeny module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libs.html#libs.htmgeny.htmlgen"><code class="docutils literal notranslate"><span class="pre">htmlgen()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="main.html#main.scrapper.deviant_scrapper_pages"><code class="docutils literal notranslate"><span class="pre">scrapper.deviant_scrapper_pages()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="main.html#main.scrapper.steamlinks_scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper.steamlinks_scrapper()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="begin.html">begin module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="begin.html#begin.D_link_extractor"><code class="docutils literal notranslate"><span class="pre">D_link_extractor()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="begin.html#begin.S_link_extractor"><code class="docutils literal notranslate"><span class="pre">S_link_extractor()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="begin.html#begin.pricefetch"><code class="docutils literal notranslate"><span class="pre">pricefetch()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="begin.html#begin.scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.availablelinks"><code class="docutils literal notranslate"><span class="pre">scrapper.availablelinks</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.availcount"><code class="docutils literal notranslate"><span class="pre">scrapper.availcount</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.currcount"><code class="docutils literal notranslate"><span class="pre">scrapper.currcount</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.data"><code class="docutils literal notranslate"><span class="pre">scrapper.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.data_keys"><code class="docutils literal notranslate"><span class="pre">scrapper.data_keys</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.devianturls"><code class="docutils literal notranslate"><span class="pre">scrapper.devianturls</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.failedlinks"><code class="docutils literal notranslate"><span class="pre">scrapper.failedlinks</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.latest"><code class="docutils literal notranslate"><span class="pre">scrapper.latest</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.match_string"><code class="docutils literal notranslate"><span class="pre">scrapper.match_string</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.remove_string"><code class="docutils literal notranslate"><span class="pre">scrapper.remove_string</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.rerunner"><code class="docutils literal notranslate"><span class="pre">scrapper.rerunner()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.steamlinks"><code class="docutils literal notranslate"><span class="pre">scrapper.steamlinks</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.urls"><code class="docutils literal notranslate"><span class="pre">scrapper.urls</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.visited"><code class="docutils literal notranslate"><span class="pre">scrapper.visited</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="begin.html#begin.scrapper.writer"><code class="docutils literal notranslate"><span class="pre">scrapper.writer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="libs.urlextractor.remove_filter">
-<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">remove_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/urlextractor.html#remove_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.remove_filter" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>steamurl</strong> – str - Steam url</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str - Steam url without filter tag</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Accepts a steam url and removes the filter part of the url and returns the url</div>
-<div class="line">Some urls have a filter part which is not needed for the program to work, this function removes the filter part and returns the url</div>
-</div>
-</dd></dl>
-
-</section>
-<section id="libs-htmgeny-module">
-<h2>libs.htmgeny module<a class="headerlink" href="#libs-htmgeny-module" title="Permalink to this heading">#</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Deprecated - need to update</p>
-<p>Only kept as a reference as pandas will use different methods</p>
+<p>⚠️begin (old module)</p>
 </div>
-<span class="target" id="module-libs.htmgeny"></span><dl class="py function">
-<dt class="sig sig-object py" id="libs.htmgeny.htmlgen">
-<span class="sig-prename descclassname"><span class="pre">libs.htmgeny.</span></span><span class="sig-name descname"><span class="pre">htmlgen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jsonfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/htmgeny.html#htmlgen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmgeny.htmlgen" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>jsonfile</strong> – str - json file name(path)</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Generates and opens a html file for the given jsonfile </div>
-<div class="line">A html page is generated and opened.</div>
-<div class="line">Note: A defualt brower must be set by windows </div>
-</div>
-</dd></dl>
-
-</section>
 </section>
 
         </article>
@@ -300,23 +263,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="main.html">
+          <a class="next-page" href="libs.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">main module</div>
+                <div class="title">libs package</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="begin.html">
+          <a class="prev-page" href="changeOlog.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">begin module</div>
+                <div class="title">CHANGE-O-LOG</div>
                 
               </div>
             </a>
@@ -340,40 +303,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">libs package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-libs.steamget">libs.steamget module</a><ul>
-<li><a class="reference internal" href="#libs.steamget.get_item"><code class="docutils literal notranslate"><span class="pre">get_item()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-libs.urlextractor">libs.urlextractor module</a><ul>
-<li><a class="reference internal" href="#libs.urlextractor.nextcursor"><code class="docutils literal notranslate"><span class="pre">nextcursor()</span></code></a></li>
-<li><a class="reference internal" href="#libs.urlextractor.remove_filter"><code class="docutils literal notranslate"><span class="pre">remove_filter()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#libs-htmgeny-module">libs.htmgeny module</a><ul>
-<li><a class="reference internal" href="#libs.htmgeny.htmlgen"><code class="docutils literal notranslate"><span class="pre">htmlgen()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
