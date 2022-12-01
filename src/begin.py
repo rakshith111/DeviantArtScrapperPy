@@ -27,7 +27,7 @@ class scrapper:
 
     def __init__(self) -> None:
         '''
-        ..warning:: 
+        .. warning:: 
             Deprecated - need to update Only kept as a reference
 
         (visited)    links.pkl:consists of previously visited deviantart page links so that they arent visited more than once
