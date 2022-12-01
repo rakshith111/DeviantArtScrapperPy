@@ -5,9 +5,10 @@ import os
 from time import sleep
 from libs import urlextractor
 
-
+import json
 import requests
 from bs4 import BeautifulSoup
+from libs import deviantartapi
 
 
 class scrapper:
@@ -19,14 +20,38 @@ class scrapper:
         :return: None
 
         | Initializes the class and loads the data from the csv files
+        | Initializes the selenium driver and logs in to the account requires a username and password
+        | If credentials are not provided, it will request for the credentials
+        | Once credentials are provided, it will login to the account and save the cookies
+
 
 
         '''
         self.remove_string = "https://www.deviantart.com/users/outgoing?"
         self.match_string = "https://steamcommunity.com/market/listings/"
         self.data_path = 'src\data'
+
         # self.data_files=['deviantXsteam.csv','localprice.csv','failed.csv']
         # check if files exists or not and create it
+        if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'Credentials.json')))):
+            print('[x] Credentials not found, creating new file')
+            print('[+] Creating Credentials.json')
+            print('[+] Please enter your credentials')
+            username = input('Username: ')
+            password = input('Password: ')
+            with open(os.path.abspath(os.path.join(self.data_path, 'Credentials.json')), 'w') as f:
+                json.dump({'username': username, 'password': password}, f)
+            print('[+] Logging in with credentials')
+            self.deviantartapi = deviantartapi.selenium_scrapper(
+                username, password)
+
+        else:
+            print('[+] Logging in with credentials')
+            with open(os.path.abspath(os.path.join(self.data_path, 'Credentials.json')), 'r') as f:
+                credentials = json.load(f)
+            self.deviantartapi = deviantartapi.selenium_scrapper(
+                credentials['username'], credentials['password'])
+
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'deviantXsteam.csv')))):
             print('[x] deviantXsteam.csv not found, creating new file')
             print('[+] Creating deviantXsteam.csv')
@@ -58,54 +83,9 @@ class scrapper:
                 os.path.join(self.data_path, 'failed.csv')))
     # Add a rerun function to rerun the failed links
 
-    def deviant_scrapper_pages(self, baseurl: str, nextpage: int = 2) -> list:
+    def steamlinks_scrapper(self, deviantartpages: list) -> None:
         '''
-        :param baseurl: str - Deviant art page url
-        :param nextpage: int - Number of pages to visit
-        :return: - list of all the art page links
-
-        | Accepts a deviant url and searches for the sub deviant art links
-        | Then next page cursor is searched and the function is called again with the next page url
-        | each page returns 24 links, then 24*nextpage links will be returned
-        | so if nexpage is 2 then 48 links are returned
-
-
-        '''
-
-        deviantartpages = []
-        NextBtnClicker = 0
-        page = requests.get(baseurl)
-        page_cookie = page.cookies
-
-        soup = BeautifulSoup(page.content, 'html.parser')
-        print(f"Accessing page {NextBtnClicker+1} ={baseurl}....")
-        for deviantdata in soup.findAll('div', {'class': "mWr4e"}):
-            hrefval = deviantdata.select(
-                'a[data-hook="deviation_link"]')[0]['href']
-            deviantartpages.append(hrefval)
-        # will retrive 24 urls
-        NextBtnClicker += 1
-        nexts = urlextractor.nextcursor(baseurl, page_cookie)
-        while NextBtnClicker <= nextpage-1 and nexts:
-
-            joinedurl = "https://www.deviantart.com"+nexts
-            print(f"Accessing page {NextBtnClicker+1} ={joinedurl}....")
-            main_page = requests.get(joinedurl, cookies=page_cookie)
-            mp_cookie = main_page.cookies
-            soup = BeautifulSoup(main_page.content, 'html.parser')
-            for deviantdata in soup.findAll('div', {'class': "mWr4e"}):
-                hrefval = deviantdata.select(
-                    'a[data-hook="deviation_link"]')[0]['href']
-                deviantartpages.append(hrefval)
-            nexts = urlextractor.nextcursor(joinedurl, mp_cookie)
-            NextBtnClicker += 1
-            sleep(2)
-
-        return deviantartpages
-
-    def steamlinks_scrapper(self, deviantartpages: list):
-        '''
-        :param deviantartpages: list - list of deviant art page links which are to be searched for steam links
+        :param list deviantartpages:  list of deviant art page links which are to be searched for steam links
         :return: None
 
         | Accepts a list of deviant art page links
@@ -114,7 +94,7 @@ class scrapper:
 
         '''
         for deviantartpage in deviantartpages:
-            print(f"Accessing {deviantartpage}....")
+            print(f"[+] Accessing {deviantartpage}....")
             page = requests.get(deviantartpage)
             soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -122,7 +102,8 @@ class scrapper:
                 hrefval = pagedata.get('href')
                 if self.match_string in hrefval:  # match string has the steammarket link
                     hrefval = urlextractor.remove_filter(hrefval)
-                    steamlink = (hrefval.replace(self.remove_string, ""))
+                    steamlink = (str(hrefval).replace(self.remove_string, ""))
+                    #return steamlink
 
                 #     if steamlink:
                 #         self.deviantxsteamdf = self.deviantxsteamdf.append(
@@ -138,8 +119,17 @@ class scrapper:
 
 if __name__ == "__main__":
 
-    # k=(scrapper().deviant_scrapper_pages("https://www.deviantart.com/tag/steamprofile",2))
-    k = scrapper()
-    k.steamlinks_scrapper(
-        ["https://www.deviantart.com/xieon08/art/Shora-Steam-Artwork-Animated-903885045"])
-    print((k))
+    print("ye")
+    scrapper()
+    dev = deviantartapi.selenium_scrapper()
+    k = dev.get_deviant_links(
+    ['https://www.deviantart.com/tag/steamprofile?order=this-month'], 4)
+    # retrives 96 links in case of no duplicates
+
+    # getsubpages=(scrapper().deviant_scrapper_pages("https://www.deviantart.com/tag/steamprofile",2))
+    # print(getsubpages)
+    # getsteamliks = scrapper()
+    # pp=getsteamliks.steamlinks_scrapper(
+    #  ["https://www.deviantart.com/xieon08/art/Shora-Steam-Artwork-Animated-903885045"])
+    # print(pp)
+    # no steam url https://www.deviantart.com/dryrel/art/CP2077-Rainy-Day-Animated-Steam-Artwork-936861222

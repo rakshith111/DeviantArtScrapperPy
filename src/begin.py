@@ -102,7 +102,7 @@ def D_link_extractor(self):
             for deviantdata in soup.findAll('a',{'data-hook':"deviation_link"}):
                     hrefval=deviantdata.get('href')
                     self.devianturls.add(hrefval)
-        nexts=nextcursor(devianturl,page_cookie)
+        nexts=nextcursor_requests(devianturl,page_cookie)
         while NextBtnClicker<=1 and nexts:                                                              #Change 2 to any number less than 5 after inital run
             print(f"Accessing page {NextBtnClicker}....")
             joinedurl=devianturl+"&"+nexts
@@ -112,7 +112,7 @@ def D_link_extractor(self):
             for deviantdata in soup.findAll('a',{'data-hook':"deviation_link"}):
                 hrefval=deviantdata.get('href')
                 self.devianturls.add(hrefval)
-            nexts=nextcursor(joinedurl,mp_cookie)
+            nexts=nextcursor_requests(joinedurl,mp_cookie)
             NextBtnClicker+=1
             sleep(2)
         self.availablelinks=self.devianturls-self.visited   
