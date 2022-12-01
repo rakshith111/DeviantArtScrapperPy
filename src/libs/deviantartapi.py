@@ -86,6 +86,7 @@ class selenium_scrapper:
     def get_deviant_links(self, baseurl: list,nextpage:int=2) -> set:
         '''
         :param list baseurl:  - list of Deviant art Base urls
+        :param int nextpage:  - Number of pages to scrape
         :return: set of links to the deviant art pages
         :rtype: set
 
