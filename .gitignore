@@ -2,3 +2,6 @@ data
 testingstf
 doctrees
 geckodriver.log
+src/__pycache__/
+src/libs/__pycache__/
+docs/.doctrees/
