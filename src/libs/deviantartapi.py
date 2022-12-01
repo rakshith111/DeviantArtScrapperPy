@@ -5,7 +5,7 @@ from selenium import webdriver
 import os
 import pickle
 from selenium.webdriver.common.by import By
-import urlextractor
+from libs import urlextractor
 
 class selenium_scrapper:
     def __init__(self, username=None, password=None) -> None:

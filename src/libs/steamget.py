@@ -7,16 +7,14 @@ from urllib.parse import unquote
 import re
 
 
-def get_item(steamurl):
+def get_item(steamurl: str) -> str:
     """
-    :param steamurl: str - Steam url 
-    :return: str -  price of the item
+    :param str steamurl: Steam url 
+    :rtype: str
     :example: get_item("https://steamcommunity.com/market/listings/753/746850-Chinatown" )
-    :return: returns ₹ 269.36  (price of the item)
+    :return: price of the item  returns ₹ 269.36  (price of the item)
 
-    | Takes a steamurl and returns its price
-
- 
+    | Takes a steammarket url and returns its price
 
     """
     patforid = ("/[\d]+/")

@@ -3,11 +3,15 @@ import json
 import os
 
 
-def htmlgen(jsonfile):
+def htmlgen(jsonfile) -> None:
     """
-    :param jsonfile: str - json file name(path)
+    :param str jsonfile: json file name(path)
 
     :return: None
+
+    .. deprecated:: 0.0.1
+        Only kept as a reference as pandas will use different methods
+
 
     | Generates and opens a html file for the given jsonfile 
     | A html page is generated and opened.
