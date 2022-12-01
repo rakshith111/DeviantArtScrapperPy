@@ -153,12 +153,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+  <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changeOlog.html">CHANGE-O-LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../begin.html">begin module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../libs.html">libs package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../main.html">main module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libs.html">Libs package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../begin.html">begin module</a></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -193,193 +195,227 @@
         </div>
         <article role="main">
           <h1>Source code for begin</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">json</span><span class="o">,</span><span class="nn">os</span><span class="o">,</span><span class="nn">pickle</span><span class="o">,</span><span class="nn">re</span><span class="o">,</span><span class="nn">requests</span>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">from</span> <span class="nn">libs.htmgeny</span> <span class="kn">import</span> <span class="n">htmlgen</span>
 <span class="kn">from</span> <span class="nn">libs.urlextractor</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">libs.steamget</span> <span class="kn">import</span> <span class="n">get_item</span>
+
+
 <div class="viewcode-block" id="scrapper"><a class="viewcode-back" href="../begin.html#begin.scrapper">[docs]</a><span class="k">class</span> <span class="nc">scrapper</span><span class="p">:</span>
-    <span class="n">devianturls</span><span class="o">=</span><span class="nb">set</span><span class="p">()</span>
-    <span class="n">availablelinks</span><span class="o">=</span><span class="nb">set</span><span class="p">()</span>
-    <span class="n">availcount</span><span class="o">=</span><span class="mi">10</span>
-    <span class="n">currcount</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">visited</span><span class="o">=</span><span class="nb">set</span><span class="p">()</span>
-    <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
-    <span class="n">latest</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
-    <span class="n">steamlinks</span><span class="o">=</span><span class="nb">set</span><span class="p">()</span> 
-    <span class="n">failedlinks</span><span class="o">=</span><span class="p">[]</span>
-    <span class="n">urls</span><span class="o">=</span><span class="p">[]</span>
-    <span class="n">data_keys</span><span class="o">=</span><span class="p">[]</span>
-    <span class="n">match_string</span><span class="o">=</span><span class="s2">&quot;https://steamcommunity.com/market/listings/&quot;</span>
-    <span class="n">remove_string</span><span class="o">=</span><span class="s2">&quot;https://www.deviantart.com/users/outgoing?&quot;</span>
-    
+    <span class="n">devianturls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">availablelinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">availcount</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">currcount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">latest</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">steamlinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">failedlinks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_keys</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">match_string</span> <span class="o">=</span> <span class="s2">&quot;https://steamcommunity.com/market/listings/&quot;</span>
+    <span class="n">remove_string</span> <span class="o">=</span> <span class="s2">&quot;https://www.deviantart.com/users/outgoing?&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        .. warning:: </span>
+<span class="sd">            Deprecated - need to update Only kept as a reference</span>
+
 <span class="sd">        (visited)    links.pkl:consists of previously visited deviantart page links so that they arent visited more than once</span>
 <span class="sd">        (failedlinks)failed.pkl:contains steam links which failed to get steam price due to naming or unknown error </span>
 <span class="sd">        (data)       data.json: contains all visited steam links with prices , if the steam link appears again in another art page its price will be updated</span>
 <span class="sd">        (url)        links.txt: list of all the links to check with</span>
-<span class="sd">        </span>
+
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="c1">#check if files exists or not and create it</span>
+        <span class="c1"># check if files exists or not and create it</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;links.pkl&#39;</span><span class="p">)):</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;links.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">pf</span><span class="p">:</span>
-                <span class="n">init</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Blank&quot;</span><span class="p">,</span><span class="s2">&quot;Blank1&quot;</span><span class="p">]</span>
+                <span class="n">init</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Blank&quot;</span><span class="p">,</span> <span class="s2">&quot;Blank1&quot;</span><span class="p">]</span>
                 <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="n">pf</span><span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;failed.pkl&#39;</span><span class="p">)):</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;failed.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">pf</span><span class="p">:</span>
-                <span class="n">init</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;https://steamcommunity.com/market/listings/753/447850-Void&quot;</span><span class="p">,</span>
-                      <span class="s2">&quot;https://steamcommunity.com/market/listings/753/554660-Puzzle%20Poker%20Card&quot;</span><span class="p">]</span>
+                <span class="n">init</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://steamcommunity.com/market/listings/753/447850-Void&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;https://steamcommunity.com/market/listings/753/554660-Puzzle%20Poker%20Card&quot;</span><span class="p">]</span>
                 <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="n">pf</span><span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)):</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jf</span><span class="p">:</span>
                 <span class="n">jf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;LINKS&quot;</span><span class="p">:</span> <span class="s2">&quot;values&quot;</span><span class="p">}))</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;lastavaailable.txt&#39;</span><span class="p">)):</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;lastavaailable.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jf</span><span class="p">:</span>
-               <span class="n">jf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="c1">#if files exist retrieve data</span>
+                <span class="n">jf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># if files exist retrieve data</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;links.pkl&#39;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;failed.pkl&#39;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>    
-        <span class="k">except</span> <span class="ne">EOFError</span><span class="p">:</span> 
-            <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="o">=</span><span class="nb">list</span><span class="p">()</span>    
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>  
-            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>                                              
-            <span class="bp">self</span><span class="o">.</span><span class="n">data_keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-        <span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="s2">&quot;links.txt&quot;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">urls</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">EOFError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;links.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">urls</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
 <div class="viewcode-block" id="scrapper.writer"><a class="viewcode-back" href="../begin.html#begin.scrapper.writer">[docs]</a>    <span class="k">def</span> <span class="nf">writer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;latest.json&#39;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>           
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Writes the data to json file</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;latest.json&#39;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
             <span class="n">json_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">latest</span><span class="p">))</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>                      
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
             <span class="n">json_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;failed.pkl&#39;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">txtfile</span><span class="p">:</span>                                        
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;failed.pkl&#39;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">txtfile</span><span class="p">:</span>
             <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="p">,</span> <span class="n">txtfile</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;links.pkl&#39;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">txtfile</span><span class="p">:</span>                                       
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;links.pkl&#39;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">txtfile</span><span class="p">:</span>
             <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">visited</span><span class="p">),</span> <span class="n">txtfile</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="scrapper.rerunner"><a class="viewcode-back" href="../begin.html#begin.scrapper.rerunner">[docs]</a>    <span class="k">def</span> <span class="nf">rerunner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Reruns the scrapper for the failed links</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Re-Running missed items</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="p">:</span>
-                <span class="n">link</span><span class="o">=</span><span class="n">remove_filter</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>               
+                <span class="n">link</span> <span class="o">=</span> <span class="n">remove_filter</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">price</span><span class="o">=</span><span class="n">get_item</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-                    <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="s2">&quot;NA&quot;</span> <span class="ow">in</span> <span class="n">price</span> <span class="p">):</span>
-                        <span class="n">price</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;[\d,]+[\.][\d]+&quot;</span><span class="p">,</span><span class="n">price</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-                        <span class="k">if</span><span class="p">(</span><span class="n">price</span> <span class="o">&gt;=</span><span class="mf">100.00</span><span class="p">):</span>                                                 <span class="c1">#Appends only if value is greater than 100</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">latest</span><span class="p">[</span><span class="n">link</span><span class="p">]</span><span class="o">=</span><span class="n">price</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">link</span><span class="p">]</span><span class="o">=</span><span class="n">price</span>
+                    <span class="n">price</span> <span class="o">=</span> <span class="n">get_item</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+                    <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="s2">&quot;NA&quot;</span> <span class="ow">in</span> <span class="n">price</span><span class="p">):</span>
+                        <span class="n">price</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;[\d,]+[\.][\d]+&quot;</span><span class="p">,</span> <span class="n">price</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">price</span> <span class="o">&gt;=</span> <span class="mf">100.00</span><span class="p">):</span>  <span class="c1"># Appends only if value is greater than 100</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">latest</span><span class="p">[</span><span class="n">link</span><span class="p">]</span> <span class="o">=</span> <span class="n">price</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">link</span><span class="p">]</span> <span class="o">=</span> <span class="n">price</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">link</span><span class="o">+</span><span class="s2">&quot; failed &quot;</span><span class="p">)</span>
                     <span class="k">pass</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>                      
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
             <span class="n">json_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="p">))</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;failed.pkl&#39;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>                                        <span class="c1"># Pickling the final links to file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="p">))</span>
+        <span class="c1"># Pickling the final links to file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;failed.pkl&#39;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
             <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
         <span class="n">htmlgen</span><span class="p">(</span><span class="s2">&quot;data.json&quot;</span><span class="p">)</span>
         <span class="n">htmlgen</span><span class="p">(</span><span class="s2">&quot;latest.json&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check latest.html For Latest data&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span></div></div>
-<div class="viewcode-block" id="D_link_extractor"><a class="viewcode-back" href="../begin.html#begin.D_link_extractor">[docs]</a><span class="k">def</span> <span class="nf">D_link_extractor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="scrapper.D_link_extractor"><a class="viewcode-back" href="../begin.html#begin.scrapper.D_link_extractor">[docs]</a>    <span class="k">def</span> <span class="nf">D_link_extractor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Extracts the deviant art links from the deviantart page</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
         <span class="k">for</span> <span class="n">devianturl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">urls</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accessing Deviant gallery page &quot;</span><span class="o">+</span> <span class="n">devianturl</span><span class="p">)</span>          
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accessing Deviant gallery page &quot;</span> <span class="o">+</span> <span class="n">devianturl</span><span class="p">)</span>
             <span class="n">NextBtnClicker</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">page</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">devianturl</span><span class="p">)</span>
-            <span class="n">page_cookie</span><span class="o">=</span><span class="n">page</span><span class="o">.</span><span class="n">cookies</span>
-            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>  
-            <span class="k">for</span> <span class="n">deviantdata</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,{</span><span class="s1">&#39;data-hook&#39;</span><span class="p">:</span><span class="s2">&quot;deviation_link&quot;</span><span class="p">}):</span>
-                    <span class="n">hrefval</span><span class="o">=</span><span class="n">deviantdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">devianturls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">hrefval</span><span class="p">)</span>
-        <span class="n">nexts</span><span class="o">=</span><span class="n">nextcursor</span><span class="p">(</span><span class="n">devianturl</span><span class="p">,</span><span class="n">page_cookie</span><span class="p">)</span>
-        <span class="k">while</span> <span class="n">NextBtnClicker</span><span class="o">&lt;=</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">nexts</span><span class="p">:</span>                                                              <span class="c1">#Change 2 to any number less than 5 after inital run</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accessing page </span><span class="si">{</span><span class="n">NextBtnClicker</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
-            <span class="n">joinedurl</span><span class="o">=</span><span class="n">devianturl</span><span class="o">+</span><span class="s2">&quot;&amp;&quot;</span><span class="o">+</span><span class="n">nexts</span>
-            <span class="n">main_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">joinedurl</span><span class="p">,</span><span class="n">cookies</span><span class="o">=</span><span class="n">page_cookie</span><span class="p">)</span>
-            <span class="n">mp_cookie</span><span class="o">=</span><span class="n">main_page</span><span class="o">.</span><span class="n">cookies</span>     
-            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">main_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>                                          
-            <span class="k">for</span> <span class="n">deviantdata</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,{</span><span class="s1">&#39;data-hook&#39;</span><span class="p">:</span><span class="s2">&quot;deviation_link&quot;</span><span class="p">}):</span>
-                <span class="n">hrefval</span><span class="o">=</span><span class="n">deviantdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">devianturl</span><span class="p">)</span>
+            <span class="n">page_cookie</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">cookies</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">deviantdata</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;data-hook&#39;</span><span class="p">:</span> <span class="s2">&quot;deviation_link&quot;</span><span class="p">}):</span>
+                <span class="n">hrefval</span> <span class="o">=</span> <span class="n">deviantdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">devianturls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">hrefval</span><span class="p">)</span>
-            <span class="n">nexts</span><span class="o">=</span><span class="n">nextcursor</span><span class="p">(</span><span class="n">joinedurl</span><span class="p">,</span><span class="n">mp_cookie</span><span class="p">)</span>
-            <span class="n">NextBtnClicker</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">nexts</span> <span class="o">=</span> <span class="n">nextcursor_requests</span><span class="p">(</span><span class="n">devianturl</span><span class="p">,</span> <span class="n">page_cookie</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">NextBtnClicker</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">nexts</span><span class="p">:</span>  <span class="c1"># Change 2 to any number less than 5 after inital run</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accessing page </span><span class="si">{</span><span class="n">NextBtnClicker</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
+            <span class="n">joinedurl</span> <span class="o">=</span> <span class="n">devianturl</span><span class="o">+</span><span class="s2">&quot;&amp;&quot;</span><span class="o">+</span><span class="n">nexts</span>
+            <span class="n">main_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">joinedurl</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">page_cookie</span><span class="p">)</span>
+            <span class="n">mp_cookie</span> <span class="o">=</span> <span class="n">main_page</span><span class="o">.</span><span class="n">cookies</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">main_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">deviantdata</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;data-hook&#39;</span><span class="p">:</span> <span class="s2">&quot;deviation_link&quot;</span><span class="p">}):</span>
+                <span class="n">hrefval</span> <span class="o">=</span> <span class="n">deviantdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">devianturls</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">hrefval</span><span class="p">)</span>
+            <span class="n">nexts</span> <span class="o">=</span> <span class="n">nextcursor_requests</span><span class="p">(</span><span class="n">joinedurl</span><span class="p">,</span> <span class="n">mp_cookie</span><span class="p">)</span>
+            <span class="n">NextBtnClicker</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">devianturls</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">visited</span>   
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Links extracted =</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">devianturls</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">Accessing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="p">)</span><span class="si">}</span><span class="s2"> links...&quot;</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="s2">&quot;lastavaailable.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="p">),</span><span class="n">f</span><span class="p">)</span></div>
-<div class="viewcode-block" id="S_link_extractor"><a class="viewcode-back" href="../begin.html#begin.S_link_extractor">[docs]</a><span class="k">def</span> <span class="nf">S_link_extractor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">artworkurls</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">devianturls</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">visited</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Links extracted =</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">devianturls</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">Accessing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="p">)</span><span class="si">}</span><span class="s2"> links...&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;lastavaailable.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="scrapper.S_link_extractor"><a class="viewcode-back" href="../begin.html#begin.scrapper.S_link_extractor">[docs]</a>    <span class="k">def</span> <span class="nf">S_link_extractor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Extracts the steam lins links from the art pages</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">artworkurls</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accessing ArtWork page </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">artworkurls</span><span class="p">)</span>
-            <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artworkurls</span><span class="p">)</span>  
-            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>                    
-            <span class="k">for</span> <span class="n">pagedata</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s2">&quot;external&quot;</span><span class="p">}):</span>
-                <span class="n">hrefval</span><span class="o">=</span><span class="n">pagedata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>                                    
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">match_string</span> <span class="ow">in</span> <span class="n">hrefval</span><span class="p">:</span>                                       <span class="c1">#match string has the steammarket link</span>
-                    <span class="n">hrefval</span><span class="o">=</span><span class="n">remove_filter</span><span class="p">(</span><span class="n">hrefval</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">hrefval</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remove_string</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>              <span class="c1">#deviant external link is stripped and if matches its added into this set                                     </span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artworkurls</span><span class="p">)</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">pagedata</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s2">&quot;external&quot;</span><span class="p">}):</span>
+                <span class="n">hrefval</span> <span class="o">=</span> <span class="n">pagedata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">match_string</span> <span class="ow">in</span> <span class="n">hrefval</span><span class="p">:</span>  <span class="c1"># match string has the steammarket link</span>
+                    <span class="n">hrefval</span> <span class="o">=</span> <span class="n">remove_filter</span><span class="p">(</span><span class="n">hrefval</span><span class="p">)</span>
+                    <span class="c1"># deviant external link is stripped and if matches its added into this set</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                        <span class="n">hrefval</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remove_string</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="p">)</span><span class="si">}</span><span class="s2"> steam links extracted&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">availcount</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="o">=</span><span class="nb">set</span><span class="p">()</span>
-        <span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="s2">&quot;lastavaailable.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="p">),</span><span class="n">f</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="s2">&quot;laststeam.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="p">),</span><span class="n">f</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">availcount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;lastavaailable.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">availablelinks</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;laststeam.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Current Steam links saved to file : laststeam.txt </span><span class="se">\n</span><span class="s2">Run it with another prog if the script breaks &quot;</span><span class="p">)</span></div>
-<div class="viewcode-block" id="pricefetch"><a class="viewcode-back" href="../begin.html#begin.pricefetch">[docs]</a><span class="k">def</span> <span class="nf">pricefetch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">currcount</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">availcount</span><span class="p">):</span>
+
+<div class="viewcode-block" id="scrapper.pricefetch"><a class="viewcode-back" href="../begin.html#begin.scrapper.pricefetch">[docs]</a>    <span class="k">def</span> <span class="nf">pricefetch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Fetches the price of the steam links</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">while</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">currcount</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">availcount</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">price</span><span class="o">=</span><span class="n">get_item</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">currcount</span><span class="o">+=</span><span class="mi">1</span>
-                    <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="s2">&quot;NA&quot;</span> <span class="ow">in</span> <span class="n">price</span> <span class="p">):</span>
-                        <span class="n">price</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;[\d]+.[\d]+&quot;</span><span class="p">,</span><span class="n">price</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-                        <span class="k">if</span><span class="p">(</span><span class="n">price</span> <span class="o">&gt;=</span><span class="mf">100.00</span><span class="p">):</span>                                                 <span class="c1">#Appends only if value is greater than 100</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">latest</span><span class="p">[</span><span class="n">link</span><span class="p">]</span><span class="o">=</span><span class="n">price</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">link</span><span class="p">]</span><span class="o">=</span><span class="n">price</span>
-                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span> 
+                    <span class="n">price</span> <span class="o">=</span> <span class="n">get_item</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">currcount</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="s2">&quot;NA&quot;</span> <span class="ow">in</span> <span class="n">price</span><span class="p">):</span>
+                        <span class="n">price</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;[\d]+.[\d]+&quot;</span><span class="p">,</span> <span class="n">price</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">price</span> <span class="o">&gt;=</span> <span class="mf">100.00</span><span class="p">):</span>  <span class="c1"># Appends only if value is greater than 100</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">latest</span><span class="p">[</span><span class="n">link</span><span class="p">]</span> <span class="o">=</span> <span class="n">price</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">link</span><span class="p">]</span> <span class="o">=</span> <span class="n">price</span>
+                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">failedlinks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">link</span><span class="o">+</span><span class="s2">&quot; failed &quot;</span><span class="p">)</span>
                     <span class="k">pass</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="o">=</span><span class="nb">set</span><span class="p">()</span>
-            <span class="k">with</span> <span class="nb">open</span> <span class="p">(</span><span class="s2">&quot;laststeam.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="p">),</span><span class="n">f</span><span class="p">)</span></div>
-<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;laststeam.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">steamlinks</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span></div></div>
+<span class="c1"># if __name__==&quot;__main__&quot;:</span>
 
-    <span class="n">scapper</span> <span class="o">=</span> <span class="n">scrapper</span><span class="p">()</span>
-    <span class="n">visited</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">visited</span>
-    <span class="n">failedlinks</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">failedlinks</span>
-    <span class="n">match_string</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">match_string</span>
-    <span class="n">remove_string</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">remove_string</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">urls</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">data_keys</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">data_keys</span>
-    <span class="n">latest</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">latest</span>
-    <span class="n">availablelinks</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">availablelinks</span>
-    <span class="n">steamlinks</span> <span class="o">=</span> <span class="n">scapper</span><span class="o">.</span><span class="n">steamlinks</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">&quot;lastavaailable.txt&quot;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;lastavaailable.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">availablelinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">scapper</span><span class="o">.</span><span class="n">D_link_extractor</span><span class="p">()</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">&quot;laststeam.txt&quot;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;laststeam.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">steamlinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">scapper</span><span class="o">.</span><span class="n">S_link_extractor</span><span class="p">()</span>
+<span class="c1">#     scapper = scrapper()</span>
+<span class="c1">#     visited = scapper.visited</span>
+<span class="c1">#     failedlinks = scapper.failedlinks</span>
+<span class="c1">#     match_string = scapper.match_string</span>
+<span class="c1">#     remove_string = scapper.remove_string</span>
+<span class="c1">#     url = scapper.urls</span>
+<span class="c1">#     data = scapper.data</span>
+<span class="c1">#     data_keys = scapper.data_keys</span>
+<span class="c1">#     latest = scapper.latest</span>
+<span class="c1">#     availablelinks = scapper.availablelinks</span>
+<span class="c1">#     steamlinks = scapper.steamlinks</span>
+<span class="c1">#     if (os.path.getsize(&quot;lastavaailable.txt&quot;)) &gt; 2:</span>
+<span class="c1">#         with open(&quot;lastavaailable.txt&quot;, &quot;r&quot;) as f:</span>
+<span class="c1">#             availablelinks = set(json.loads(f.read()))</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         scapper.D_link_extractor()</span>
+<span class="c1">#     if (os.path.getsize(&quot;laststeam.txt&quot;)) &gt; 2:</span>
+<span class="c1">#         with open(&quot;laststeam.txt&quot;, &quot;r&quot;) as f:</span>
+<span class="c1">#             steamlinks = set(json.loads(f.read()))</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         scapper.S_link_extractor()</span>
 
-    <span class="n">scapper</span><span class="o">.</span><span class="n">pricefetch</span><span class="p">()</span>
-    <span class="n">scapper</span><span class="o">.</span><span class="n">rerunner</span><span class="p">()</span>
+<span class="c1">#     scapper.pricefetch()</span>
+<span class="c1">#     scapper.rerunner()</span>
 
 
-    <span class="n">scapper</span><span class="o">.</span><span class="n">writer</span><span class="p">()</span>
+<span class="c1">#     scapper.writer()</span>
 </pre></div>
         </article>
       </div>

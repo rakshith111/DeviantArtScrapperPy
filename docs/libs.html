@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="main module" href="main.html" /><link rel="prev" title="begin module" href="begin.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="main module" href="main.html" /><link rel="prev" title="CURRENT MODULES" href="Modules.html" />
 
     <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
-        <title>libs package - DeviantArtScrapper 0.0.1 documentation</title>
+        <title>Libs package - DeviantArtScrapper 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -154,12 +154,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="changeOlog.html">CHANGE-O-LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="begin.html">begin module</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">libs package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Libs package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -195,31 +197,174 @@
         </div>
         <article role="main">
           <section id="libs-package">
-<h1>libs package<a class="headerlink" href="#libs-package" title="Permalink to this heading">#</a></h1>
+<h1>Libs package<a class="headerlink" href="#libs-package" title="Permalink to this heading">#</a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="module-libs.deviantartapi">
+<span id="libs-deviantartapi-module"></span><h2>libs.deviantartapi module<a class="headerlink" href="#module-libs.deviantartapi" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="libs.deviantartapi.selenium_scrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libs.deviantartapi.</span></span><span class="sig-name descname"><span class="pre">selenium_scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/deviantartapi.html#selenium_scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.deviantartapi.selenium_scrapper" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – Deviant art username</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – Deviant art password</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line">Initializes the driver,Logs in to the account and loads the page</div>
+<div class="line">Uses cookies to login to the account if the cookies are present</div>
+<div class="line">If the cookies are not present, it will login to the account and save the cookies</div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="libs.deviantartapi.selenium_scrapper.get_deviant_links">
+<span class="sig-name descname"><span class="pre">get_deviant_links</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nextpage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="reference internal" href="_modules/libs/deviantartapi.html#selenium_scrapper.get_deviant_links"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.deviantartapi.selenium_scrapper.get_deviant_links" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>baseurl</strong> (<em>list</em>) – <ul class="simple">
+<li><p>list of Deviant art Base urls</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>set of links to the deviant art pages</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Need to enable Paging in Account settings -&gt; Browsing -&gt; Paging -&gt; click through pages</p>
+</div>
+<div class="line-block">
+<div class="line">Loads the page, Finds all the links to the deviant art pages</div>
+<div class="line">Then next page cursor is searched and the function is called again with the next page url</div>
+<div class="line">each page returns 24 links, then 24*nextpage links will be returned</div>
+<div class="line">so if nexpage is 2 then 48 links are returned</div>
+<div class="line">Next page cursor count can be set manually in the function</div>
+<div class="line">Returns the set of links</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libs.deviantartapi.selenium_scrapper.scroll">
+<span class="sig-name descname"><span class="pre">scroll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scroll_pause_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/deviantartapi.html#selenium_scrapper.scroll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.deviantartapi.selenium_scrapper.scroll" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scroll_pause_time</strong> (<em>int</em>) – Time to wait between scrolls</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Page source</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function returns 24 links per page, even if there are more than 24 links in the page needs to be fixed in the future</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Need to enable scroll Account settings -&gt; Browsing -&gt; Paging -&gt; Scroll through pages</p>
+</div>
+<div class="line-block">
+<div class="line">Scrolls the page to load all the images</div>
+<div class="line">Can override the default time to wait between scrolls</div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-libs.htmgeny">
+<span id="libs-htmgeny-module"></span><h2>libs.htmgeny module<a class="headerlink" href="#module-libs.htmgeny" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="libs.htmgeny.htmlgen">
+<span class="sig-prename descclassname"><span class="pre">libs.htmgeny.</span></span><span class="sig-name descname"><span class="pre">htmlgen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jsonfile</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/libs/htmgeny.html#htmlgen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmgeny.htmlgen" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>jsonfile</strong> (<em>str</em>) – json file name(path)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.0.1: </span>Only kept as a reference as pandas will use different methods</p>
+</div>
+<div class="line-block">
+<div class="line">Generates and opens a html file for the given jsonfile </div>
+<div class="line">A html page is generated and opened.</div>
+<div class="line">Note: A defualt brower must be set by windows </div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-libs.oldlibs">
+<span id="libs-oldlibs-module"></span><h2>libs.oldlibs module<a class="headerlink" href="#module-libs.oldlibs" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="libs.oldlibs.deviant_scrapper_pages">
+<span class="sig-prename descclassname"><span class="pre">libs.oldlibs.</span></span><span class="sig-name descname"><span class="pre">deviant_scrapper_pages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nextpage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/libs/oldlibs.html#deviant_scrapper_pages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.oldlibs.deviant_scrapper_pages" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>baseurl</strong> (<em>str</em>) – Deviant art page url</p></li>
+<li><p><strong>nextpage</strong> (<em>int</em>) – Number of pages to visit</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>list of all the art page links</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.0.1: </span>Use <code class="xref py py-func docutils literal notranslate"><span class="pre">deviantartapi.selenium_scrapper()</span></code> instead
+outdated since Deviantart changed their website and introduced login system</p>
+</div>
+<div class="line-block">
+<div class="line">Accepts a deviant url and searches for the sub deviant art links</div>
+<div class="line">Then next page cursor is searched and the function is called again with the next page url</div>
+<div class="line">each page returns 24 links, then 24*nextpage links will be returned</div>
+<div class="line">so if nexpage is 2 then 48 links are returned</div>
+</div>
+</dd></dl>
+
 </section>
 <section id="module-libs.steamget">
 <span id="libs-steamget-module"></span><h2>libs.steamget module<a class="headerlink" href="#module-libs.steamget" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="libs.steamget.get_item">
-<span class="sig-prename descclassname"><span class="pre">libs.steamget.</span></span><span class="sig-name descname"><span class="pre">get_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/steamget.html#get_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.steamget.get_item" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">libs.steamget.</span></span><span class="sig-name descname"><span class="pre">get_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/steamget.html#get_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.steamget.get_item" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>steamurl</strong> – str - Steam url</p>
+<dd class="field-odd"><p><strong>steamurl</strong> (<em>str</em>) – Steam url</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str -  price of the item</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
 </dd>
 <dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p>get_item(”<a class="reference external" href="https://steamcommunity.com/market/listings/753/746850-Chinatown">https://steamcommunity.com/market/listings/753/746850-Chinatown</a>” )</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>returns ₹ 269.36  (price of the item)</p>
+<dd class="field-even"><p>price of the item  returns ₹ 269.36  (price of the item)</p>
 </dd>
 </dl>
 <div class="line-block">
-<div class="line">Takes a steamurl and returns its price</div>
+<div class="line">Takes a steammarket url and returns its price</div>
 </div>
 </dd></dl>
 
@@ -227,68 +372,82 @@
 <section id="module-libs.urlextractor">
 <span id="libs-urlextractor-module"></span><h2>libs.urlextractor module<a class="headerlink" href="#module-libs.urlextractor" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="libs.urlextractor.nextcursor">
-<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">nextcursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseurl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/urlextractor.html#nextcursor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.nextcursor" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="libs.urlextractor.nextcursor_requests">
+<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">nextcursor_requests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/urlextractor.html#nextcursor_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.nextcursor_requests" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>baseurl</strong> – str - Deviant art page url</p></li>
-<li><p><strong>cookie</strong> – cookie - cookie of the parent page</p></li>
+<li><p><strong>baseurl</strong> (<em>str</em>) – Deviant art page url</p></li>
+<li><p><strong>cookie</strong> (<em>cookie</em>) – cookie of the parent page</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str - next page cursor</p>
+<dd class="field-even"><p>next page cursor</p>
 </dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>“/tag/steamprofile?cursor=MTQwYWI2MjA9NCY1OTBhY2FkMD03MiZkMTc0YjZiYz1OJTJGQQ”</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p>“/tag/steamprofile?cursor=MTQwYWI2MjA9NCY1OTBhY2FkMD03MiZkMTc0YjZiYz1OJTJGQQ”</p>
 </dd>
 </dl>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.0.1: </span>Use <code class="xref py py-func docutils literal notranslate"><span class="pre">deviantartapi.nextcursor_selenium()</span></code> instead
+outdated since Deviantart changed their website and introduced login system
+Requests version doesn’t render js</p>
+</div>
 <div class="line-block">
+<div class="line">Made for requests version</div>
 <div class="line">Accepts a deviant url along with its parent cookie, searches for the next page cursor , and returns the cursor part </div>
 <div class="line">if no next page  or any other error returns 0</div>
 </div>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="libs.urlextractor.remove_filter">
-<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">remove_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/urlextractor.html#remove_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.remove_filter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="libs.urlextractor.nextcursor_selenium">
+<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">nextcursor_selenium</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/urlextractor.html#nextcursor_selenium"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.nextcursor_selenium" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>steamurl</strong> – str - Steam url</p>
+<dd class="field-odd"><p><strong>page_data</strong> (<em>str</em>) – raw page source data of the page</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>str - Steam url without filter tag</p>
+<dd class="field-even"><p>next page cursor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Exception<span class="colon">:</span></dt>
+<dd class="field-even"><p>IndexError - if no next page  or any other error returns 0</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p>“/tag/steamprofile?cursor=MTQwYWI2MjA9NCY1OTBhY2FkMD03MiZkMTc0YjZiYz1OJTJGQQ”</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line">Made for selenuim version</div>
+<div class="line">Accepts a deviant page source , searches for the next page cursor , and returns the cursor part </div>
+<div class="line">if no next page  or any other error returns 0</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libs.urlextractor.remove_filter">
+<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">remove_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/urlextractor.html#remove_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.remove_filter" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>steamurl</strong> (<em>str</em>) – Steam url</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Steam url without filter tag</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 <div class="line-block">
 <div class="line">Accepts a steam url and removes the filter part of the url and returns the url</div>
 <div class="line">Some urls have a filter part which is not needed for the program to work, this function removes the filter part and returns the url</div>
-</div>
-</dd></dl>
-
-</section>
-<section id="libs-htmgeny-module">
-<h2>libs.htmgeny module<a class="headerlink" href="#libs-htmgeny-module" title="Permalink to this heading">#</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Deprecated - need to update</p>
-<p>Only kept as a reference as pandas will use different methods</p>
-</div>
-<span class="target" id="module-libs.htmgeny"></span><dl class="py function">
-<dt class="sig sig-object py" id="libs.htmgeny.htmlgen">
-<span class="sig-prename descclassname"><span class="pre">libs.htmgeny.</span></span><span class="sig-name descname"><span class="pre">htmlgen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jsonfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/htmgeny.html#htmlgen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmgeny.htmlgen" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>jsonfile</strong> – str - json file name(path)</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Generates and opens a html file for the given jsonfile </div>
-<div class="line">A html page is generated and opened.</div>
-<div class="line">Note: A defualt brower must be set by windows </div>
+<div class="line">if no filter part is found returns the same url</div>
 </div>
 </dd></dl>
 
@@ -309,14 +468,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="begin.html">
+          <a class="prev-page" href="Modules.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">begin module</div>
+                <div class="title">CURRENT MODULES</div>
                 
               </div>
             </a>
@@ -352,19 +511,32 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">libs package</a><ul>
+<li><a class="reference internal" href="#">Libs package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-libs.deviantartapi">libs.deviantartapi module</a><ul>
+<li><a class="reference internal" href="#libs.deviantartapi.selenium_scrapper"><code class="docutils literal notranslate"><span class="pre">selenium_scrapper</span></code></a><ul>
+<li><a class="reference internal" href="#libs.deviantartapi.selenium_scrapper.get_deviant_links"><code class="docutils literal notranslate"><span class="pre">selenium_scrapper.get_deviant_links()</span></code></a></li>
+<li><a class="reference internal" href="#libs.deviantartapi.selenium_scrapper.scroll"><code class="docutils literal notranslate"><span class="pre">selenium_scrapper.scroll()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-libs.htmgeny">libs.htmgeny module</a><ul>
+<li><a class="reference internal" href="#libs.htmgeny.htmlgen"><code class="docutils literal notranslate"><span class="pre">htmlgen()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-libs.oldlibs">libs.oldlibs module</a><ul>
+<li><a class="reference internal" href="#libs.oldlibs.deviant_scrapper_pages"><code class="docutils literal notranslate"><span class="pre">deviant_scrapper_pages()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-libs.steamget">libs.steamget module</a><ul>
 <li><a class="reference internal" href="#libs.steamget.get_item"><code class="docutils literal notranslate"><span class="pre">get_item()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-libs.urlextractor">libs.urlextractor module</a><ul>
-<li><a class="reference internal" href="#libs.urlextractor.nextcursor"><code class="docutils literal notranslate"><span class="pre">nextcursor()</span></code></a></li>
+<li><a class="reference internal" href="#libs.urlextractor.nextcursor_requests"><code class="docutils literal notranslate"><span class="pre">nextcursor_requests()</span></code></a></li>
+<li><a class="reference internal" href="#libs.urlextractor.nextcursor_selenium"><code class="docutils literal notranslate"><span class="pre">nextcursor_selenium()</span></code></a></li>
 <li><a class="reference internal" href="#libs.urlextractor.remove_filter"><code class="docutils literal notranslate"><span class="pre">remove_filter()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#libs-htmgeny-module">libs.htmgeny module</a><ul>
-<li><a class="reference internal" href="#libs.htmgeny.htmlgen"><code class="docutils literal notranslate"><span class="pre">htmlgen()</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="libs package" href="libs.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="begin module" href="begin.html" /><link rel="prev" title="Libs package" href="libs.html" />
 
     <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
         <title>main module - DeviantArtScrapper 0.0.1 documentation</title>
@@ -154,12 +154,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="changeOlog.html">CHANGE-O-LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="begin.html">begin module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="libs.html">libs package</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">main module</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="libs.html">Libs package</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -220,38 +222,16 @@
 </dl>
 <div class="line-block">
 <div class="line">Initializes the class and loads the data from the csv files</div>
+<div class="line">Initializes the selenium driver and logs in to the account requires a username and password</div>
+<div class="line">If credentials are not provided, it will request for the credentials</div>
+<div class="line">Once credentials are provided, it will login to the account and save the cookies</div>
 </div>
-<dl class="py method">
-<dt class="sig sig-object py" id="main.scrapper.deviant_scrapper_pages">
-<span class="sig-name descname"><span class="pre">deviant_scrapper_pages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nextpage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.deviant_scrapper_pages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.deviant_scrapper_pages" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>baseurl</strong> – str - Deviant art page url</p></li>
-<li><p><strong>nextpage</strong> – int - Number of pages to visit</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>list of all the art page links</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Accepts a deviant url and searches for the sub deviant art links</div>
-<div class="line">Then next page cursor is searched and the function is called again with the next page url</div>
-<div class="line">each page returns 24 links, then 24*nextpage links will be returned</div>
-<div class="line">so if nexpage is 2 then 48 links are returned</div>
-</div>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="main.scrapper.steamlinks_scrapper">
-<span class="sig-name descname"><span class="pre">steamlinks_scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deviantartpages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#scrapper.steamlinks_scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.steamlinks_scrapper" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">steamlinks_scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deviantartpages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.steamlinks_scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.steamlinks_scrapper" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>deviantartpages</strong> – list - list of deviant art page links which are to be searched for steam links</p>
+<dd class="field-odd"><p><strong>deviantartpages</strong> (<em>list</em>) – list of deviant art page links which are to be searched for steam links</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -273,7 +253,15 @@
       <footer>
         
         <div class="related-pages">
-          
+          <a class="next-page" href="begin.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">begin module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
           <a class="prev-page" href="libs.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
@@ -281,7 +269,7 @@
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">libs package</div>
+                <div class="title">Libs package</div>
                 
               </div>
             </a>
@@ -319,7 +307,6 @@
             <ul>
 <li><a class="reference internal" href="#">main module</a><ul>
 <li><a class="reference internal" href="#main.scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper</span></code></a><ul>
-<li><a class="reference internal" href="#main.scrapper.deviant_scrapper_pages"><code class="docutils literal notranslate"><span class="pre">scrapper.deviant_scrapper_pages()</span></code></a></li>
 <li><a class="reference internal" href="#main.scrapper.steamlinks_scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper.steamlinks_scrapper()</span></code></a></li>
 </ul>
 </li>
