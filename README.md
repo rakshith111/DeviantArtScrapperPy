@@ -4,14 +4,11 @@
 
 ## Requirements 
 
-<code>beautifulsoup4</code> <br>
-<code>httpx</code> <br>
-<code>json2html</code> <br>
-<code>lxml</code> <br>
-<code>pandas</code> <br>
-<code>requests</code> <br>
-<code>urllib3</code> <br>
+<code>pip install -r requirements.txt</code>
+
+## Setup
+### Coming soon
 
 ## Read the docs locally
 ### Run in terminal
-<code> python -m http.server -d docs </code>
+<code>python -m http.server -b 127.0.0.1 -d docs </code>
