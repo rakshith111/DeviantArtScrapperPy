@@ -202,7 +202,8 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
-<span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">urlextractor</span>
+<span class="kn">import</span> <span class="nn">urlextractor</span>
+
 
 <div class="viewcode-block" id="selenium_scrapper"><a class="viewcode-back" href="../../libs.html#libs.deviantartapi.selenium_scrapper">[docs]</a><span class="k">class</span> <span class="nc">selenium_scrapper</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -217,7 +218,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;src\data&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;src\data&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loginurl</span> <span class="o">=</span> <span class="s1">&#39;https://www.deviantart.com/users/login&#39;</span>
         <span class="c1"># add a method to Read cookie&#39;s expire time and get new ones if expired</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;cookie.pkl&#39;</span><span class="p">)))):</span>
@@ -243,7 +244,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loginurl</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Cookies loaded&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="selenium_scrapper.scroll"><a class="viewcode-back" href="../../libs.html#libs.deviantartapi.selenium_scrapper.scroll">[docs]</a>    <span class="k">def</span> <span class="nf">scroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scroll_pause_time</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="selenium_scrapper.scroll"><a class="viewcode-back" href="../../libs.html#libs.deviantartapi.selenium_scrapper.scroll">[docs]</a>    <span class="k">def</span> <span class="nf">scroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scroll_pause_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&#39;&#39;&#39;</span>
 
 <span class="sd">        :param int scroll_pause_time:  Time to wait between scrolls</span>
@@ -263,7 +264,8 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Get scroll height</span>
         <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">screen_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="s2">&quot;return window.screen.height;&quot;</span><span class="p">)</span>
+        <span class="n">screen_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span>
+            <span class="s2">&quot;return window.screen.height;&quot;</span><span class="p">)</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] Scrolling </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1"> times&#39;</span><span class="p">)</span>
             <span class="c1"># scroll one screen height each time</span>
@@ -272,22 +274,23 @@
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">scroll_pause_time</span><span class="p">)</span>
             <span class="c1"># update scroll height each time after scrolled, as the scroll height can change after we scrolled the page</span>
-            <span class="n">scroll_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span><span class="s2">&quot;return document.body.scrollHeight;&quot;</span><span class="p">)</span>
+            <span class="n">scroll_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">execute_script</span><span class="p">(</span>
+                <span class="s2">&quot;return document.body.scrollHeight;&quot;</span><span class="p">)</span>
             <span class="c1"># Break the loop when the height we need to scroll to is larger than the total scroll height</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">screen_height</span><span class="p">)</span> <span class="o">*</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="n">scroll_height</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[*] Scrolling done&quot;</span><span class="p">)</span>
-               
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span></div>
 
-<div class="viewcode-block" id="selenium_scrapper.get_deviant_links"><a class="viewcode-back" href="../../libs.html#libs.deviantartapi.selenium_scrapper.get_deviant_links">[docs]</a>    <span class="k">def</span> <span class="nf">get_deviant_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseurl</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span><span class="n">nextpage</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+<div class="viewcode-block" id="selenium_scrapper.get_deviant_links"><a class="viewcode-back" href="../../libs.html#libs.deviantartapi.selenium_scrapper.get_deviant_links">[docs]</a>    <span class="k">def</span> <span class="nf">get_deviant_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseurl</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">nextpage</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param list baseurl:  list of Deviant art Base urls</span>
 <span class="sd">        :param int nextpage:  Number of pages to scrape</span>
 <span class="sd">        :return: set of links to the deviant art pages</span>
 <span class="sd">        :rtype: set</span>
 
-<span class="sd">    </span>
+
 <span class="sd">        .. note::</span>
 <span class="sd">            Need to enable Paging in Account settings -&gt; Browsing -&gt; Paging -&gt; click through pages</span>
 
@@ -300,39 +303,44 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">deviantartpages</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        
+
         <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">baseurl</span><span class="p">:</span>
             <span class="n">nextbtnclicker</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Accessing page </span><span class="si">{</span><span class="n">nextbtnclicker</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
             <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
            <span class="c1"># with open(&#39;deviantart.html&#39;, &#39;w&#39;,encoding=&quot;utf-8&quot;) as f:</span>
-              <span class="c1">#  f.write(page)</span>
+            <span class="c1">#  f.write(page)</span>
             <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;data-hook&#39;</span><span class="p">:</span> <span class="s2">&quot;deviation_link&quot;</span><span class="p">},</span> <span class="n">href</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">deviantartpages</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">])</span>
             <span class="n">nextbtnclicker</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">findnextcursor</span> <span class="o">=</span> <span class="n">urlextractor</span><span class="o">.</span><span class="n">nextcursor_selenium</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">)</span>
+            <span class="n">findnextcursor</span> <span class="o">=</span> <span class="n">urlextractor</span><span class="o">.</span><span class="n">nextcursor_selenium</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">)</span>
 
             <span class="k">while</span> <span class="n">nextbtnclicker</span> <span class="o">&lt;=</span> <span class="n">nextpage</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">findnextcursor</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Next page cursor = </span><span class="si">{</span><span class="n">findnextcursor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>     
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Next page cursor = </span><span class="si">{</span><span class="n">findnextcursor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">joinedurl</span> <span class="o">=</span> <span class="s2">&quot;https://www.deviantart.com&quot;</span><span class="o">+</span><span class="n">findnextcursor</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">joinedurl</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Accessing page </span><span class="si">{</span><span class="n">nextbtnclicker</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">joinedurl</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;[+] Accessing page </span><span class="si">{</span><span class="n">nextbtnclicker</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">joinedurl</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
                 <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;data-hook&#39;</span><span class="p">:</span> <span class="s2">&quot;deviation_link&quot;</span><span class="p">},</span> <span class="n">href</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">deviantartpages</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">])</span>
-                <span class="n">findnextcursor</span> <span class="o">=</span> <span class="n">urlextractor</span><span class="o">.</span><span class="n">nextcursor_selenium</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">)</span>
+                <span class="n">findnextcursor</span> <span class="o">=</span> <span class="n">urlextractor</span><span class="o">.</span><span class="n">nextcursor_selenium</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">)</span>
                 <span class="n">nextbtnclicker</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">deviantartpages</span></div></div>
 
 
-<span class="c1"># if __name__ == &quot;__main__&quot;:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-<span class="c1">#     dev = selenium_scrapper()</span>
-<span class="c1">#     k = dev.get_deviant_links(</span>
-<span class="c1">#     [&#39;https://www.deviantart.com/tag/steamprofile?order=this-month&#39;], 4)</span>
+    <span class="n">dev</span> <span class="o">=</span> <span class="n">selenium_scrapper</span><span class="p">()</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">dev</span><span class="o">.</span><span class="n">get_deviant_links</span><span class="p">(</span>
+        <span class="p">[</span><span class="s1">&#39;https://www.deviantart.com/tag/steamprofile?order=this-month&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
         </article>
       </div>

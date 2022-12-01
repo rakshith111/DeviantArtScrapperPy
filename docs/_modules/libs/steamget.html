@@ -153,12 +153,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+  <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../changeOlog.html">CHANGE-O-LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../begin.html">begin module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../libs.html">libs package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../main.html">main module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../libs.html">Libs package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../begin.html">begin module</a></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -202,20 +204,18 @@
 <span class="kn">import</span> <span class="nn">re</span>
 
 
-<div class="viewcode-block" id="get_item"><a class="viewcode-back" href="../../libs.html#libs.steamget.get_item">[docs]</a><span class="k">def</span> <span class="nf">get_item</span><span class="p">(</span><span class="n">steamurl</span><span class="p">):</span>
+<div class="viewcode-block" id="get_item"><a class="viewcode-back" href="../../libs.html#libs.steamget.get_item">[docs]</a><span class="k">def</span> <span class="nf">get_item</span><span class="p">(</span><span class="n">steamurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    :param steamurl: str - Steam url </span>
-<span class="sd">    :return: str -  price of the item</span>
+<span class="sd">    :param str steamurl: Steam url </span>
+<span class="sd">    :rtype: str</span>
 <span class="sd">    :example: get_item(&quot;https://steamcommunity.com/market/listings/753/746850-Chinatown&quot; )</span>
-<span class="sd">    :return: returns ₹ 269.36  (price of the item)</span>
+<span class="sd">    :return: price of the item  returns ₹ 269.36  (price of the item)</span>
 
-<span class="sd">    | Takes a steamurl and returns its price</span>
-
-<span class="sd"> </span>
+<span class="sd">    | Takes a steammarket url and returns its price</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">patforid</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;/[\d]+/&quot;</span><span class="p">)</span>
-    <span class="n">patforname</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;/[\d]+-[\w%()-&#39;!$%&amp;*+,-./:;&lt;=&gt;?@[\]^_`{|}~]+&quot;</span><span class="p">)</span>
+    <span class="n">patforid</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/[\d]+/&quot;</span><span class="p">)</span>
+    <span class="n">patforname</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/[\d]+-[\w%()-&#39;!$%&amp;*+,-./:;&lt;=&gt;?@[\]^_`{|}~]+&quot;</span><span class="p">)</span>
     <span class="n">appid</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">patforid</span><span class="p">,</span> <span class="n">steamurl</span><span class="p">)</span>
     <span class="n">patforname</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">patforname</span><span class="p">,</span> <span class="n">steamurl</span><span class="p">)</span>
 
@@ -240,8 +240,6 @@
             <span class="n">get_item</span><span class="p">(</span><span class="n">steamurl</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;NA&quot;</span></div>
-
-
 </pre></div>
         </article>
       </div>
