@@ -83,15 +83,15 @@ class scrapper:
         '''
         Reruns the scrapper for the failed links
         '''
-        if(len(self.failedlinks) > 0):
+        if (len(self.failedlinks) > 0):
             print("\n Re-Running missed items\n\n")
             for link in self.failedlinks:
                 link = remove_filter(link)
                 try:
                     price = get_item(link)
-                    if(not "NA" in price):
+                    if (not "NA" in price):
                         price = float(re.findall("[\d,]+[\.][\d]+", price)[0])
-                        if(price >= 100.00):  # Appends only if value is greater than 100
+                        if (price >= 100.00):  # Appends only if value is greater than 100
                             self.latest[link] = price
                             self.data[link] = price
                             self.failedlinks.remove(link)
@@ -173,14 +173,14 @@ class scrapper:
         '''
         Fetches the price of the steam links
         '''
-        while(self.currcount < self.availcount):
+        while (self.currcount < self.availcount):
             for link in self.steamlinks:
                 try:
                     price = get_item(link)
                     self.currcount += 1
-                    if(not "NA" in price):
+                    if (not "NA" in price):
                         price = float(re.findall("[\d]+.[\d]+", price)[0])
-                        if(price >= 100.00):  # Appends only if value is greater than 100
+                        if (price >= 100.00):  # Appends only if value is greater than 100
                             self.latest[link] = price
                             self.data[link] = price
                 except TypeError:

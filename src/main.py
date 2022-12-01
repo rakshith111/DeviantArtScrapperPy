@@ -29,7 +29,7 @@ class scrapper:
         '''
         self.remove_string = "https://www.deviantart.com/users/outgoing?"
         self.match_string = "https://steamcommunity.com/market/listings/"
-        self.data_path = 'src\data'
+        self.data_path = r'src\data'
 
         # self.data_files=['deviantXsteam.csv','localprice.csv','failed.csv']
         # check if files exists or not and create it
@@ -103,7 +103,7 @@ class scrapper:
                 if self.match_string in hrefval:  # match string has the steammarket link
                     hrefval = urlextractor.remove_filter(hrefval)
                     steamlink = (str(hrefval).replace(self.remove_string, ""))
-                    #return steamlink
+                    # return steamlink
 
                 #     if steamlink:
                 #         self.deviantxsteamdf = self.deviantxsteamdf.append(
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     scrapper()
     dev = deviantartapi.selenium_scrapper()
     k = dev.get_deviant_links(
-    ['https://www.deviantart.com/tag/steamprofile?order=this-month'], 4)
+        ['https://www.deviantart.com/tag/steamprofile?order=this-month'], 4)
     # retrives 96 links in case of no duplicates
 
     # getsubpages=(scrapper().deviant_scrapper_pages("https://www.deviantart.com/tag/steamprofile",2))
