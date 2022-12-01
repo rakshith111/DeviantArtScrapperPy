@@ -31,7 +31,7 @@ def nextcursor_requests(baseurl: str, cookie) -> str:
         nextpage = pagedata.xpath('//*[text()="Next"]//@href')
         return nextpage[0]
     except IndexError:
-        return 0
+        return 0  # type: ignore
 
 
 def nextcursor_selenium(page_data: str) -> str:
@@ -51,12 +51,11 @@ def nextcursor_selenium(page_data: str) -> str:
 
     '''
     try:
-        sleep(0.5)
         pagedata = html.fromstring(page_data)
         nextpage = pagedata.xpath('//*[text()="Next"]//@href')
         return nextpage[0]
     except IndexError:
-        return 0
+        return 0  # type: ignore
 
 
 def remove_filter(steamurl: str) -> str:

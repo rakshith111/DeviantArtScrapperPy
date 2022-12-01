@@ -1,4 +1,4 @@
-from json2html import *
+from json2html import json2html
 import json
 import os
 
@@ -29,8 +29,9 @@ def htmlgen(jsonfile) -> None:
             k = f'<a href="{key}">{key}</a>'
             latesthtmldict[k] = data[key]
         name = jsonfile.split('.')
-        htmltabel = json2html.convert(json=latesthtmldict, escape=False)
+        htmltabel = json2html.convert(
+            json=latesthtmldict, escape=False)  # type: ignore
         writefile = open(f"{name[0]}.html", "w")
-        writefile.write("<center>"+htmltabel+"</center></div>")
+        writefile.write("<center>"+htmltabel+"</center></div>")  # type: ignore
         writefile.close()
         os.system(f"start {name[0]}.html")

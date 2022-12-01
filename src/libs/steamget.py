@@ -7,7 +7,7 @@ from urllib.parse import unquote
 import re
 
 
-def get_item(steamurl: str) -> str:
+def get_item(steamurl: str) -> str:  # type: ignore
     """
     :param str steamurl: Steam url 
     :rtype: str
@@ -17,8 +17,8 @@ def get_item(steamurl: str) -> str:
     | Takes a steammarket url and returns its price
 
     """
-    patforid = ("/[\d]+/")
-    patforname = ("/[\d]+-[\w%()-'!$%&*+,-./:;<=>?@[\]^_`{|}~]+")
+    patforid = (r"/[\d]+/")
+    patforname = (r"/[\d]+-[\w%()-'!$%&*+,-./:;<=>?@[\]^_`{|}~]+")
     appid = re.findall(patforid, steamurl)
     patforname = re.findall(patforname, steamurl)
 
@@ -43,5 +43,3 @@ def get_item(steamurl: str) -> str:
             get_item(steamurl)
     except KeyError:
         return "NA"
-
-
