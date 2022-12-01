@@ -85,8 +85,8 @@ class selenium_scrapper:
 
     def get_deviant_links(self, baseurl: list,nextpage:int=2) -> set:
         '''
-        :param list baseurl:  - list of Deviant art Base urls
-        :param int nextpage:  - Number of pages to scrape
+        :param list baseurl:  list of Deviant art Base urls
+        :param int nextpage:  Number of pages to scrape
         :return: set of links to the deviant art pages
         :rtype: set
 
@@ -126,7 +126,7 @@ class selenium_scrapper:
                     self.deviantartpages.add(a['href'])
                 findnextcursor = urlextractor.nextcursor_selenium(self.driver.page_source)
                 nextbtnclicker += 1
-                time.sleep(2)
+                time.sleep(1)
         self.driver.close()
         return self.deviantartpages
 

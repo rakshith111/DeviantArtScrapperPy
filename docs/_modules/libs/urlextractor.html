@@ -153,12 +153,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+  <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../changeOlog.html">CHANGE-O-LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../begin.html">begin module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../libs.html">libs package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../main.html">main module</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../libs.html">Libs package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../begin.html">begin module</a></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -197,20 +199,26 @@
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">html</span>
 <span class="c1">#from random import randint</span>
-<span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">cookies</span>
 
 
-<div class="viewcode-block" id="nextcursor"><a class="viewcode-back" href="../../libs.html#libs.urlextractor.nextcursor">[docs]</a><span class="k">def</span> <span class="nf">nextcursor</span><span class="p">(</span><span class="n">baseurl</span><span class="p">,</span> <span class="n">cookie</span><span class="p">):</span>
+<div class="viewcode-block" id="nextcursor_requests"><a class="viewcode-back" href="../../libs.html#libs.urlextractor.nextcursor_requests">[docs]</a><span class="k">def</span> <span class="nf">nextcursor_requests</span><span class="p">(</span><span class="n">baseurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cookie</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    :param baseurl: str - Deviant art page url</span>
-<span class="sd">    :param cookie: cookie - cookie of the parent page</span>
-<span class="sd">    :return: str - next page cursor </span>
+<span class="sd">    :param str baseurl:  Deviant art page url</span>
+<span class="sd">    :param cookie cookie:  cookie of the parent page</span>
+<span class="sd">    :return:  next page cursor </span>
+<span class="sd">    :rtype: str</span>
 <span class="sd">    :example: &quot;/tag/steamprofile?cursor=MTQwYWI2MjA9NCY1OTBhY2FkMD03MiZkMTc0YjZiYz1OJTJGQQ&quot;</span>
 
+<span class="sd">    .. deprecated:: 0.0.1</span>
+<span class="sd">        Use :func:`deviantartapi.nextcursor_selenium` instead</span>
+<span class="sd">        outdated since Deviantart changed their website and introduced login system</span>
+<span class="sd">        Requests version doesn&#39;t render js</span>
+<span class="sd">    :Paragraphs: This function is deprecated and will be removed in future versions</span>
+<span class="sd">    | Made for requests version</span>
 <span class="sd">    | Accepts a deviant url along with its parent cookie, searches for the next page cursor , and returns the cursor part </span>
 <span class="sd">    | if no next page  or any other error returns 0</span>
 
-<span class="sd">    </span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">baseurl</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookie</span><span class="p">)</span>
@@ -223,15 +231,40 @@
         <span class="k">return</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="remove_filter"><a class="viewcode-back" href="../../libs.html#libs.urlextractor.remove_filter">[docs]</a><span class="k">def</span> <span class="nf">remove_filter</span><span class="p">(</span><span class="n">steamurl</span><span class="p">):</span>
+<div class="viewcode-block" id="nextcursor_selenium"><a class="viewcode-back" href="../../libs.html#libs.urlextractor.nextcursor_selenium">[docs]</a><span class="k">def</span> <span class="nf">nextcursor_selenium</span><span class="p">(</span><span class="n">page_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">    :param str page_data: raw page source data of the page</span>
+<span class="sd">    :return:  next page cursor </span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    :exception: IndexError - if no next page  or any other error returns 0</span>
+<span class="sd">    :example: &quot;/tag/steamprofile?cursor=MTQwYWI2MjA9NCY1OTBhY2FkMD03MiZkMTc0YjZiYz1OJTJGQQ&quot;</span>
+
+<span class="sd">    | Made for selenuim version</span>
+<span class="sd">    | Accepts a deviant page source , searches for the next page cursor , and returns the cursor part </span>
+<span class="sd">    | if no next page  or any other error returns 0</span>
+
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">pagedata</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">page_data</span><span class="p">)</span>
+        <span class="n">nextpage</span> <span class="o">=</span> <span class="n">pagedata</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;//*[text()=&quot;Next&quot;]//@href&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">nextpage</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="remove_filter"><a class="viewcode-back" href="../../libs.html#libs.urlextractor.remove_filter">[docs]</a><span class="k">def</span> <span class="nf">remove_filter</span><span class="p">(</span><span class="n">steamurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39; </span>
-<span class="sd">    :param steamurl: str - Steam url</span>
-<span class="sd">    :return: str - Steam url without filter tag</span>
+<span class="sd">    :param str steamurl:  Steam url</span>
+<span class="sd">    :return:  Steam url without filter tag</span>
+<span class="sd">    :rtype: str</span>
 
 <span class="sd">    | Accepts a steam url and removes the filter part of the url and returns the url</span>
 <span class="sd">    | Some urls have a filter part which is not needed for the program to work, this function removes the filter part and returns the url</span>
-<span class="sd">    </span>
-<span class="sd">    </span>
+<span class="sd">    | if no filter part is found returns the same url</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">posifilter</span> <span class="o">=</span> <span class="n">steamurl</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;?filter&#39;</span><span class="p">)</span>
