@@ -4,4 +4,4 @@ json2html
 lxml
 pandas
 requests
-urllib3
+selenium
