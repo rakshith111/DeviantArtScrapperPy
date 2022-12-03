@@ -5,7 +5,7 @@ import os
 project = 'DeviantArtScrapper'
 copyright = '2022, rakshith111'
 author = 'rakshith111'
-release = '0.0.1'
+release = '0.0.2'
 
 
 sys.path.insert(0, os.path.abspath('../../src'))

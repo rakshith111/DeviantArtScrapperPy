@@ -2,7 +2,7 @@
 
 Any notable changes to this project that I deem necessary will be documented in this file.
 
-## 0.0.1 - 01/12/2022
+## 0.0.2 - 01/12/2022
 
 ```{important}
 
