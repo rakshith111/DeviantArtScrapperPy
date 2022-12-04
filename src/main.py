@@ -100,7 +100,7 @@ class scrapper:
         '''
         rowdata = []
         datacount = 0
-        saveafter = self.saveafter
+        self.saveafter = saveafter
         for deviantartpage in deviantartpages:
             if deviantartpage in self.deviantxsteamdf['DeviantUrls'].values:
                 print('[X] Deviantart page already exists')
@@ -114,8 +114,8 @@ class scrapper:
                     "steamcommunity.com/market/listings"))
                 # if steam market link is found
                 if outgoingsteam:
-                    outgoingsteam = (outgoingsteam.get('href'))
-                    outgoingsteam = urlextractor.remove_filter(outgoingsteam)
+                    outgoingsteam = (outgoingsteam.get('href'))  # type: ignore
+                    outgoingsteam = urlextractor.remove_filter(str(outgoingsteam))
                     steamlink = (str(outgoingsteam).replace(
                         self.remove_string, ""))
                     print('[+] Steam link found')
@@ -127,7 +127,7 @@ class scrapper:
                     datacount += 1
 
                 # save after 5 links
-                if datacount > saveafter:
+                if datacount > self.saveafter:
                     print('[+] Saving data to deviantXsteam.csv')
                     merger = pd.DataFrame(
                         rowdata, columns=['SteamUrl', 'DeviantUrls'])

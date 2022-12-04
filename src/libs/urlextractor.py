@@ -1,5 +1,5 @@
-from time import sleep
 import requests
+from time import sleep
 from lxml import html
 #from random import randint
 

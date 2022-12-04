@@ -1,9 +1,8 @@
-from libs import urlextractor
-
-
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
+
+from libs import urlextractor
 
 
 def deviant_scrapper_pages(self, baseurl: str, nextpage: int = 2) -> list:

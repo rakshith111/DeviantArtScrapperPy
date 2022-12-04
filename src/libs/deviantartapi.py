@@ -7,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 
 import urlextractor
+
+
 class selenium_scrapper:
     def __init__(self, username=None, password=None) -> None:
         '''
@@ -19,15 +21,15 @@ class selenium_scrapper:
         | If the cookies are not present, it will login to the account and save the cookies
 
         '''
-        
+
         options = Options()
         options.headless = True
         self.driver = webdriver.Firefox(options=options,)
         self.data_path = r'src\data'
         self.loginurl = 'https://www.deviantart.com/users/login'
         self.driver.get(self.loginurl)
-        print ('[+] Headless Firefox Initialized')
-   
+        print('[+] Headless Firefox Initialized')
+
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'cookie.pkl')))):
             print('[x] Cookie.pkl not found, creating new file')
             time.sleep(2)

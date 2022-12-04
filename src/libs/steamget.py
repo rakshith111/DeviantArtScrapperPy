@@ -1,10 +1,11 @@
 import json
 import time
-from time import sleep
-from httpx import stream
-import requests
-from urllib.parse import unquote
 import re
+import requests
+
+
+from urllib.parse import unquote
+
 
 
 def get_item(steamurl: str) -> str:  # type: ignore

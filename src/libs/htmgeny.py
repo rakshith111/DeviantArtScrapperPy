@@ -1,6 +1,6 @@
-from json2html import json2html
 import json
 import os
+from json2html import json2html
 
 
 def htmlgen(jsonfile) -> None:
