@@ -4,11 +4,20 @@ Any notable changes to this project that I deem necessary will be documented in 
 
 ## 0.0.2 - 01/12/2022
 
+- Added Headless option for firefox
+- Optimized searching for steam links using regex instead of string matching
+- Modified the data files 
+- Writes steam links to file
+
+## 0.0.2 - 01/12/2022
+
 ```{important}
 
 - Added a login feature to the scrapper
 - Since a login is required to access the full gallery, the scrapper will now ask for a username and password
 ```
+- Now module uses selenium to scrape the website
+- Selenuim firefox driver is used
 - Other minor changes
 
 ## 0.0.1 - 29/11/2022
