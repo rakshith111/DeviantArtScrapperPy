@@ -1,13 +1,12 @@
 import time
-import requests
-from bs4 import BeautifulSoup
-from selenium import webdriver
 import os
 import pickle
+from bs4 import BeautifulSoup
+from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+
 import urlextractor
-
-
 class selenium_scrapper:
     def __init__(self, username=None, password=None) -> None:
         '''
@@ -20,14 +19,17 @@ class selenium_scrapper:
         | If the cookies are not present, it will login to the account and save the cookies
 
         '''
-        self.driver = webdriver.Firefox()
+        
+        options = Options()
+        options.headless = True
+        self.driver = webdriver.Firefox(options=options,)
         self.data_path = r'src\data'
         self.loginurl = 'https://www.deviantart.com/users/login'
-        # add a method to Read cookie's expire time and get new ones if expired
+        self.driver.get(self.loginurl)
+        print ('[+] Headless Firefox Initialized')
+   
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'cookie.pkl')))):
             print('[x] Cookie.pkl not found, creating new file')
-
-            self.driver.get(self.loginurl)
             time.sleep(2)
             self.driver.find_element(By.ID, "username").send_keys(username)
             time.sleep(0.5)
@@ -39,7 +41,6 @@ class selenium_scrapper:
                 os.path.join(self.data_path, 'cookie.pkl')), "wb"))
         else:
             print('[+] Loading Cookies')
-            self.driver.get(self.loginurl)
             cookies = pickle.load(open(os.path.abspath(
                 os.path.join(self.data_path, 'cookie.pkl')), "rb"))
             for cookie in cookies:
@@ -139,8 +140,8 @@ class selenium_scrapper:
         return self.deviantartpages
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    dev = selenium_scrapper()
-    k = dev.get_deviant_links(
-        ['https://www.deviantart.com/tag/steamprofile?order=this-month'], 4)
+#     dev = selenium_scrapper()
+#     k = dev.get_deviant_links(
+#         ['https://www.deviantart.com/tag/steamprofile?order=this-month'], 4)
