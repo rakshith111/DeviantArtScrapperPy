@@ -2,7 +2,7 @@
 
 Any notable changes to this project that I deem necessary will be documented in this file.
 
-## 0.0.2 - 01/12/2022
+## 0.0.2 - 04/12/2022
 
 - Added Headless option for firefox
 - Optimized searching for steam links using regex instead of string matching
