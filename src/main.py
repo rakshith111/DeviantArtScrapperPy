@@ -1,13 +1,13 @@
-
-import pandas as pd
 import json
 import os
-from time import sleep
-from libs import urlextractor
-
+import re
 import json
 import requests
+import pandas as pd
+from time import sleep
 from bs4 import BeautifulSoup
+
+from libs import urlextractor
 from libs import deviantartapi
 
 
@@ -31,8 +31,8 @@ class scrapper:
         self.match_string = "https://steamcommunity.com/market/listings/"
         self.data_path = r'src\data'
 
-        # self.data_files=['deviantXsteam.csv','localprice.csv','failed.csv']
-        # check if files exists or not and create it
+       # self.data_files = ['deviantXsteam.csv', 'localprice.csv', 'failed.csv']
+       # check if files exists or not and create it
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'Credentials.json')))):
             print('[x] Credentials not found, creating new file')
             print('[+] Creating Credentials.json')
@@ -44,7 +44,6 @@ class scrapper:
             print('[+] Logging in with credentials')
             self.deviantartapi = deviantartapi.selenium_scrapper(
                 username, password)
-
         else:
             print('[+] Logging in with credentials')
             with open(os.path.abspath(os.path.join(self.data_path, 'Credentials.json')), 'r') as f:
@@ -55,7 +54,7 @@ class scrapper:
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'deviantXsteam.csv')))):
             print('[x] deviantXsteam.csv not found, creating new file')
             print('[+] Creating deviantXsteam.csv')
-            pd.DataFrame(columns=['Steam_AppId', 'Steam_URL', 'DeviantUrls', 'VisitedCount']).to_csv(
+            pd.DataFrame(columns=['SteamUrl', 'DeviantUrls']).to_csv(
                 os.path.abspath(os.path.join(self.data_path, 'deviantXsteam.csv')), index=False)
         else:
             print('[+] Loading deviantXsteam.csv')
@@ -65,71 +64,97 @@ class scrapper:
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'localprice.csv')))):
             print('[x] localprice.csv not found, creating new file')
             print('[+] Creating localprice.csv')
-            pd.DataFrame(columns=['Steam_AppId', 'SteamPrice', 'SteamPriceDate', ]).to_csv(
+            pd.DataFrame(columns=['SteamAppId', 'SteamUrl', 'SteamPrice', 'SteamPriceDate', ]).to_csv(
                 os.path.abspath(os.path.join(self.data_path, 'localprice.csv')), index=False)
         else:
             print('[+] Loading localprice.csv')
             self.localpricedf = pd.read_csv(os.path.abspath(
                 os.path.join(self.data_path, 'localprice.csv'))
             )
+
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'failed.csv')))):
             print('[x] failed.csv not found, creating new file')
             print('[+] Creating failed.csv')
-            pd.DataFrame(columns=['Steam_URL', 'Steam_AppId']).to_csv(
+            pd.DataFrame(columns=['SteamUrl', 'SteamAppId']).to_csv(
                 os.path.abspath(os.path.join(self.data_path, 'failed.csv')), index=False)
         else:
             print('[+] Loading failed.csv')
             self.faileddf = pd.read_csv(os.path.abspath(
                 os.path.join(self.data_path, 'failed.csv')))
+        print('#'*50)
+
     # Add a rerun function to rerun the failed links
 
-    def steamlinks_scrapper(self, deviantartpages: list) -> None:
+    def steamlinks_scrapper(self, deviantartpages: list,saveafter:int=5) -> None:
         '''
         :param list deviantartpages:  list of deviant art page links which are to be searched for steam links
+        :param int saveafter:  number of links to be searched before saving the data 
         :return: None
 
-        | Accepts a list of deviant art page links
-        | Then searches for the steam links in the art pages
-        | If steam link is found then it is added to the deviantXsteam.csv file
+        | Accepts a list of deviant art page links, then searches for the steam links in the art pages
+        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present 
+        | If no steam market link is found, its still added but with a None value for the steam market link
+        | Saves data every 5 links to avoid data loss in case of an error
+        | `saveafter` Can be overriden 
 
         '''
+        rowdata = []
+        datacount = 0
+        saveafter = self.saveafter
         for deviantartpage in deviantartpages:
-            print(f"[+] Accessing {deviantartpage}....")
-            page = requests.get(deviantartpage)
-            soup = BeautifulSoup(page.content, 'html.parser')
+            if deviantartpage in self.deviantxsteamdf['DeviantUrls'].values:
+                print('[X] Deviantart page already exists')
+                print('[X] Skipping ....')
+                continue
+            else:
+                print(f"[+] Accessing {deviantartpage}....")
+                page = requests.get(deviantartpage)
+                soup = BeautifulSoup(page.content, 'html.parser')
+                outgoingsteam = soup.find('a', {'class': "external"}, href=re.compile(
+                    "steamcommunity.com/market/listings"))
+                # if steam market link is found
+                if outgoingsteam:
+                    outgoingsteam = (outgoingsteam.get('href'))
+                    outgoingsteam = urlextractor.remove_filter(outgoingsteam)
+                    steamlink = (str(outgoingsteam).replace(
+                        self.remove_string, ""))
+                    print('[+] Steam link found')
+                    rowdata.append((steamlink, deviantartpage))
+                    datacount += 1
+                else:
+                    print('[X] No steam link found')
+                    rowdata.append((None, deviantartpage))
+                    datacount += 1
 
-            for pagedata in soup.findAll('a', {'class': "external"}):
-                hrefval = pagedata.get('href')
-                if self.match_string in hrefval:  # match string has the steammarket link
-                    hrefval = urlextractor.remove_filter(hrefval)
-                    steamlink = (str(hrefval).replace(self.remove_string, ""))
-                    # return steamlink
-
-                #     if steamlink:
-                #         self.deviantxsteamdf = self.deviantxsteamdf.append(
-                #             {'Steam_AppId': steamlink, 'Steam_URL': f"https://store.steampowered.com/app/{steamlink}", 'DeviantUrls': deviantartpage, 'VisitedCount': 1}, ignore_index=True)
-                #         self.deviantxsteamdf.to_csv(
-                #             'data/deviantXsteam.csv', index=False)
-                #     else:
-                #         self.faileddf = self.faileddf.append(
-                #             {'Steam_URL': f"https://store.steampowered.com/app/{steamlink}", 'Steam_AppId': steamlink}, ignore_index=True)
-                #         self.faileddf.to_csv('data/failed.csv', index=False)
-                # sleep(2)
+                # save after 5 links
+                if datacount > saveafter:
+                    print('[+] Saving data to deviantXsteam.csv')
+                    merger = pd.DataFrame(
+                        rowdata, columns=['SteamUrl', 'DeviantUrls'])
+                    self.deviantxsteamdf = pd.concat(
+                        [self.deviantxsteamdf, merger], ignore_index=True)
+                    self.deviantxsteamdf.to_csv(os.path.abspath(os.path.join(
+                        self.data_path, 'deviantXsteam.csv')), index=False)
+                    print('[+] Data saved to deviantXsteam.csv')
+                    datacount = 0
+                    rowdata = []
+        # save remaining data if any
+        if len(rowdata) > 0:
+            print(f'[+] Saving {len(rowdata)} data to deviantXsteam.csv')
+            merger = pd.DataFrame(rowdata, columns=['SteamUrl', 'DeviantUrls'])
+            self.deviantxsteamdf = pd.concat(
+                [self.deviantxsteamdf, merger], ignore_index=True)
+            self.deviantxsteamdf.to_csv(os.path.abspath(os.path.join(
+                self.data_path, 'deviantXsteam.csv')), index=False)
+            print('[+] Data saved to deviantXsteam.csv')
 
 
 if __name__ == "__main__":
 
-    print("ye")
-    scrapper()
-    dev = deviantartapi.selenium_scrapper()
-    k = dev.get_deviant_links(
-        ['https://www.deviantart.com/tag/steamprofile?order=this-month'], 4)
+    # dev = deviantartapi.selenium_scrapper()
+    # k = dev.get_deviant_links(
+    #     ['parent'], 4)
     # retrives 96 links in case of no duplicates
 
-    # getsubpages=(scrapper().deviant_scrapper_pages("https://www.deviantart.com/tag/steamprofile",2))
-    # print(getsubpages)
-    # getsteamliks = scrapper()
-    # pp=getsteamliks.steamlinks_scrapper(
-    #  ["https://www.deviantart.com/xieon08/art/Shora-Steam-Artwork-Animated-903885045"])
-    # print(pp)
-    # no steam url https://www.deviantart.com/dryrel/art/CP2077-Rainy-Day-Animated-Steam-Artwork-936861222
+    getsteamliks = scrapper()
+    pp = getsteamliks.steamlinks_scrapper( ["link1","link2"])
