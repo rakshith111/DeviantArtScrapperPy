@@ -5,3 +5,4 @@ geckodriver.log
 src/__pycache__/
 src/libs/__pycache__/
 docs/.doctrees/
+.vscode/settings.json
