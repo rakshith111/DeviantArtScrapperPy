@@ -228,19 +228,24 @@
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="main.scrapper.steamlinks_scrapper">
-<span class="sig-name descname"><span class="pre">steamlinks_scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deviantartpages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.steamlinks_scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.steamlinks_scrapper" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">steamlinks_scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deviantartpages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveafter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.steamlinks_scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.steamlinks_scrapper" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>deviantartpages</strong> (<em>list</em>) – list of deviant art page links which are to be searched for steam links</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deviantartpages</strong> (<em>list</em>) – list of deviant art page links which are to be searched for steam links</p></li>
+<li><p><strong>saveafter</strong> (<em>int</em>) – number of links to be searched before saving the data</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <div class="line-block">
-<div class="line">Accepts a list of deviant art page links</div>
-<div class="line">Then searches for the steam links in the art pages</div>
-<div class="line">If steam link is found then it is added to the deviantXsteam.csv file</div>
+<div class="line">Accepts a list of deviant art page links, then searches for the steam links in the art pages</div>
+<div class="line">If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present </div>
+<div class="line">If no steam market link is found, its still added but with a None value for the steam market link</div>
+<div class="line">Saves data every 5 links to avoid data loss in case of an error</div>
+<div class="line"><cite>saveafter</cite> Can be overriden </div>
 </div>
 </dd></dl>
 
