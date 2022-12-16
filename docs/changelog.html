@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs.deviantartapi module" href="libs.deviantartapi.html" /><link rel="prev" title="CURRENT MODULES" href="Modules.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="CURRENT MODULES" href="Modules.html" /><link rel="prev" title="Welcome to DeviantArtScrapper’s documentation!" href="index.html" />
 
     <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
-        <title>libs package - DeviantArtScrapper 0.0.2 documentation</title>
+        <title>CHANGELOG - DeviantArtScrapper 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -155,9 +155,9 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">libs package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">CHANGELOG</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libs.html">libs package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.htmgeny.html">libs.htmgeny module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.oldlibs.html">libs.oldlibs module</a></li>
@@ -203,36 +203,59 @@
           </label>
         </div>
         <article role="main">
-          <section id="libs-package">
-<h1>libs package<a class="headerlink" href="#libs-package" title="Permalink to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.deviantartapi.html#libs.deviantartapi.selenium_scrapper"><code class="docutils literal notranslate"><span class="pre">selenium_scrapper</span></code></a></li>
+          <section id="changelog">
+<h1>CHANGELOG<a class="headerlink" href="#changelog" title="Permalink to this heading">#</a></h1>
+<p>Any notable changes to this project that I deem necessary will be documented in this file.</p>
+<section id="id1">
+<h2>0.0.3 - 16/12/2022<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Update the way the links are checked for redundancy, now it uses a <code class="docutils literal notranslate"><span class="pre">set</span></code> instead <code class="docutils literal notranslate"><span class="pre">in</span></code></p></li>
+<li><p>Split the library documentation based on modules rather than one long file</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.htmgeny.html">libs.htmgeny module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.htmgeny.html#libs.htmgeny.htmlgen"><code class="docutils literal notranslate"><span class="pre">htmlgen()</span></code></a></li>
+</section>
+<section id="id2">
+<h2>0.0.2 - 04/12/2022<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Added Headless option for firefox</p></li>
+<li><p>Optimized searching for steam links using regex instead of string matching</p></li>
+<li><p>Modified the data files</p></li>
+<li><p>Writes steam links to file</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.oldlibs.html">libs.oldlibs module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.oldlibs.html#libs.oldlibs.deviant_scrapper_pages"><code class="docutils literal notranslate"><span class="pre">deviant_scrapper_pages()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.steamget.html">libs.steamget module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.steamget.html#libs.steamget.get_item"><code class="docutils literal notranslate"><span class="pre">get_item()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.urlextractor.html">libs.urlextractor module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.urlextractor.html#libs.urlextractor.nextcursor_requests"><code class="docutils literal notranslate"><span class="pre">nextcursor_requests()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="libs.urlextractor.html#libs.urlextractor.nextcursor_selenium"><code class="docutils literal notranslate"><span class="pre">nextcursor_selenium()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="libs.urlextractor.html#libs.urlextractor.remove_filter"><code class="docutils literal notranslate"><span class="pre">remove_filter()</span></code></a></li>
-</ul>
-</li>
+</section>
+<section id="id3">
+<h2>0.0.2 - 01/12/2022<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>Added a login feature to the scrapper</p></li>
+<li><p>Since a login is required to access the full gallery, the scrapper will now ask for a username and password</p></li>
 </ul>
 </div>
+<ul class="simple">
+<li><p>Now module uses selenium to scrape the website</p></li>
+<li><p>Selenuim firefox driver is used</p></li>
+<li><p>Other minor changes</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>0.0.1 - 29/11/2022<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>DeviantArt Website Changes they added a login system to the website, which kinda broke the scraper.</p>
+<ul class="simple">
+<li><p>Need to find a way to login to the website.</p></li>
+</ul>
+</div>
+</section>
+<section id="id5">
+<h2>0.0.1 - 22/11/2022<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Changed the way the program is structured. Now it is a module, and the main program is in the <code class="docutils literal notranslate"><span class="pre">main.py</span></code> file.</p></li>
+<li><p>Add sphinx doc gen</p></li>
+<li><p>Updated Documentation</p></li>
+<li><p>Generate Documentation (docs/build/html)</p></li>
+<li><p>Updated File initialization</p></li>
+</ul>
 </section>
 </section>
 
@@ -241,23 +264,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="libs.deviantartapi.html">
+          <a class="next-page" href="Modules.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">libs.deviantartapi module</div>
+                <div class="title">CURRENT MODULES</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="Modules.html">
+          <a class="prev-page" href="index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">CURRENT MODULES</div>
+                <div class="title">Home</div>
                 
               </div>
             </a>
@@ -293,8 +316,12 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">libs package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#">CHANGELOG</a><ul>
+<li><a class="reference internal" href="#id1">0.0.3 - 16/12/2022</a></li>
+<li><a class="reference internal" href="#id2">0.0.2 - 04/12/2022</a></li>
+<li><a class="reference internal" href="#id3">0.0.2 - 01/12/2022</a></li>
+<li><a class="reference internal" href="#id4">0.0.1 - 29/11/2022</a></li>
+<li><a class="reference internal" href="#id5">0.0.1 - 22/11/2022</a></li>
 </ul>
 </li>
 </ul>

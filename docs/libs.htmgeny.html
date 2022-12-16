@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs.deviantartapi module" href="libs.deviantartapi.html" /><link rel="prev" title="CURRENT MODULES" href="Modules.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs.oldlibs module" href="libs.oldlibs.html" /><link rel="prev" title="libs.deviantartapi module" href="libs.deviantartapi.html" />
 
     <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
-        <title>libs package - DeviantArtScrapper 0.0.2 documentation</title>
+        <title>libs.htmgeny module - DeviantArtScrapper 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -157,9 +157,9 @@
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">libs package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="libs.html">libs package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libs.htmgeny.html">libs.htmgeny module</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">libs.htmgeny module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.oldlibs.html">libs.oldlibs module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.steamget.html">libs.steamget module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.urlextractor.html">libs.urlextractor module</a></li>
@@ -203,37 +203,30 @@
           </label>
         </div>
         <article role="main">
-          <section id="libs-package">
-<h1>libs package<a class="headerlink" href="#libs-package" title="Permalink to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.deviantartapi.html#libs.deviantartapi.selenium_scrapper"><code class="docutils literal notranslate"><span class="pre">selenium_scrapper</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.htmgeny.html">libs.htmgeny module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.htmgeny.html#libs.htmgeny.htmlgen"><code class="docutils literal notranslate"><span class="pre">htmlgen()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.oldlibs.html">libs.oldlibs module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.oldlibs.html#libs.oldlibs.deviant_scrapper_pages"><code class="docutils literal notranslate"><span class="pre">deviant_scrapper_pages()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.steamget.html">libs.steamget module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.steamget.html#libs.steamget.get_item"><code class="docutils literal notranslate"><span class="pre">get_item()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.urlextractor.html">libs.urlextractor module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.urlextractor.html#libs.urlextractor.nextcursor_requests"><code class="docutils literal notranslate"><span class="pre">nextcursor_requests()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="libs.urlextractor.html#libs.urlextractor.nextcursor_selenium"><code class="docutils literal notranslate"><span class="pre">nextcursor_selenium()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="libs.urlextractor.html#libs.urlextractor.remove_filter"><code class="docutils literal notranslate"><span class="pre">remove_filter()</span></code></a></li>
-</ul>
-</li>
-</ul>
+          <section id="module-libs.htmgeny">
+<span id="libs-htmgeny-module"></span><h1>libs.htmgeny module<a class="headerlink" href="#module-libs.htmgeny" title="Permalink to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="libs.htmgeny.htmlgen">
+<span class="sig-prename descclassname"><span class="pre">libs.htmgeny.</span></span><span class="sig-name descname"><span class="pre">htmlgen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jsonfile</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/libs/htmgeny.html#htmlgen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmgeny.htmlgen" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>jsonfile</strong> (<em>str</em>) – json file name(path)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.0.1: </span><span class="raw-html"><br /></span>
+<strong>Only kept as a reference as pandas will use different methods</strong></p>
 </div>
-</section>
+<div class="line-block">
+<div class="line">Generates and opens a html file for the given jsonfile </div>
+<div class="line">A html page is generated and opened.</div>
+<div class="line">Note: A defualt brower must be set by windows </div>
+</div>
+</dd></dl>
+
 </section>
 
         </article>
@@ -241,23 +234,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="libs.deviantartapi.html">
+          <a class="next-page" href="libs.oldlibs.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">libs.deviantartapi module</div>
+                <div class="title">libs.oldlibs module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="Modules.html">
+          <a class="prev-page" href="libs.deviantartapi.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">CURRENT MODULES</div>
+                <div class="title">libs.deviantartapi module</div>
                 
               </div>
             </a>
@@ -293,8 +286,8 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">libs package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#">libs.htmgeny module</a><ul>
+<li><a class="reference internal" href="#libs.htmgeny.htmlgen"><code class="docutils literal notranslate"><span class="pre">htmlgen()</span></code></a></li>
 </ul>
 </li>
 </ul>

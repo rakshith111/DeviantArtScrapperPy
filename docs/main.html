@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="begin module" href="begin.html" /><link rel="prev" title="Libs package" href="libs.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="begin module" href="begin.html" /><link rel="prev" title="libs.urlextractor module" href="libs.urlextractor.html" />
 
     <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
         <title>main module - DeviantArtScrapper 0.0.2 documentation</title>
@@ -155,9 +155,16 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="changeOlog.html">CHANGE-O-LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="libs.html">Libs package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="libs.html">libs package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libs.htmgeny.html">libs.htmgeny module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libs.oldlibs.html">libs.oldlibs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libs.steamget.html">libs.steamget module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libs.urlextractor.html">libs.urlextractor module</a></li>
+</ul>
+</li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">main module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
 </ul>
@@ -227,6 +234,26 @@
 <div class="line">Once credentials are provided, it will login to the account and save the cookies</div>
 </div>
 <dl class="py method">
+<dt class="sig sig-object py" id="main.scrapper.price_finder">
+<span class="sig-name descname"><span class="pre">price_finder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">saveafter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.price_finder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.price_finder" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>saveafter</strong> (<em>int</em>) – number of links to be searched before saving the data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line">Accepts a list of deviant art page links, then searches for the steam links in the art pages</div>
+<div class="line">If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present </div>
+<div class="line">If no steam market link is found, its still added but with a None value for the steam market link</div>
+<div class="line">Saves data every 5 links to avoid data loss in case of an error</div>
+<div class="line"><cite>saveafter</cite> Can be overriden </div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="main.scrapper.steamlinks_scrapper">
 <span class="sig-name descname"><span class="pre">steamlinks_scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deviantartpages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveafter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.steamlinks_scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.steamlinks_scrapper" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
@@ -267,14 +294,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="libs.html">
+          <a class="prev-page" href="libs.urlextractor.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Libs package</div>
+                <div class="title">libs.urlextractor module</div>
                 
               </div>
             </a>
@@ -312,6 +339,7 @@
             <ul>
 <li><a class="reference internal" href="#">main module</a><ul>
 <li><a class="reference internal" href="#main.scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper</span></code></a><ul>
+<li><a class="reference internal" href="#main.scrapper.price_finder"><code class="docutils literal notranslate"><span class="pre">scrapper.price_finder()</span></code></a></li>
 <li><a class="reference internal" href="#main.scrapper.steamlinks_scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper.steamlinks_scrapper()</span></code></a></li>
 </ul>
 </li>

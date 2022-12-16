@@ -154,9 +154,16 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changeOlog.html">CHANGE-O-LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../libs.html">Libs package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../libs.html">libs package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../libs.deviantartapi.html">libs.deviantartapi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../libs.htmgeny.html">libs.htmgeny module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../libs.oldlibs.html">libs.oldlibs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../libs.steamget.html">libs.steamget module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../libs.urlextractor.html">libs.urlextractor module</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../main.html">main module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../begin.html">begin module</a></li>
 </ul>
@@ -228,8 +235,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">match_string</span> <span class="o">=</span> <span class="s2">&quot;https://steamcommunity.com/market/listings/&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;src\data&#39;</span>
 
-       <span class="c1"># self.data_files = [&#39;deviantXsteam.csv&#39;, &#39;localprice.csv&#39;, &#39;failed.csv&#39;]</span>
-       <span class="c1"># check if files exists or not and create it</span>
+        <span class="c1">#self.data_files = [&#39;deviantXsteam.csv&#39;, &#39;localprice.csv&#39;, &#39;failed.csv&#39;]</span>
+        <span class="c1"># check if files exists or not and create it</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Credentials.json&#39;</span><span class="p">)))):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[x] Credentials not found, creating new file&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Creating Credentials.json&#39;</span><span class="p">)</span>
@@ -282,7 +289,7 @@
 
     <span class="c1"># Add a rerun function to rerun the failed links</span>
 
-<div class="viewcode-block" id="scrapper.steamlinks_scrapper"><a class="viewcode-back" href="../main.html#main.scrapper.steamlinks_scrapper">[docs]</a>    <span class="k">def</span> <span class="nf">steamlinks_scrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deviantartpages</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span><span class="n">saveafter</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="scrapper.steamlinks_scrapper"><a class="viewcode-back" href="../main.html#main.scrapper.steamlinks_scrapper">[docs]</a>    <span class="k">def</span> <span class="nf">steamlinks_scrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deviantartpages</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">saveafter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param list deviantartpages:  list of deviant art page links which are to be searched for steam links</span>
 <span class="sd">        :param int saveafter:  number of links to be searched before saving the data </span>
@@ -298,43 +305,40 @@
         <span class="n">rowdata</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">datacount</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">saveafter</span> <span class="o">=</span> <span class="n">saveafter</span>
-        <span class="k">for</span> <span class="n">deviantartpage</span> <span class="ow">in</span> <span class="n">deviantartpages</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">deviantartpage</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="p">[</span><span class="s1">&#39;DeviantUrls&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[X] Deviantart page already exists&#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[X] Skipping ....&#39;</span><span class="p">)</span>
-                <span class="k">continue</span>
+        <span class="n">difflinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">deviantartpages</span><span class="p">)</span> <span class="o">-</span> \
+            <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="p">[</span><span class="s1">&#39;DeviantUrls&#39;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">deviantartpage</span> <span class="ow">in</span> <span class="n">difflinks</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Accessing </span><span class="si">{</span><span class="n">deviantartpage</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">deviantartpage</span><span class="p">)</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+            <span class="n">outgoingsteam</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s2">&quot;external&quot;</span><span class="p">},</span> <span class="n">href</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+                <span class="s2">&quot;steamcommunity.com/market/listings&quot;</span><span class="p">))</span>
+            <span class="c1"># if steam market link is found</span>
+            <span class="k">if</span> <span class="n">outgoingsteam</span><span class="p">:</span>
+                <span class="n">outgoingsteam</span> <span class="o">=</span> <span class="p">(</span><span class="n">outgoingsteam</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span>  <span class="c1"># type: ignore</span>
+                <span class="n">outgoingsteam</span> <span class="o">=</span> <span class="n">urlextractor</span><span class="o">.</span><span class="n">remove_filter</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">outgoingsteam</span><span class="p">))</span>
+                <span class="n">steamlink</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">outgoingsteam</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">remove_string</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Steam link found&#39;</span><span class="p">)</span>
+                <span class="n">rowdata</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">steamlink</span><span class="p">,</span> <span class="n">deviantartpage</span><span class="p">))</span>
+                <span class="n">datacount</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Accessing </span><span class="si">{</span><span class="n">deviantartpage</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
-                <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">deviantartpage</span><span class="p">)</span>
-                <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
-                <span class="n">outgoingsteam</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s2">&quot;external&quot;</span><span class="p">},</span> <span class="n">href</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-                    <span class="s2">&quot;steamcommunity.com/market/listings&quot;</span><span class="p">))</span>
-                <span class="c1"># if steam market link is found</span>
-                <span class="k">if</span> <span class="n">outgoingsteam</span><span class="p">:</span>
-                    <span class="n">outgoingsteam</span> <span class="o">=</span> <span class="p">(</span><span class="n">outgoingsteam</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span>  <span class="c1"># type: ignore</span>
-                    <span class="n">outgoingsteam</span> <span class="o">=</span> <span class="n">urlextractor</span><span class="o">.</span><span class="n">remove_filter</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">outgoingsteam</span><span class="p">))</span>
-                    <span class="n">steamlink</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">outgoingsteam</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">remove_string</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Steam link found&#39;</span><span class="p">)</span>
-                    <span class="n">rowdata</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">steamlink</span><span class="p">,</span> <span class="n">deviantartpage</span><span class="p">))</span>
-                    <span class="n">datacount</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[X] No steam link found&#39;</span><span class="p">)</span>
-                    <span class="n">rowdata</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="n">deviantartpage</span><span class="p">))</span>
-                    <span class="n">datacount</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[X] No steam link found&#39;</span><span class="p">)</span>
+                <span class="n">rowdata</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="n">deviantartpage</span><span class="p">))</span>
+                <span class="n">datacount</span> <span class="o">+=</span> <span class="mi">1</span>
 
-                <span class="c1"># save after 5 links</span>
-                <span class="k">if</span> <span class="n">datacount</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveafter</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Saving data to deviantXsteam.csv&#39;</span><span class="p">)</span>
-                    <span class="n">merger</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-                        <span class="n">rowdata</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;DeviantUrls&#39;</span><span class="p">])</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
-                        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="p">,</span> <span class="n">merger</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;deviantXsteam.csv&#39;</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Data saved to deviantXsteam.csv&#39;</span><span class="p">)</span>
-                    <span class="n">datacount</span> <span class="o">=</span> <span class="mi">0</span>
-                    <span class="n">rowdata</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># save after 5 links</span>
+            <span class="k">if</span> <span class="n">datacount</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveafter</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Saving data to deviantXsteam.csv&#39;</span><span class="p">)</span>
+                <span class="n">merger</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                    <span class="n">rowdata</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;DeviantUrls&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="p">,</span> <span class="n">merger</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;deviantXsteam.csv&#39;</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Data saved to deviantXsteam.csv&#39;</span><span class="p">)</span>
+                <span class="n">datacount</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">rowdata</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># save remaining data if any</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rowdata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] Saving </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rowdata</span><span class="p">)</span><span class="si">}</span><span class="s1"> data to deviantXsteam.csv&#39;</span><span class="p">)</span>
@@ -343,8 +347,37 @@
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="p">,</span> <span class="n">merger</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;deviantXsteam.csv&#39;</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Data saved to deviantXsteam.csv&#39;</span><span class="p">)</span></div></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Data saved to deviantXsteam.csv&#39;</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="scrapper.price_finder"><a class="viewcode-back" href="../main.html#main.scrapper.price_finder">[docs]</a>    <span class="k">def</span> <span class="nf">price_finder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">saveafter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="c1"># accept failed and deviantXsteam links </span>
+        <span class="c1"># load via diff methods</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        :param int saveafter:  number of links to be searched before saving the data </span>
+<span class="sd">        :return: None</span>
+
+<span class="sd">        | Accepts a list of deviant art page links, then searches for the steam links in the art pages</span>
+<span class="sd">        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present </span>
+<span class="sd">        | If no steam market link is found, its still added but with a None value for the steam market link</span>
+<span class="sd">        | Saves data every 5 links to avoid data loss in case of an error</span>
+<span class="sd">        | `saveafter` Can be overriden </span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">rowdata</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">datacount</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saveafter</span> <span class="o">=</span> <span class="n">saveafter</span>
+        <span class="n">difflinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">])</span> <span class="o">-</span> \
+            <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">steamlink</span> <span class="ow">in</span> <span class="n">difflinks</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Accessing </span><span class="si">{</span><span class="n">steamlink</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">steamlink</span><span class="p">)</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+            <span class="n">steamappid</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s2">&quot;market_listing_nav&quot;</span><span class="p">},</span> <span class="nb">id</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+                <span class="s2">&quot;market_listing_nav&quot;</span><span class="p">))</span>
+            <span class="c1"># if steam market link is found</span>
+            <span class="k">if</span> <span class="n">steamappid</span><span class="p">:</span>
+                <span class="n">steamappid</span> <span class="o">=</span> <span class="p">(</span><span class="n">steamappid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">))</span></div></div>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
@@ -354,7 +387,8 @@
     <span class="c1"># retrives 96 links in case of no duplicates</span>
 
     <span class="n">getsteamliks</span> <span class="o">=</span> <span class="n">scrapper</span><span class="p">()</span>
-    <span class="n">pp</span> <span class="o">=</span> <span class="n">getsteamliks</span><span class="o">.</span><span class="n">steamlinks_scrapper</span><span class="p">(</span> <span class="p">[</span><span class="s2">&quot;link1&quot;</span><span class="p">,</span><span class="s2">&quot;link2&quot;</span><span class="p">])</span>
+    <span class="n">pp</span> <span class="o">=</span> <span class="n">getsteamliks</span><span class="o">.</span><span class="n">steamlinks_scrapper</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">&quot;https://www.deviantart.com/xieon08/art/VIPER-Valorant-Neon-Green-Steam-Artwork-Animated-910675813&quot;</span><span class="p">])</span>
 </pre></div>
         </article>
       </div>

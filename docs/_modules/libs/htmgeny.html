@@ -154,9 +154,16 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changeOlog.html">CHANGE-O-LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../libs.html">Libs package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../libs.html">libs package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.deviantartapi.html">libs.deviantartapi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.htmgeny.html">libs.htmgeny module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.oldlibs.html">libs.oldlibs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.steamget.html">libs.steamget module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.urlextractor.html">libs.urlextractor module</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../main.html">main module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../begin.html">begin module</a></li>
 </ul>
@@ -200,14 +207,18 @@
 <span class="kn">from</span> <span class="nn">json2html</span> <span class="kn">import</span> <span class="n">json2html</span>
 
 
-<div class="viewcode-block" id="htmlgen"><a class="viewcode-back" href="../../libs.html#libs.htmgeny.htmlgen">[docs]</a><span class="k">def</span> <span class="nf">htmlgen</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="htmlgen"><a class="viewcode-back" href="../../libs.htmgeny.html#libs.htmgeny.htmlgen">[docs]</a><span class="k">def</span> <span class="nf">htmlgen</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param str jsonfile: json file name(path)</span>
 
 <span class="sd">    :return: None</span>
+<span class="sd">    </span>
+<span class="sd">    .. role:: raw-html(raw)</span>
+<span class="sd">       :format: html</span>
 
 <span class="sd">    .. deprecated:: 0.0.1</span>
-<span class="sd">        Only kept as a reference as pandas will use different methods</span>
+<span class="sd">       :raw-html:`&lt;br /&gt;`</span>
+<span class="sd">       **Only kept as a reference as pandas will use different methods**</span>
 
 
 <span class="sd">    | Generates and opens a html file for the given jsonfile </span>

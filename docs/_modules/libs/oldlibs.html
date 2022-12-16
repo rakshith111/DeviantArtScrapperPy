@@ -154,9 +154,16 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changeOlog.html">CHANGE-O-LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../libs.html">Libs package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../libs.html">libs package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.deviantartapi.html">libs.deviantartapi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.htmgeny.html">libs.htmgeny module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.oldlibs.html">libs.oldlibs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.steamget.html">libs.steamget module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.urlextractor.html">libs.urlextractor module</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../main.html">main module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../begin.html">begin module</a></li>
 </ul>
@@ -202,7 +209,7 @@
 <span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">urlextractor</span>
 
 
-<div class="viewcode-block" id="deviant_scrapper_pages"><a class="viewcode-back" href="../../libs.html#libs.oldlibs.deviant_scrapper_pages">[docs]</a><span class="k">def</span> <span class="nf">deviant_scrapper_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nextpage</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="deviant_scrapper_pages"><a class="viewcode-back" href="../../libs.oldlibs.html#libs.oldlibs.deviant_scrapper_pages">[docs]</a><span class="k">def</span> <span class="nf">deviant_scrapper_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nextpage</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
 
 <span class="sd">        :param str baseurl:  Deviant art page url</span>
@@ -210,14 +217,19 @@
 <span class="sd">        :return: - list of all the art page links</span>
 <span class="sd">        :rtype: list</span>
 
-<span class="sd">        .. deprecated:: 0.0.1</span>
-<span class="sd">            Use :func:`deviantartapi.selenium_scrapper` instead</span>
-<span class="sd">            outdated since Deviantart changed their website and introduced login system</span>
-
 <span class="sd">        | Accepts a deviant url and searches for the sub deviant art links</span>
 <span class="sd">        | Then next page cursor is searched and the function is called again with the next page url</span>
 <span class="sd">        | each page returns 24 links, then 24*nextpage links will be returned</span>
 <span class="sd">        | so if nexpage is 2 then 48 links are returned</span>
+
+<span class="sd">        .. role:: raw-html(raw)</span>
+<span class="sd">           :format: html</span>
+
+<span class="sd">        .. deprecated:: 0.0.1</span>
+<span class="sd">            :raw-html:`&lt;br /&gt;`</span>
+<span class="sd">            **Use :func:`deviantartapi.selenium_scrapper` instead</span>
+<span class="sd">            outdated since Deviantart changed their website and introduced login system**</span>
+<span class="sd">       </span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 

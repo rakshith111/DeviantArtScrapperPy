@@ -11,6 +11,6 @@ Module under heavy development
 ```{toctree}
 :maxdepth: 1
 
-changeOlog
+changelog
 Modules
 ```

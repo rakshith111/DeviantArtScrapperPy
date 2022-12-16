@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs.deviantartapi module" href="libs.deviantartapi.html" /><link rel="prev" title="CURRENT MODULES" href="Modules.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs.htmgeny module" href="libs.htmgeny.html" /><link rel="prev" title="libs package" href="libs.html" />
 
     <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
-        <title>libs package - DeviantArtScrapper 0.0.2 documentation</title>
+        <title>libs.deviantartapi module - DeviantArtScrapper 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -157,8 +157,8 @@
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">libs package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="libs.html">libs package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">libs.deviantartapi module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.htmgeny.html">libs.htmgeny module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.oldlibs.html">libs.oldlibs module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.steamget.html">libs.steamget module</a></li>
@@ -203,37 +203,90 @@
           </label>
         </div>
         <article role="main">
-          <section id="libs-package">
-<h1>libs package<a class="headerlink" href="#libs-package" title="Permalink to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.deviantartapi.html#libs.deviantartapi.selenium_scrapper"><code class="docutils literal notranslate"><span class="pre">selenium_scrapper</span></code></a></li>
+          <section id="module-libs.deviantartapi">
+<span id="libs-deviantartapi-module"></span><h1>libs.deviantartapi module<a class="headerlink" href="#module-libs.deviantartapi" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="libs.deviantartapi.selenium_scrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libs.deviantartapi.</span></span><span class="sig-name descname"><span class="pre">selenium_scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/deviantartapi.html#selenium_scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.deviantartapi.selenium_scrapper" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – Deviant art username</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – Deviant art password</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.htmgeny.html">libs.htmgeny module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.htmgeny.html#libs.htmgeny.htmlgen"><code class="docutils literal notranslate"><span class="pre">htmlgen()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.oldlibs.html">libs.oldlibs module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.oldlibs.html#libs.oldlibs.deviant_scrapper_pages"><code class="docutils literal notranslate"><span class="pre">deviant_scrapper_pages()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.steamget.html">libs.steamget module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.steamget.html#libs.steamget.get_item"><code class="docutils literal notranslate"><span class="pre">get_item()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="libs.urlextractor.html">libs.urlextractor module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="libs.urlextractor.html#libs.urlextractor.nextcursor_requests"><code class="docutils literal notranslate"><span class="pre">nextcursor_requests()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="libs.urlextractor.html#libs.urlextractor.nextcursor_selenium"><code class="docutils literal notranslate"><span class="pre">nextcursor_selenium()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="libs.urlextractor.html#libs.urlextractor.remove_filter"><code class="docutils literal notranslate"><span class="pre">remove_filter()</span></code></a></li>
-</ul>
-</li>
-</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line">Initializes the driver,Logs in to the account and loads the page</div>
+<div class="line">Uses cookies to login to the account if the cookies are present</div>
+<div class="line">If the cookies are not present, it will login to the account and save the cookies</div>
 </div>
-</section>
+<dl class="py method">
+<dt class="sig sig-object py" id="libs.deviantartapi.selenium_scrapper.get_deviant_links">
+<span class="sig-name descname"><span class="pre">get_deviant_links</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nextpage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="reference internal" href="_modules/libs/deviantartapi.html#selenium_scrapper.get_deviant_links"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.deviantartapi.selenium_scrapper.get_deviant_links" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>baseurl</strong> (<em>list</em>) – list of Deviant art Base urls</p></li>
+<li><p><strong>nextpage</strong> (<em>int</em>) – Number of pages to scrape</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>set of links to the deviant art pages</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Need to enable Paging in Account settings -&gt; Browsing -&gt; Paging -&gt; click through pages</p>
+</div>
+<div class="line-block">
+<div class="line">Loads the page, Finds all the links to the deviant art pages</div>
+<div class="line">Then next page cursor is searched and the function is called again with the next page url</div>
+<div class="line">each page returns 24 links, then 24*nextpage links will be returned</div>
+<div class="line">so if nexpage is 2 then 48 links are returned</div>
+<div class="line">Next page cursor count can be set manually in the function</div>
+<div class="line">Returns the set of links</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libs.deviantartapi.selenium_scrapper.scroll">
+<span class="sig-name descname"><span class="pre">scroll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scroll_pause_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/deviantartapi.html#selenium_scrapper.scroll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.deviantartapi.selenium_scrapper.scroll" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scroll_pause_time</strong> (<em>int</em>) – Time to wait between scrolls</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Page source</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>CURRENTLY NOT USED</strong>
+This function returns 24 links per page, even if there are more than 24 links in the page needs to be fixed in the future</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Need to enable scroll Account settings -&gt; Browsing -&gt; Paging -&gt; Scroll through pages</p>
+</div>
+<div class="line-block">
+<div class="line">Scrolls the page to load all the images</div>
+<div class="line">Can override the default time to wait between scrolls</div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -241,23 +294,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="libs.deviantartapi.html">
+          <a class="next-page" href="libs.htmgeny.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">libs.deviantartapi module</div>
+                <div class="title">libs.htmgeny module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="Modules.html">
+          <a class="prev-page" href="libs.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">CURRENT MODULES</div>
+                <div class="title">libs package</div>
                 
               </div>
             </a>
@@ -293,8 +346,12 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">libs package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#">libs.deviantartapi module</a><ul>
+<li><a class="reference internal" href="#libs.deviantartapi.selenium_scrapper"><code class="docutils literal notranslate"><span class="pre">selenium_scrapper</span></code></a><ul>
+<li><a class="reference internal" href="#libs.deviantartapi.selenium_scrapper.get_deviant_links"><code class="docutils literal notranslate"><span class="pre">selenium_scrapper.get_deviant_links()</span></code></a></li>
+<li><a class="reference internal" href="#libs.deviantartapi.selenium_scrapper.scroll"><code class="docutils literal notranslate"><span class="pre">selenium_scrapper.scroll()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
