@@ -2,7 +2,7 @@
 
 Any notable changes to this project that I deem necessary will be documented in this file.
 
-## 0.0.3 -
+## 0.0.3 - 16/12/2022
 
 - Update the way the links are checked for redundancy, now it uses a `set` instead `in`
 - Split the library documentation based on modules rather than one long file
