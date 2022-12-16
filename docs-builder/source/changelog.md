@@ -1,6 +1,12 @@
-# CHANGE-O-LOG
+# CHANGELOG
 
 Any notable changes to this project that I deem necessary will be documented in this file.
+
+## 0.0.3 -
+
+- Update the way the links are checked for redundancy, now it uses a `set` instead `in`
+- Split the library documentation based on modules rather than one long file
+
 
 ## 0.0.2 - 04/12/2022
 

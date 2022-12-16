@@ -9,6 +9,7 @@ release = '0.0.2'
 
 
 sys.path.insert(0, os.path.abspath('../../src'))
+sys.path.insert(0, os.path.abspath('../../src/libs'))
 
 templates_path = ['_templates']
 html_static_path = ['_static']
