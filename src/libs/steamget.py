@@ -6,7 +6,7 @@ import requests
 
 from urllib.parse import unquote
 
-
+# add proxy support
 
 def get_item(steamurl: str) -> str:  # type: ignore
     """

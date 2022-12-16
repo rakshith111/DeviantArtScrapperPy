@@ -8,9 +8,13 @@ def htmlgen(jsonfile) -> None:
     :param str jsonfile: json file name(path)
 
     :return: None
+    
+    .. role:: raw-html(raw)
+       :format: html
 
     .. deprecated:: 0.0.1
-        Only kept as a reference as pandas will use different methods
+       :raw-html:`<br />`
+       **Only kept as a reference as pandas will use different methods**
 
 
     | Generates and opens a html file for the given jsonfile 

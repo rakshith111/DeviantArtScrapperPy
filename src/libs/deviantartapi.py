@@ -58,6 +58,7 @@ class selenium_scrapper:
         :rtype: str
 
         .. warning:: 
+            **CURRENTLY NOT USED**
             This function returns 24 links per page, even if there are more than 24 links in the page needs to be fixed in the future
 
         .. note::

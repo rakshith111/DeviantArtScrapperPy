@@ -12,14 +12,20 @@ def nextcursor_requests(baseurl: str, cookie) -> str:
     :rtype: str
     :example: "/tag/steamprofile?cursor=MTQwYWI2MjA9NCY1OTBhY2FkMD03MiZkMTc0YjZiYz1OJTJGQQ"
 
-    .. deprecated:: 0.0.1
-        Use :func:`deviantartapi.nextcursor_selenium` instead
-        outdated since Deviantart changed their website and introduced login system
-        Requests version doesn't render js
-
     | Made for requests version
-    | Accepts a deviant url along with its parent cookie, searches for the next page cursor , and returns the cursor part 
+    | Accepts a deviant url along with its parent cookie, searches for the next page cursor, and returns the cursor part 
     | if no next page  or any other error returns 0
+
+    .. role:: raw-html(raw)
+        :format: html
+
+    .. deprecated:: 0.0.1
+        :raw-html:`<br />`
+        **Use :func:`deviantartapi.nextcursor_selenium` instead**
+        outdated since Deviantart changed their website and introduced login system,also
+        the requests version doesn't render js
+
+    
 
 
     '''

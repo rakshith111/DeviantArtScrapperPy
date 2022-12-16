@@ -13,14 +13,19 @@ def deviant_scrapper_pages(self, baseurl: str, nextpage: int = 2) -> list:
         :return: - list of all the art page links
         :rtype: list
 
-        .. deprecated:: 0.0.1
-            Use :func:`deviantartapi.selenium_scrapper` instead
-            outdated since Deviantart changed their website and introduced login system
-
         | Accepts a deviant url and searches for the sub deviant art links
         | Then next page cursor is searched and the function is called again with the next page url
         | each page returns 24 links, then 24*nextpage links will be returned
         | so if nexpage is 2 then 48 links are returned
+
+        .. role:: raw-html(raw)
+           :format: html
+
+        .. deprecated:: 0.0.1
+            :raw-html:`<br />`
+            **Use :func:`deviantartapi.selenium_scrapper` instead
+            outdated since Deviantart changed their website and introduced login system**
+       
 
     '''
 
