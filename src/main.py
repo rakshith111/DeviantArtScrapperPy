@@ -31,7 +31,7 @@ class scrapper:
         '''
         self.remove_string = "https://www.deviantart.com/users/outgoing?"
         self.match_string = "https://steamcommunity.com/market/listings/"
-        self.patforid = ("[\d]+/")
+        self.patfortag = ("[\d]+-")
         self.data_path = r'src\data'
         self.today = datetime.datetime.now().strftime(r'%d-%m-%Y')
 
@@ -73,7 +73,7 @@ class scrapper:
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'localprice.csv')))):
             print('[x] localprice.csv not found, creating new file')
             print('[+] Creating localprice.csv')
-            pd.DataFrame(columns=['SteamAppId', 'SteamUrl', 'SteamPrice', 'SteamPriceDate', ]).to_csv(
+            pd.DataFrame(columns=['App_Tag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate', ]).to_csv(
                 os.path.abspath(os.path.join(self.data_path, 'localprice.csv')), index=False)
             self.localpricedf = pd.read_csv(os.path.abspath(
                 os.path.join(self.data_path, 'localprice.csv'))
@@ -87,7 +87,7 @@ class scrapper:
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'failed.csv')))):
             print('[x] failed.csv not found, creating new file')
             print('[+] Creating failed.csv')
-            pd.DataFrame(columns=['SteamUrl', 'SteamAppId']).to_csv(
+            pd.DataFrame(columns=['SteamUrl', 'App_Tag']).to_csv(
                 os.path.abspath(os.path.join(self.data_path, 'failed.csv')), index=False)
             self.faileddf = pd.read_csv(os.path.abspath(
                 os.path.join(self.data_path, 'failed.csv')))
@@ -99,6 +99,9 @@ class scrapper:
 
     def file_reload(self) -> None:
         '''
+        | Reloads the data from the csv files
+        | This is used when the data is updated in the csv files
+
         :return: None
         '''
         print('[+] Re-Loading failed.csv')
@@ -193,16 +196,19 @@ class scrapper:
         datacount = 0
         self.saveafter = saveafter
         self.steam_urls = self.deviantxsteamdf["SteamUrl"].dropna()
-        for steamlinks in self.steam_urls:
-            price = steamget.get_item(steamlinks)
-            appid = re.findall(self.patforid, steamlinks)
-            rowdata.append((appid[0].replace("/", ""),
-                           steamlinks, price, self.today))
+        difflinks = set(self.steam_urls) - \
+            set(self.localpricedf['SteamUrl'])
+        for steamlinks in difflinks:
+            price = steamget.get_item(steamlinks).replace("₹ ", "")
+            app_tag = re.findall(self.patfortag, steamlinks)[
+                0].replace("-", "")
+            rowdata.append((app_tag,steamlinks, price, self.today))
             datacount += 1
+
             if datacount > self.saveafter:
                 print('[+] Saving data to localprice.csv')
                 merger = pd.DataFrame(
-                    rowdata, columns=['SteamAppId', 'SteamUrl', 'SteamPrice', 'SteamPriceDate'])
+                    rowdata, columns=['App_Tag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate'])
                 self.localpricedf = pd.concat(
                     [self.localpricedf, merger], ignore_index=True)
                 self.localpricedf.to_csv(os.path.abspath(os.path.join(
@@ -211,17 +217,15 @@ class scrapper:
                 datacount = 0
                 rowdata = []
         # save remaining data if any
-        if datacount > self.saveafter:
-            print('[+] Saving data to localprice.csv')
+        if len(rowdata) > 0:
+            print(f'[+] Saving {len(rowdata)} data to localprice.csv')
             merger = pd.DataFrame(
-                rowdata, columns=['SteamAppId', 'SteamUrl', 'SteamPrice', 'SteamPriceDate'])
+                rowdata, columns=['App_Tag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate'])
             self.localpricedf = pd.concat(
                 [self.localpricedf, merger], ignore_index=True)
             self.localpricedf.to_csv(os.path.abspath(os.path.join(
                 self.data_path, 'localprice.csv')), index=False)
             print('[+] Data saved to localprice.csv')
-            datacount = 0
-            rowdata = []
 
 
 if __name__ == "__main__":
@@ -231,9 +235,6 @@ if __name__ == "__main__":
     #     ['parent'], 4)
     # retrives 96 links in case of no duplicates
 
-    # getsteamliks = scrapper(True)
-    # # pp = getsteamliks.steamlinks_scrapper(
-    # #     ["https://www.deviantart.com/xieon08/art/VIPER-Valorant-Neon-Green-Steam-Artwork-Animated-910675813"])
-    # gg= getsteamliks.price_finder()
-    steamget.get_item(
-        "https://steamcommunity.com/market/listings/753/566780-Beats%20Fever")
+    getsteamliks = scrapper(True)
+
+    gg = getsteamliks.price_finder()
