@@ -23,7 +23,10 @@ class selenium_scrapper:
         '''
 
         options = Options()
-        options.headless = True
+        self.username = username
+        self.password = password
+        options.headless = False
+        #options.headless = True
         self.driver = webdriver.Firefox(options=options,)
         self.data_path = r'src\data'
         self.loginurl = 'https://www.deviantart.com/users/login'
@@ -32,15 +35,8 @@ class selenium_scrapper:
 
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'cookie.pkl')))):
             print('[x] Cookie.pkl not found, creating new file')
-            time.sleep(2)
-            self.driver.find_element(By.ID, "username").send_keys(username)
-            time.sleep(0.5)
-            self.driver.find_element(By.ID, "password").send_keys(password)
-            time.sleep(0.5)
-            self.driver.find_element(By.ID, "loginbutton").click()
-            time.sleep(0.5)
-            pickle.dump(self.driver.get_cookies(), open(os.path.abspath(
-                os.path.join(self.data_path, 'cookie.pkl')), "wb"))
+            self.login()
+            
         else:
             print('[+] Loading Cookies')
             cookies = pickle.load(open(os.path.abspath(
@@ -48,7 +44,31 @@ class selenium_scrapper:
             for cookie in cookies:
                 self.driver.add_cookie(cookie)
             self.driver.get(self.loginurl)
+            if self.driver.current_url == self.loginurl:
+                print('[x] Error in loding cookies, logging in manually')
+                self.login()
             print('[+] Cookies loaded')
+    def login(self):
+
+        '''
+        :return: None
+
+        | Logs in to the account and saves the cookies
+
+        '''
+        
+        for character in self.username:
+            self.driver.find_element(By.ID, "username").send_keys(character)
+            time.sleep(0.3)
+
+        for character in self.password:
+            self.driver.find_element(By.ID, "password").send_keys(character)
+            time.sleep(0.3)
+        self.driver.find_element(By.ID, "loginbutton").click()
+        time.sleep(2)
+        pickle.dump(self.driver.get_cookies(), open(os.path.abspath(
+            os.path.join(self.data_path, 'cookie.pkl')), "wb"))
+        print('[+] Cookies saved')
 
     def scroll(self, scroll_pause_time: float = 1.5,) -> str:
         '''
@@ -114,8 +134,8 @@ class selenium_scrapper:
         for url in baseurl:
             nextbtnclicker = 0
             self.driver.get(url)
-            print(f"[+] Accessing page {nextbtnclicker+1} = {url}....")
-            time.sleep(11)
+            print(f"[+] Accessing page {nextbtnclicker+1} = {url} ....")
+            time.sleep(5)
             soup = BeautifulSoup(self.driver.page_source, 'html.parser')
 
            # with open('deviantart.html', 'w',encoding="utf-8") as f:
@@ -140,6 +160,7 @@ class selenium_scrapper:
                 nextbtnclicker += 1
                 time.sleep(1)
         self.driver.close()
+        print(f"[+] Total links found = {len(self.deviantartpages)}")
         return self.deviantartpages
 
 
