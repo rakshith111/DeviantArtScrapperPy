@@ -25,8 +25,7 @@ class scrapper:
         | Initializes the selenium driver and logs in to the account requires a username and password
         | If credentials are not provided, it will request for the credentials
         | Once credentials are provided, it will login to the account and save the cookies
-
-
+        | Dev mode is used to skip the login process 
 
         '''
         self.remove_string = "https://www.deviantart.com/users/outgoing?"
@@ -191,7 +190,7 @@ class scrapper:
         | `saveafter` Can be overriden 
 
         '''
-       # self.file_reload()
+        self.file_reload()
         rowdata = []
         datacount = 0
         self.saveafter = saveafter
@@ -200,8 +199,7 @@ class scrapper:
             set(self.localpricedf['SteamUrl'])
         for steamlinks in difflinks:
             price = steamget.get_item(steamlinks).replace("₹ ", "")
-            app_tag = re.findall(self.patfortag, steamlinks)[
-                0].replace("-", "")
+            app_tag = re.findall(self.patfortag, steamlinks)[0].replace("-", "")
             rowdata.append((app_tag,steamlinks, price, self.today))
             datacount += 1
 
@@ -230,11 +228,17 @@ class scrapper:
 
 if __name__ == "__main__":
 
-    # dev = deviantartapi.selenium_scrapper()
-    # k = dev.get_deviant_links(
-    #     ['parent'], 4)
-    # retrives 96 links in case of no duplicates
 
-    getsteamliks = scrapper(True)
+   
+    mainscrapper= scrapper(dev=False)
+    
 
-    gg = getsteamliks.price_finder()
+    with open(os.path.abspath( "src\data\links.txt")) as f:
+        links = f.readlines()
+
+    artlinks=mainscrapper.deviantartapi.get_deviant_links(links[:2], 2)
+    
+    mainscrapper.steamlinks_scrapper(list(artlinks))
+    mainscrapper.price_finder()
+
+    
