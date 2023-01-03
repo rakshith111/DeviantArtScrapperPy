@@ -5,9 +5,11 @@ Any notable changes to this project that I deem necessary will be documented in 
 
 ## 0.0.6 -3/1/2023
 
-```{important}
+```{warning}
 
-- New anti selenium detection deployed bt deviant art, now the program will fail at login
+- New anti selenium detection deployed by deviant art, now the program will fail at login
+- Need to find a way to bypass the new anti selenium detection
+- Halted development for now till I find a way to bypass the selenium detection
 
 ```
 - Added a new login method to fix cookie expire/ failures

@@ -3,12 +3,12 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="CURRENT MODULES" href="Modules.html" /><link rel="prev" title="Welcome to DeviantArtScrapper’s documentation!" href="index.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="To do list" href="To-do.html" /><link rel="prev" title="Welcome to DeviantArtScrapper’s documentation!" href="index.html" />
 
-    <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>CHANGELOG - DeviantArtScrapper 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -149,13 +149,14 @@
   <span class="sidebar-brand-text">DeviantArtScrapper 0.0.2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="To-do.html">To do list</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="libs.html">libs package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a></li>
@@ -207,14 +208,44 @@
 <h1>CHANGELOG<a class="headerlink" href="#changelog" title="Permalink to this heading">#</a></h1>
 <p>Any notable changes to this project that I deem necessary will be documented in this file.</p>
 <section id="id1">
-<h2>0.0.3 - 16/12/2022<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2>0.0.6 -3/1/2023<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>New anti selenium detection deployed by deviant art, now the program will fail at login</p></li>
+<li><p>Need to find a way to bypass the new anti selenium detection</p></li>
+<li><p>Halted development for now till I find a way to bypass the selenium detection</p></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p>Added a new login method to fix cookie expire/ failures</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>0.0.5 - 25/12/2022<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">main.py</span></code> to use all the modules and scrap the website</p></li>
+<li><p>Fixed an issue where the login failes due to expired cookies</p></li>
+<li><p>Now slow mode is enabled by default to avoid getting flagged as bot</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>0.0.4 - 24/12/2022<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Added steam price fetecher</p></li>
+<li><p>Saves the steam price to a file</p></li>
+<li><p>Updated module <code class="docutils literal notranslate"><span class="pre">steam_price.py</span></code> to fetch the steam price</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>0.0.3 - 16/12/2022<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Update the way the links are checked for redundancy, now it uses a <code class="docutils literal notranslate"><span class="pre">set</span></code> instead <code class="docutils literal notranslate"><span class="pre">in</span></code></p></li>
 <li><p>Split the library documentation based on modules rather than one long file</p></li>
 </ul>
 </section>
-<section id="id2">
-<h2>0.0.2 - 04/12/2022<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h2>0.0.2 - 04/12/2022<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Added Headless option for firefox</p></li>
 <li><p>Optimized searching for steam links using regex instead of string matching</p></li>
@@ -222,8 +253,8 @@
 <li><p>Writes steam links to file</p></li>
 </ul>
 </section>
-<section id="id3">
-<h2>0.0.2 - 01/12/2022<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h2>0.0.2 - 01/12/2022<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <ul class="simple">
@@ -237,8 +268,8 @@
 <li><p>Other minor changes</p></li>
 </ul>
 </section>
-<section id="id4">
-<h2>0.0.1 - 29/11/2022<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h2>0.0.1 - 29/11/2022<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>DeviantArt Website Changes they added a login system to the website, which kinda broke the scraper.</p>
@@ -247,8 +278,8 @@
 </ul>
 </div>
 </section>
-<section id="id5">
-<h2>0.0.1 - 22/11/2022<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<section id="id8">
+<h2>0.0.1 - 22/11/2022<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Changed the way the program is structured. Now it is a module, and the main program is in the <code class="docutils literal notranslate"><span class="pre">main.py</span></code> file.</p></li>
 <li><p>Add sphinx doc gen</p></li>
@@ -264,12 +295,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Modules.html">
+          <a class="next-page" href="To-do.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">CURRENT MODULES</div>
+                <div class="title">To do list</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -296,9 +327,7 @@
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         
@@ -317,11 +346,14 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">CHANGELOG</a><ul>
-<li><a class="reference internal" href="#id1">0.0.3 - 16/12/2022</a></li>
-<li><a class="reference internal" href="#id2">0.0.2 - 04/12/2022</a></li>
-<li><a class="reference internal" href="#id3">0.0.2 - 01/12/2022</a></li>
-<li><a class="reference internal" href="#id4">0.0.1 - 29/11/2022</a></li>
-<li><a class="reference internal" href="#id5">0.0.1 - 22/11/2022</a></li>
+<li><a class="reference internal" href="#id1">0.0.6 -3/1/2023</a></li>
+<li><a class="reference internal" href="#id2">0.0.5 - 25/12/2022</a></li>
+<li><a class="reference internal" href="#id3">0.0.4 - 24/12/2022</a></li>
+<li><a class="reference internal" href="#id4">0.0.3 - 16/12/2022</a></li>
+<li><a class="reference internal" href="#id5">0.0.2 - 04/12/2022</a></li>
+<li><a class="reference internal" href="#id6">0.0.2 - 01/12/2022</a></li>
+<li><a class="reference internal" href="#id7">0.0.1 - 29/11/2022</a></li>
+<li><a class="reference internal" href="#id8">0.0.1 - 22/11/2022</a></li>
 </ul>
 </li>
 </ul>

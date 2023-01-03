@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="begin module" href="begin.html" /><link rel="prev" title="libs.urlextractor module" href="libs.urlextractor.html" />
 
-    <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>main module - DeviantArtScrapper 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -149,13 +149,12 @@
   <span class="sidebar-brand-text">DeviantArtScrapper 0.0.2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="libs.html">libs package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a></li>
@@ -169,6 +168,8 @@
 <li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="To-do.html">To do list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
 </ul>
 
 </div>
@@ -211,7 +212,7 @@
 </div>
 <span class="target" id="module-main"></span><dl class="py class">
 <dt class="sig sig-object py" id="main.scrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">scrapper</span></span><a class="reference internal" href="_modules/main.html#scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">File<span class="colon">:</span></dt>
@@ -223,8 +224,11 @@
 <dt class="field-odd">File<span class="colon">:</span></dt>
 <dd class="field-odd"><p>deviantXsteam.csv - Contains the links to the deviantart pages and the steam links in the art pages</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>dev</strong> (<em>bool</em>) – If true, it will skip the login process</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 <div class="line-block">
@@ -232,7 +236,22 @@
 <div class="line">Initializes the selenium driver and logs in to the account requires a username and password</div>
 <div class="line">If credentials are not provided, it will request for the credentials</div>
 <div class="line">Once credentials are provided, it will login to the account and save the cookies</div>
+<div class="line">Dev mode is used to skip the login process </div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="main.scrapper.file_reload">
+<span class="sig-name descname"><span class="pre">file_reload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.file_reload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.file_reload" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Reloads the data from the csv files</div>
+<div class="line">This is used when the data is updated in the csv files</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="main.scrapper.price_finder">
 <span class="sig-name descname"><span class="pre">price_finder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">saveafter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.price_finder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.price_finder" title="Permalink to this definition">#</a></dt>
@@ -317,9 +336,7 @@
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         
@@ -339,6 +356,7 @@
             <ul>
 <li><a class="reference internal" href="#">main module</a><ul>
 <li><a class="reference internal" href="#main.scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper</span></code></a><ul>
+<li><a class="reference internal" href="#main.scrapper.file_reload"><code class="docutils literal notranslate"><span class="pre">scrapper.file_reload()</span></code></a></li>
 <li><a class="reference internal" href="#main.scrapper.price_finder"><code class="docutils literal notranslate"><span class="pre">scrapper.price_finder()</span></code></a></li>
 <li><a class="reference internal" href="#main.scrapper.steamlinks_scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper.steamlinks_scrapper()</span></code></a></li>
 </ul>

@@ -11,7 +11,7 @@ Module under heavy development
 ```{toctree}
 :maxdepth: 1
 
-Modules
-To-do
 changelog
+To-do
+Modules
 ```

@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs.urlextractor module" href="libs.urlextractor.html" /><link rel="prev" title="libs.oldlibs module" href="libs.oldlibs.html" />
 
-    <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>libs.steamget module - DeviantArtScrapper 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -149,13 +149,12 @@
   <span class="sidebar-brand-text">DeviantArtScrapper 0.0.2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current has-children"><a class="reference internal" href="libs.html">libs package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a></li>
@@ -169,6 +168,8 @@
 <li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="To-do.html">To do list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
 </ul>
 
 </div>
@@ -207,10 +208,13 @@
 <span id="libs-steamget-module"></span><h1>libs.steamget module<a class="headerlink" href="#module-libs.steamget" title="Permalink to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="libs.steamget.get_item">
-<span class="sig-prename descclassname"><span class="pre">libs.steamget.</span></span><span class="sig-name descname"><span class="pre">get_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/steamget.html#get_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.steamget.get_item" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">libs.steamget.</span></span><span class="sig-name descname"><span class="pre">get_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steam_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/steamget.html#get_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.steamget.get_item" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>steamurl</strong> (<em>str</em>) – Steam url</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>steam_url</strong> (<em>str</em>) – Steam url</p></li>
+<li><p><strong>country_code</strong> (<em>int</em>) – country code</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
@@ -221,9 +225,19 @@
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>price of the item  returns ₹ 269.36  (price of the item)</p>
 </dd>
+<dt class="field-odd">Exception<span class="colon">:</span></dt>
+<dd class="field-odd"><p>IndexError :  RE: Error in regex</p>
+</dd>
+<dt class="field-even">Exception<span class="colon">:</span></dt>
+<dd class="field-even"><p>NP: No price found</p>
+</dd>
+<dt class="field-odd">Exception<span class="colon">:</span></dt>
+<dd class="field-odd"><p>KeyError :  FA: Failed to get price</p>
+</dd>
 </dl>
 <div class="line-block">
 <div class="line">Takes a steammarket url and returns its price</div>
+<div class="line">Optional country code, default is 24 for Indian-INR, 1 for US-USD</div>
 </div>
 </dd></dl>
 
@@ -266,9 +280,7 @@
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         

@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
-    <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>main - DeviantArtScrapper 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -148,13 +148,12 @@
   <span class="sidebar-brand-text">DeviantArtScrapper 0.0.2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../libs.html">libs package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../libs.deviantartapi.html">libs.deviantartapi module</a></li>
@@ -168,6 +167,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../begin.html">begin module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../To-do.html">To do list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">CHANGELOG</a></li>
 </ul>
 
 </div>
@@ -208,58 +209,66 @@
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 
-<span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">urlextractor</span>
+<span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">steamget</span><span class="p">,</span> <span class="n">urlextractor</span>
 <span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">deviantartapi</span>
 
 
 <div class="viewcode-block" id="scrapper"><a class="viewcode-back" href="../main.html#main.scrapper">[docs]</a><span class="k">class</span> <span class="nc">scrapper</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dev</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :file: localprice.csv - Contains the steam links and the prices of the items</span>
 <span class="sd">        :file: failed.csv - Contains the steam links that failed to load due to multiple requests</span>
 <span class="sd">        :file: deviantXsteam.csv - Contains the links to the deviantart pages and the steam links in the art pages</span>
+<span class="sd">        :param bool dev:  If true, it will skip the login process</span>
 <span class="sd">        :return: None</span>
 
 <span class="sd">        | Initializes the class and loads the data from the csv files</span>
 <span class="sd">        | Initializes the selenium driver and logs in to the account requires a username and password</span>
 <span class="sd">        | If credentials are not provided, it will request for the credentials</span>
 <span class="sd">        | Once credentials are provided, it will login to the account and save the cookies</span>
-
-
+<span class="sd">        | Dev mode is used to skip the login process </span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remove_string</span> <span class="o">=</span> <span class="s2">&quot;https://www.deviantart.com/users/outgoing?&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">match_string</span> <span class="o">=</span> <span class="s2">&quot;https://steamcommunity.com/market/listings/&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">patfortag</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;[\d]+-&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;src\data&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">)</span>
 
         <span class="c1">#self.data_files = [&#39;deviantXsteam.csv&#39;, &#39;localprice.csv&#39;, &#39;failed.csv&#39;]</span>
-        <span class="c1"># check if files exists or not and create it</span>
-        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Credentials.json&#39;</span><span class="p">)))):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[x] Credentials not found, creating new file&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Creating Credentials.json&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Please enter your credentials&#39;</span><span class="p">)</span>
-            <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Username: &#39;</span><span class="p">)</span>
-            <span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Password: &#39;</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Credentials.json&#39;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">},</span> <span class="n">f</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Logging in with credentials&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">deviantartapi</span> <span class="o">=</span> <span class="n">deviantartapi</span><span class="o">.</span><span class="n">selenium_scrapper</span><span class="p">(</span>
-                <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Logging in with credentials&#39;</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Credentials.json&#39;</span><span class="p">)),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">credentials</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">deviantartapi</span> <span class="o">=</span> <span class="n">deviantartapi</span><span class="o">.</span><span class="n">selenium_scrapper</span><span class="p">(</span>
-                <span class="n">credentials</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="n">credentials</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span>
 
+        <span class="k">if</span> <span class="n">dev</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Dev mode enabled, skipping login&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Credentials.json&#39;</span><span class="p">)))):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[x] Credentials not found, creating new file&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Creating Credentials.json&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Please enter your credentials&#39;</span><span class="p">)</span>
+                <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Username: &#39;</span><span class="p">)</span>
+                <span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Password: &#39;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Credentials.json&#39;</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">},</span> <span class="n">f</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Logging in with credentials&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deviantartapi</span> <span class="o">=</span> <span class="n">deviantartapi</span><span class="o">.</span><span class="n">selenium_scrapper</span><span class="p">(</span>
+                    <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Logging in with credentials&#39;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;Credentials.json&#39;</span><span class="p">)),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">credentials</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deviantartapi</span> <span class="o">=</span> <span class="n">deviantartapi</span><span class="o">.</span><span class="n">selenium_scrapper</span><span class="p">(</span>
+                    <span class="n">credentials</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="n">credentials</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span>
+        <span class="c1"># check if files exists or not and create it</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;deviantXsteam.csv&#39;</span><span class="p">)))):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[x] deviantXsteam.csv not found, creating new file&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Creating deviantXsteam.csv&#39;</span><span class="p">)</span>
             <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;DeviantUrls&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;deviantXsteam.csv&#39;</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;deviantXsteam.csv&#39;</span><span class="p">)))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Loading deviantXsteam.csv&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
@@ -268,8 +277,11 @@
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;localprice.csv&#39;</span><span class="p">)))):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[x] localprice.csv not found, creating new file&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Creating localprice.csv&#39;</span><span class="p">)</span>
-            <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SteamAppId&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamPrice&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamPriceDate&#39;</span><span class="p">,</span> <span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;App_Tag&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamPrice&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamPriceDate&#39;</span><span class="p">,</span> <span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;localprice.csv&#39;</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;localprice.csv&#39;</span><span class="p">))</span>
+            <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Loading localprice.csv&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
@@ -279,18 +291,37 @@
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;failed.csv&#39;</span><span class="p">)))):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[x] failed.csv not found, creating new file&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Creating failed.csv&#39;</span><span class="p">)</span>
-            <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamAppId&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;App_Tag&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;failed.csv&#39;</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">faileddf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;failed.csv&#39;</span><span class="p">)))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Loading failed.csv&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">faileddf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;failed.csv&#39;</span><span class="p">)))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="o">*</span><span class="mi">50</span><span class="o">+</span><span class="s1">&#39; Done loading &#39;</span><span class="o">+</span><span class="s1">&#39;#&#39;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+
+<div class="viewcode-block" id="scrapper.file_reload"><a class="viewcode-back" href="../main.html#main.scrapper.file_reload">[docs]</a>    <span class="k">def</span> <span class="nf">file_reload</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        | Reloads the data from the csv files</span>
+<span class="sd">        | This is used when the data is updated in the csv files</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Re-Loading failed.csv&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">faileddf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;failed.csv&#39;</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Re-Loading localprice.csv&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;localprice.csv&#39;</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Re-Loading deviantXsteam.csv&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;deviantXsteam.csv&#39;</span><span class="p">)))</span></div>
 
     <span class="c1"># Add a rerun function to rerun the failed links</span>
 
 <div class="viewcode-block" id="scrapper.steamlinks_scrapper"><a class="viewcode-back" href="../main.html#main.scrapper.steamlinks_scrapper">[docs]</a>    <span class="k">def</span> <span class="nf">steamlinks_scrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deviantartpages</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">saveafter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param list deviantartpages:  list of deviant art page links which are to be searched for steam links</span>
 <span class="sd">        :param int saveafter:  number of links to be searched before saving the data </span>
 <span class="sd">        :return: None</span>
@@ -349,11 +380,11 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;deviantXsteam.csv&#39;</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Data saved to deviantXsteam.csv&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="scrapper.price_finder"><a class="viewcode-back" href="../main.html#main.scrapper.price_finder">[docs]</a>    <span class="k">def</span> <span class="nf">price_finder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">saveafter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="scrapper.price_finder"><a class="viewcode-back" href="../main.html#main.scrapper.price_finder">[docs]</a>    <span class="k">def</span> <span class="nf">price_finder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">saveafter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="c1"># accept failed and deviantXsteam links </span>
+        <span class="c1"># add a way to accept failed and deviantXsteam links</span>
         <span class="c1"># load via diff methods</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param int saveafter:  number of links to be searched before saving the data </span>
 <span class="sd">        :return: None</span>
 
@@ -364,31 +395,58 @@
 <span class="sd">        | `saveafter` Can be overriden </span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_reload</span><span class="p">()</span>
         <span class="n">rowdata</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">datacount</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">saveafter</span> <span class="o">=</span> <span class="n">saveafter</span>
-        <span class="n">difflinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">])</span> <span class="o">-</span> \
+        <span class="bp">self</span><span class="o">.</span><span class="n">steam_urls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="p">[</span><span class="s2">&quot;SteamUrl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="n">difflinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">steam_urls</span><span class="p">)</span> <span class="o">-</span> \
             <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">])</span>
-        <span class="k">for</span> <span class="n">steamlink</span> <span class="ow">in</span> <span class="n">difflinks</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[+] Accessing </span><span class="si">{</span><span class="n">steamlink</span><span class="si">}</span><span class="s2">....&quot;</span><span class="p">)</span>
-            <span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">steamlink</span><span class="p">)</span>
-            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
-            <span class="n">steamappid</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s2">&quot;market_listing_nav&quot;</span><span class="p">},</span> <span class="nb">id</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-                <span class="s2">&quot;market_listing_nav&quot;</span><span class="p">))</span>
-            <span class="c1"># if steam market link is found</span>
-            <span class="k">if</span> <span class="n">steamappid</span><span class="p">:</span>
-                <span class="n">steamappid</span> <span class="o">=</span> <span class="p">(</span><span class="n">steamappid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">))</span></div></div>
+        <span class="k">for</span> <span class="n">steamlinks</span> <span class="ow">in</span> <span class="n">difflinks</span><span class="p">:</span>
+            <span class="n">price</span> <span class="o">=</span> <span class="n">steamget</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">steamlinks</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;₹ &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">app_tag</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">patfortag</span><span class="p">,</span> <span class="n">steamlinks</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">rowdata</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">app_tag</span><span class="p">,</span><span class="n">steamlinks</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">today</span><span class="p">))</span>
+            <span class="n">datacount</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">datacount</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveafter</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Saving data to localprice.csv&#39;</span><span class="p">)</span>
+                <span class="n">merger</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                    <span class="n">rowdata</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;App_Tag&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamPrice&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamPriceDate&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span><span class="p">,</span> <span class="n">merger</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;localprice.csv&#39;</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Data saved to localprice.csv&#39;</span><span class="p">)</span>
+                <span class="n">datacount</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">rowdata</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># save remaining data if any</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rowdata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] Saving </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rowdata</span><span class="p">)</span><span class="si">}</span><span class="s1"> data to localprice.csv&#39;</span><span class="p">)</span>
+            <span class="n">merger</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="n">rowdata</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;App_Tag&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamUrl&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamPrice&#39;</span><span class="p">,</span> <span class="s1">&#39;SteamPriceDate&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span><span class="p">,</span> <span class="n">merger</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;localprice.csv&#39;</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Data saved to localprice.csv&#39;</span><span class="p">)</span></div></div>
+
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-    <span class="c1"># dev = deviantartapi.selenium_scrapper()</span>
-    <span class="c1"># k = dev.get_deviant_links(</span>
-    <span class="c1">#     [&#39;parent&#39;], 4)</span>
-    <span class="c1"># retrives 96 links in case of no duplicates</span>
 
-    <span class="n">getsteamliks</span> <span class="o">=</span> <span class="n">scrapper</span><span class="p">()</span>
-    <span class="n">pp</span> <span class="o">=</span> <span class="n">getsteamliks</span><span class="o">.</span><span class="n">steamlinks_scrapper</span><span class="p">(</span>
-        <span class="p">[</span><span class="s2">&quot;https://www.deviantart.com/xieon08/art/VIPER-Valorant-Neon-Green-Steam-Artwork-Animated-910675813&quot;</span><span class="p">])</span>
+   
+    <span class="n">mainscrapper</span><span class="o">=</span> <span class="n">scrapper</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span> <span class="s2">&quot;src\data\links.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">links</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="n">artlinks</span><span class="o">=</span><span class="n">mainscrapper</span><span class="o">.</span><span class="n">deviantartapi</span><span class="o">.</span><span class="n">get_deviant_links</span><span class="p">(</span><span class="n">links</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">mainscrapper</span><span class="o">.</span><span class="n">steamlinks_scrapper</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">artlinks</span><span class="p">))</span>
+    <span class="n">mainscrapper</span><span class="o">.</span><span class="n">price_finder</span><span class="p">()</span>
+
+    
 </pre></div>
         </article>
       </div>
@@ -409,9 +467,7 @@
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         
