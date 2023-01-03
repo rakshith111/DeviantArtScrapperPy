@@ -2,6 +2,29 @@
 
 Any notable changes to this project that I deem necessary will be documented in this file.
 
+
+## 0.0.6 -3/1/2023
+
+```{important}
+
+- New anti selenium detection deployed bt deviant art, now the program will fail at login
+
+```
+- Added a new login method to fix cookie expire/ failures
+
+## 0.0.5 - 25/12/2022
+
+- Updated `main.py` to use all the modules and scrap the website
+- Fixed an issue where the login failes due to expired cookies
+- Now slow mode is enabled by default to avoid getting flagged as bot
+
+
+## 0.0.4 - 24/12/2022
+
+- Added steam price fetecher 
+- Saves the steam price to a file
+- Updated module `steam_price.py` to fetch the steam price
+
 ## 0.0.3 - 16/12/2022
 
 - Update the way the links are checked for redundancy, now it uses a `set` instead `in`
