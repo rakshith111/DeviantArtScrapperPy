@@ -8,7 +8,7 @@ def htmlgen(jsonfile) -> None:
     :param str jsonfile: json file name(path)
 
     :return: None
-    
+
     .. role:: raw-html(raw)
        :format: html
 

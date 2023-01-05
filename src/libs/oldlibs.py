@@ -25,7 +25,7 @@ def deviant_scrapper_pages(self, baseurl: str, nextpage: int = 2) -> list:
             :raw-html:`<br />`
             **Use :func:`deviantartapi.selenium_scrapper` instead
             outdated since Deviantart changed their website and introduced login system**
-       
+
 
     '''
 

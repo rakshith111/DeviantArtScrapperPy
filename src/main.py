@@ -34,7 +34,7 @@ class scrapper:
         self.data_path = r'src\data'
         self.today = datetime.datetime.now().strftime(r'%d-%m-%Y')
 
-        #self.data_files = ['deviantXsteam.csv', 'localprice.csv', 'failed.csv']
+        # self.data_files = ['deviantXsteam.csv', 'localprice.csv', 'failed.csv']
 
         if dev:
             print("[+] Dev mode enabled, skipping login")
@@ -199,8 +199,9 @@ class scrapper:
             set(self.localpricedf['SteamUrl'])
         for steamlinks in difflinks:
             price = steamget.get_item(steamlinks).replace("₹ ", "")
-            app_tag = re.findall(self.patfortag, steamlinks)[0].replace("-", "")
-            rowdata.append((app_tag,steamlinks, price, self.today))
+            app_tag = re.findall(self.patfortag, steamlinks)[
+                0].replace("-", "")
+            rowdata.append((app_tag, steamlinks, price, self.today))
             datacount += 1
 
             if datacount > self.saveafter:
@@ -228,17 +229,12 @@ class scrapper:
 
 if __name__ == "__main__":
 
+    mainscrapper = scrapper(dev=False)
 
-   
-    mainscrapper= scrapper(dev=False)
-    
-
-    with open(os.path.abspath( "src\data\links.txt")) as f:
+    with open(os.path.abspath("src\data\links.txt")) as f:
         links = f.readlines()
 
-    artlinks=mainscrapper.deviantartapi.get_deviant_links(links[:2], 2)
-    
+    artlinks = mainscrapper.deviantartapi.get_deviant_links(links[:2], 2)
+
     mainscrapper.steamlinks_scrapper(list(artlinks))
     mainscrapper.price_finder()
-
-    

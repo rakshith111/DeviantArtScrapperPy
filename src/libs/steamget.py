@@ -41,12 +41,13 @@ def get_item(steam_url: str, country_code=24) -> str:  # type: ignore
         if resp.ok:
             steamjsondata = json.loads(resp.content)
             if steamjsondata["lowest_price"]:  # if item exits  returns price
-                print(f'[+] Got Price for  Steamurl:{steam_url}  {steamjsondata["lowest_price"]}')
+                print(
+                    f'[+] Got Price for  Steamurl:{steam_url}  {steamjsondata["lowest_price"]}')
                 return steamjsondata["lowest_price"]
             else:
                 return "NP"
         else:
-            print("[-] Possible timeout, trying again" )
+            print("[-] Possible timeout, trying again")
             print(resp.url+" going to sleep for 5 sec ")
             print(steamjsondata)
             time.sleep(5)

@@ -26,7 +26,7 @@ class selenium_scrapper:
         self.username = username
         self.password = password
         options.headless = False
-        #options.headless = True
+        # options.headless = True
         self.driver = webdriver.Firefox(options=options,)
         self.data_path = r'src\data'
         self.loginurl = 'https://www.deviantart.com/users/login'
@@ -36,7 +36,7 @@ class selenium_scrapper:
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'cookie.pkl')))):
             print('[x] Cookie.pkl not found, creating new file')
             self.login()
-            
+
         else:
             print('[+] Loading Cookies')
             cookies = pickle.load(open(os.path.abspath(
@@ -48,15 +48,15 @@ class selenium_scrapper:
                 print('[x] Error in loding cookies, logging in manually')
                 self.login()
             print('[+] Cookies loaded')
-    def login(self):
 
+    def login(self):
         '''
         :return: None
 
         | Logs in to the account and saves the cookies
 
         '''
-        
+
         for character in self.username:
             self.driver.find_element(By.ID, "username").send_keys(character)
             time.sleep(0.3)
