@@ -25,7 +25,7 @@ class scrapper:
         | Initializes the selenium driver and logs in to the account requires a username and password
         | If credentials are not provided, it will request for the credentials
         | Once credentials are provided, it will login to the account and save the cookies
-        | Dev mode is used to skip the login process 
+        | Dev mode is used to skip the login process
 
         '''
         self.remove_string = "https://www.deviantart.com/users/outgoing?"
@@ -34,7 +34,7 @@ class scrapper:
         self.data_path = r'src\data'
         self.today = datetime.datetime.now().strftime(r'%d-%m-%Y')
 
-        #self.data_files = ['deviantXsteam.csv', 'localprice.csv', 'failed.csv']
+        # self.data_files = ['deviantXsteam.csv', 'localprice.csv', 'failed.csv']
 
         if dev:
             print("[+] Dev mode enabled, skipping login")
@@ -118,14 +118,14 @@ class scrapper:
     def steamlinks_scrapper(self, deviantartpages: list, saveafter: int = 5) -> None:
         '''
         :param list deviantartpages:  list of deviant art page links which are to be searched for steam links
-        :param int saveafter:  number of links to be searched before saving the data 
+        :param int saveafter:  number of links to be searched before saving the data
         :return: None
 
         | Accepts a list of deviant art page links, then searches for the steam links in the art pages
-        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present 
+        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present
         | If no steam market link is found, its still added but with a None value for the steam market link
         | Saves data every 5 links to avoid data loss in case of an error
-        | `saveafter` Can be overriden 
+        | `saveafter` Can be overriden
 
         '''
         rowdata = []
@@ -180,14 +180,14 @@ class scrapper:
         # add a way to accept failed and deviantXsteam links
         # load via diff methods
         '''
-        :param int saveafter:  number of links to be searched before saving the data 
+        :param int saveafter:  number of links to be searched before saving the data
         :return: None
 
         | Accepts a list of deviant art page links, then searches for the steam links in the art pages
-        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present 
+        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present
         | If no steam market link is found, its still added but with a None value for the steam market link
         | Saves data every 5 links to avoid data loss in case of an error
-        | `saveafter` Can be overriden 
+        | `saveafter` Can be overriden
 
         '''
         self.file_reload()
@@ -199,8 +199,9 @@ class scrapper:
             set(self.localpricedf['SteamUrl'])
         for steamlinks in difflinks:
             price = steamget.get_item(steamlinks).replace("₹ ", "")
-            app_tag = re.findall(self.patfortag, steamlinks)[0].replace("-", "")
-            rowdata.append((app_tag,steamlinks, price, self.today))
+            app_tag = re.findall(self.patfortag, steamlinks)[
+                0].replace("-", "")
+            rowdata.append((app_tag, steamlinks, price, self.today))
             datacount += 1
 
             if datacount > self.saveafter:
@@ -228,17 +229,12 @@ class scrapper:
 
 if __name__ == "__main__":
 
+    mainscrapper = scrapper(dev=False)
 
-   
-    mainscrapper= scrapper(dev=False)
-    
-
-    with open(os.path.abspath( "src\data\links.txt")) as f:
+    with open(os.path.abspath("src\data\links.txt")) as f:
         links = f.readlines()
 
-    artlinks=mainscrapper.deviantartapi.get_deviant_links(links[:2], 2)
-    
+    artlinks = mainscrapper.deviantartapi.get_deviant_links(links[:2], 4)
+
     mainscrapper.steamlinks_scrapper(list(artlinks))
     mainscrapper.price_finder()
-
-    

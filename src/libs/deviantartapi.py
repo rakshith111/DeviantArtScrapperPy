@@ -25,8 +25,8 @@ class selenium_scrapper:
         options = Options()
         self.username = username
         self.password = password
-        options.headless = False
-        #options.headless = True
+        options.headless = True
+        options.set_preference("useAutomationExtension", False)
         self.driver = webdriver.Firefox(options=options,)
         self.data_path = r'src\data'
         self.loginurl = 'https://www.deviantart.com/users/login'
@@ -36,7 +36,7 @@ class selenium_scrapper:
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'cookie.pkl')))):
             print('[x] Cookie.pkl not found, creating new file')
             self.login()
-            
+
         else:
             print('[+] Loading Cookies')
             cookies = pickle.load(open(os.path.abspath(
@@ -48,22 +48,20 @@ class selenium_scrapper:
                 print('[x] Error in loding cookies, logging in manually')
                 self.login()
             print('[+] Cookies loaded')
-    def login(self):
 
+    def login(self):
         '''
         :return: None
 
         | Logs in to the account and saves the cookies
 
         '''
-        
-        for character in self.username:
-            self.driver.find_element(By.ID, "username").send_keys(character)
-            time.sleep(0.3)
 
-        for character in self.password:
-            self.driver.find_element(By.ID, "password").send_keys(character)
-            time.sleep(0.3)
+        self.driver.find_element(By.ID, "username").send_keys(self.username)
+
+        self.driver.find_element(
+            By.ID, "password").send_keys(self.password)
+
         self.driver.find_element(By.ID, "loginbutton").click()
         time.sleep(2)
         pickle.dump(self.driver.get_cookies(), open(os.path.abspath(
@@ -159,6 +157,7 @@ class selenium_scrapper:
                     self.driver.page_source)
                 nextbtnclicker += 1
                 time.sleep(1)
+                print(f"[+] Current links found = {len(self.deviantartpages)}")
         self.driver.close()
         print(f"[+] Total links found = {len(self.deviantartpages)}")
         return self.deviantartpages

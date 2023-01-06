@@ -37,16 +37,18 @@ def get_item(steam_url: str, country_code=24) -> str:  # type: ignore
     url = f'https://steamcommunity.com/market/priceoverview/?currency={country_code}&appid={appid[0].replace("/","")}&market_hash_name={patforname[0].replace("/","")}'
     time.sleep(0.5)
     resp = requests.get(url)
+    steamjsondata={"NO DATA": "NO DATA"}
     try:
         if resp.ok:
             steamjsondata = json.loads(resp.content)
             if steamjsondata["lowest_price"]:  # if item exits  returns price
-                print(f'[+] Got Price for  Steamurl:{steam_url}  {steamjsondata["lowest_price"]}')
+                print(
+                    f'[+] Got Price for  Steamurl:{steam_url}  {steamjsondata["lowest_price"]}')
                 return steamjsondata["lowest_price"]
             else:
                 return "NP"
         else:
-            print("[-] Possible timeout, trying again" )
+            print("[-] Possible timeout, trying again")
             print(resp.url+" going to sleep for 5 sec ")
             print(steamjsondata)
             time.sleep(5)

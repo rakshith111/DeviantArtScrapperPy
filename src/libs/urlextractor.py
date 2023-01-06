@@ -1,7 +1,7 @@
 import requests
 from time import sleep
 from lxml import html
-#from random import randint
+# from random import randint
 
 
 def nextcursor_requests(baseurl: str, cookie) -> str:
@@ -25,7 +25,7 @@ def nextcursor_requests(baseurl: str, cookie) -> str:
         outdated since Deviantart changed their website and introduced login system,also
         the requests version doesn't render js
 
-    
+
 
 
     '''

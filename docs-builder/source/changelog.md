@@ -3,6 +3,12 @@
 Any notable changes to this project that I deem necessary will be documented in this file.
 
 
+## 0.0.7 - 6/1/2023
+
+- Removed the slow typing feature, it was causing the program to fail (Thats my best guess as to why it was failing)
+- Added a few options to the program
+
+
 ## 0.0.6 -3/1/2023
 
 ```{warning}
