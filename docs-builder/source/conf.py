@@ -3,9 +3,9 @@ import sys
 import os
 
 project = 'DeviantArtScrapper'
-copyright = '2022, rakshith111'
+copyright = '2023, rakshith111'
 author = 'rakshith111'
-release = '0.0.2'
+release = '0.0.7'
 
 
 sys.path.insert(0, os.path.abspath('../../src'))
@@ -22,8 +22,7 @@ autodoc_mock_imports = ["urlextractor"]
 
 
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode',
-              'myst_parser']
-
+              'myst_parser', ]
 html_theme = 'furo'
 pygments_style = "sphinx"
 pygments_dark_style = "monokai"

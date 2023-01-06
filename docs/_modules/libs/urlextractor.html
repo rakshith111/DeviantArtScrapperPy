@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
-    <meta name="generator" content="sphinx-5.3.0, furo 2022.09.29"/>
-        <title>libs.urlextractor - DeviantArtScrapper 0.0.2 documentation</title>
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>libs.urlextractor - DeviantArtScrapper 0.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">DeviantArtScrapper 0.0.2 documentation</div></a>
+      <a href="../../index.html"><div class="brand">DeviantArtScrapper 0.0.7 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -145,16 +145,15 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">DeviantArtScrapper 0.0.2 documentation</span>
+  <span class="sidebar-brand-text">DeviantArtScrapper 0.0.7 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
-  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">CHANGELOG</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Modules.html">CURRENT MODULES</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../libs.html">libs package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../libs.deviantartapi.html">libs.deviantartapi module</a></li>
@@ -168,6 +167,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../begin.html">begin module</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../To-do.html">To do list</a></li>
 </ul>
 
 </div>
@@ -205,11 +209,11 @@
 <span></span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
 <span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">html</span>
-<span class="c1">#from random import randint</span>
+<span class="c1"># from random import randint</span>
 
 
 <div class="viewcode-block" id="nextcursor_requests"><a class="viewcode-back" href="../../libs.urlextractor.html#libs.urlextractor.nextcursor_requests">[docs]</a><span class="k">def</span> <span class="nf">nextcursor_requests</span><span class="p">(</span><span class="n">baseurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cookie</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    :param str baseurl:  Deviant art page url</span>
 <span class="sd">    :param cookie cookie:  cookie of the parent page</span>
 <span class="sd">    :return:  next page cursor </span>
@@ -229,7 +233,7 @@
 <span class="sd">        outdated since Deviantart changed their website and introduced login system,also</span>
 <span class="sd">        the requests version doesn&#39;t render js</span>
 
-<span class="sd">    </span>
+
 
 
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -245,7 +249,7 @@
 
 
 <div class="viewcode-block" id="nextcursor_selenium"><a class="viewcode-back" href="../../libs.urlextractor.html#libs.urlextractor.nextcursor_selenium">[docs]</a><span class="k">def</span> <span class="nf">nextcursor_selenium</span><span class="p">(</span><span class="n">page_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 
 
 <span class="sd">    :param str page_data: raw page source data of the page</span>
@@ -269,7 +273,7 @@
 
 
 <div class="viewcode-block" id="remove_filter"><a class="viewcode-back" href="../../libs.urlextractor.html#libs.urlextractor.remove_filter">[docs]</a><span class="k">def</span> <span class="nf">remove_filter</span><span class="p">(</span><span class="n">steamurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&#39;&#39;&#39; </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">    :param str steamurl:  Steam url</span>
 <span class="sd">    :return:  Steam url without filter tag</span>
 <span class="sd">    :rtype: str</span>
@@ -295,7 +299,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2022, rakshith111
+                Copyright &#169; 2023, rakshith111
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -303,9 +307,7 @@
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         

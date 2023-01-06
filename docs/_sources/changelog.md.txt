@@ -3,13 +3,25 @@
 Any notable changes to this project that I deem necessary will be documented in this file.
 
 
+## 0.0.7 - 6/1/2023
+
+```{important}
+
+- Script runs fine now, further testing is required
+- More analytical features will be added in the future
+
+```
+- Removed the slow typing feature, it was causing the program to fail (Thats my best guess as to why it was failing)
+- Added a few options to the program
+
+
 ## 0.0.6 -3/1/2023
 
 ```{warning}
 
-- New anti selenium detection deployed by deviant art, now the program will fail at login
-- Need to find a way to bypass the new anti selenium detection
-- Halted development for now till I find a way to bypass the selenium detection
+- <s>New anti selenium detection deployed by deviant art, now the program will fail at login</s>
+- <s>Need to find a way to bypass the new anti selenium detection</s>
+- <s>Halted development for now till I find a way to bypass the selenium detection</s>
 
 ```
 - Added a new login method to fix cookie expire/ failures
@@ -54,7 +66,7 @@ Any notable changes to this project that I deem necessary will be documented in 
 ## 0.0.1 - 29/11/2022
 ```{Warning} 
 DeviantArt Website Changes they added a login system to the website, which kinda broke the scraper.
-- Need to find a way to login to the website.
+- <s>Need to find a way to login to the website.</s>
 ```
 
 ## 0.0.1 - 22/11/2022

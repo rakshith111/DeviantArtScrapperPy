@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>main - DeviantArtScrapper 0.0.2 documentation</title>
+        <title>main - DeviantArtScrapper 0.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">DeviantArtScrapper 0.0.2 documentation</div></a>
+      <a href="../index.html"><div class="brand">DeviantArtScrapper 0.0.7 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -145,7 +145,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">DeviantArtScrapper 0.0.2 documentation</span>
+  <span class="sidebar-brand-text">DeviantArtScrapper 0.0.7 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -167,8 +167,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../begin.html">begin module</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../To-do.html">To do list</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../To-do.html">To do list</a></li>
 </ul>
 
 </div>
@@ -230,7 +233,7 @@
 <span class="sd">        | Initializes the selenium driver and logs in to the account requires a username and password</span>
 <span class="sd">        | If credentials are not provided, it will request for the credentials</span>
 <span class="sd">        | Once credentials are provided, it will login to the account and save the cookies</span>
-<span class="sd">        | Dev mode is used to skip the login process </span>
+<span class="sd">        | Dev mode is used to skip the login process</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remove_string</span> <span class="o">=</span> <span class="s2">&quot;https://www.deviantart.com/users/outgoing?&quot;</span>
@@ -239,7 +242,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;src\data&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">)</span>
 
-        <span class="c1">#self.data_files = [&#39;deviantXsteam.csv&#39;, &#39;localprice.csv&#39;, &#39;failed.csv&#39;]</span>
+        <span class="c1"># self.data_files = [&#39;deviantXsteam.csv&#39;, &#39;localprice.csv&#39;, &#39;failed.csv&#39;]</span>
 
         <span class="k">if</span> <span class="n">dev</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[+] Dev mode enabled, skipping login&quot;</span><span class="p">)</span>
@@ -323,14 +326,14 @@
 <div class="viewcode-block" id="scrapper.steamlinks_scrapper"><a class="viewcode-back" href="../main.html#main.scrapper.steamlinks_scrapper">[docs]</a>    <span class="k">def</span> <span class="nf">steamlinks_scrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deviantartpages</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">saveafter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param list deviantartpages:  list of deviant art page links which are to be searched for steam links</span>
-<span class="sd">        :param int saveafter:  number of links to be searched before saving the data </span>
+<span class="sd">        :param int saveafter:  number of links to be searched before saving the data</span>
 <span class="sd">        :return: None</span>
 
 <span class="sd">        | Accepts a list of deviant art page links, then searches for the steam links in the art pages</span>
-<span class="sd">        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present </span>
+<span class="sd">        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present</span>
 <span class="sd">        | If no steam market link is found, its still added but with a None value for the steam market link</span>
 <span class="sd">        | Saves data every 5 links to avoid data loss in case of an error</span>
-<span class="sd">        | `saveafter` Can be overriden </span>
+<span class="sd">        | `saveafter` Can be overriden</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">rowdata</span> <span class="o">=</span> <span class="p">[]</span>
@@ -385,14 +388,14 @@
         <span class="c1"># add a way to accept failed and deviantXsteam links</span>
         <span class="c1"># load via diff methods</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        :param int saveafter:  number of links to be searched before saving the data </span>
+<span class="sd">        :param int saveafter:  number of links to be searched before saving the data</span>
 <span class="sd">        :return: None</span>
 
 <span class="sd">        | Accepts a list of deviant art page links, then searches for the steam links in the art pages</span>
-<span class="sd">        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present </span>
+<span class="sd">        | If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present</span>
 <span class="sd">        | If no steam market link is found, its still added but with a None value for the steam market link</span>
 <span class="sd">        | Saves data every 5 links to avoid data loss in case of an error</span>
-<span class="sd">        | `saveafter` Can be overriden </span>
+<span class="sd">        | `saveafter` Can be overriden</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_reload</span><span class="p">()</span>
@@ -404,8 +407,9 @@
             <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">localpricedf</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">])</span>
         <span class="k">for</span> <span class="n">steamlinks</span> <span class="ow">in</span> <span class="n">difflinks</span><span class="p">:</span>
             <span class="n">price</span> <span class="o">=</span> <span class="n">steamget</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">steamlinks</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;₹ &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="n">app_tag</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">patfortag</span><span class="p">,</span> <span class="n">steamlinks</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="n">rowdata</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">app_tag</span><span class="p">,</span><span class="n">steamlinks</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">today</span><span class="p">))</span>
+            <span class="n">app_tag</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">patfortag</span><span class="p">,</span> <span class="n">steamlinks</span><span class="p">)[</span>
+                <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">rowdata</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">app_tag</span><span class="p">,</span> <span class="n">steamlinks</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">today</span><span class="p">))</span>
             <span class="n">datacount</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="k">if</span> <span class="n">datacount</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">saveafter</span><span class="p">:</span>
@@ -433,20 +437,15 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
+    <span class="n">mainscrapper</span> <span class="o">=</span> <span class="n">scrapper</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-   
-    <span class="n">mainscrapper</span><span class="o">=</span> <span class="n">scrapper</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    
-
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span> <span class="s2">&quot;src\data\links.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;src\data\links.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">links</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
 
-    <span class="n">artlinks</span><span class="o">=</span><span class="n">mainscrapper</span><span class="o">.</span><span class="n">deviantartapi</span><span class="o">.</span><span class="n">get_deviant_links</span><span class="p">(</span><span class="n">links</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
-    
+    <span class="n">artlinks</span> <span class="o">=</span> <span class="n">mainscrapper</span><span class="o">.</span><span class="n">deviantartapi</span><span class="o">.</span><span class="n">get_deviant_links</span><span class="p">(</span><span class="n">links</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+
     <span class="n">mainscrapper</span><span class="o">.</span><span class="n">steamlinks_scrapper</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">artlinks</span><span class="p">))</span>
     <span class="n">mainscrapper</span><span class="o">.</span><span class="n">price_finder</span><span class="p">()</span>
-
-    
 </pre></div>
         </article>
       </div>
@@ -459,7 +458,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2022, rakshith111
+                Copyright &#169; 2023, rakshith111
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

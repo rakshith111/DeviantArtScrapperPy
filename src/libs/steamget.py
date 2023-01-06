@@ -37,7 +37,7 @@ def get_item(steam_url: str, country_code=24) -> str:  # type: ignore
     url = f'https://steamcommunity.com/market/priceoverview/?currency={country_code}&appid={appid[0].replace("/","")}&market_hash_name={patforname[0].replace("/","")}'
     time.sleep(0.5)
     resp = requests.get(url)
-    steamjsondata={"NO DATA": "NO DATA"}
+    steamjsondata = {"NO DATA": "NO DATA"}
     try:
         if resp.ok:
             steamjsondata = json.loads(resp.content)
