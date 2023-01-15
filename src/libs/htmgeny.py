@@ -1,41 +1,37 @@
-import json
-import os
-from json2html import json2html
+import streamlit as st
+import pandas as pd
+from streamlit.components.v1 import html
+data = pd.read_csv('deviantXsteam.csv')
+
+to_outdf = pd.DataFrame()
 
 
-def htmlgen(jsonfile) -> None:
-    """
-    :param str jsonfile: json file name(path)
-
-    :return: None
-
-    .. role:: raw-html(raw)
-       :format: html
-
-    .. deprecated:: 0.0.1
-       :raw-html:`<br />`
-       **Only kept as a reference as pandas will use different methods**
+st.set_page_config(layout="wide")
+st.title('Results')
+st.set_page_config
 
 
-    | Generates and opens a html file for the given jsonfile 
-    | A html page is generated and opened.
-    | Note: A defualt brower must be set by windows 
+def make_clickable(link):
+    # target _blank to open new window
+    # extract clickable text to display for your link
+    if pd.isna(link):
+        text = "No link"
+        link = " "
+        return f'<a target="_blank" href="{link}">{text}</a>'
+    else:
+        text = f"{link}"
+        return f'<a target="_blank" href="{link}">{text}</a>'
 
 
+# link is the column with hyperlinks
+to_outdf['DeviantUrl'] = data['DeviantUrl'].apply(make_clickable)
+to_outdf['SteamUrl'] = data['SteamUrl'].apply(make_clickable)
 
-    """
-    if (os.path.getsize(jsonfile)) > 0:
-        with open(jsonfile) as json_file:
-            data = json.load(json_file)
-        keys = data.keys()
-        latesthtmldict = {}
-        for key in keys:
-            k = f'<a href="{key}">{key}</a>'
-            latesthtmldict[k] = data[key]
-        name = jsonfile.split('.')
-        htmltabel = json2html.convert(
-            json=latesthtmldict, escape=False)  # type: ignore
-        writefile = open(f"{name[0]}.html", "w")
-        writefile.write("<center>"+htmltabel+"</center></div>")  # type: ignore
-        writefile.close()
-        os.system(f"start {name[0]}.html")
+to_outdf["price"] = data['price']
+tablehtml = to_outdf.to_html(
+    escape=False, index=False, classes="table-sort table-arrows")
+st.write(tablehtml, unsafe_allow_html=True)
+
+html('''
+<script src='table-sort.js'>
+</script>''')

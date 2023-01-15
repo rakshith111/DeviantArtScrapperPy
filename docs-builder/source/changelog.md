@@ -2,6 +2,10 @@
 
 Any notable changes to this project that I deem necessary will be documented in this file.
 
+## 0.0.8 
+
+- Moved Old html generater to `oldlibs.py` 
+- Added a new html generator using `Streamlit`
 
 ## 0.0.7 - 6/1/2023
 
