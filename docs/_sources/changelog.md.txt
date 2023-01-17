@@ -2,6 +2,13 @@
 
 Any notable changes to this project that I deem necessary will be documented in this file.
 
+## 0.0.8 -17/1/2023
+
+- Moved Old html generater to `oldlibs.py` 
+- html generator now uses `Streamlit` to generate the html file
+- Added a new `HtmlGeny`  to `main.py` to use the new html generator
+- Added minimilistic UI to the html generator and table sorter
+
 
 ## 0.0.7 - 6/1/2023
 

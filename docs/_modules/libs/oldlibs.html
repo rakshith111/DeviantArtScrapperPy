@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>libs.oldlibs - DeviantArtScrapper 0.0.7 documentation</title>
+        <title>libs.oldlibs - DeviantArtScrapper 0.0.8 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">DeviantArtScrapper 0.0.7 documentation</div></a>
+      <a href="../../index.html"><div class="brand">DeviantArtScrapper 0.0.8 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -145,7 +145,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">DeviantArtScrapper 0.0.7 documentation</span>
+  <span class="sidebar-brand-text">DeviantArtScrapper 0.0.8 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -206,11 +206,52 @@
         </div>
         <article role="main">
           <h1>Source code for libs.oldlibs</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
-
 <span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">urlextractor</span>
+<span class="kn">from</span> <span class="nn">json2html</span> <span class="kn">import</span> <span class="n">json2html</span>
+
+
+<div class="viewcode-block" id="htmlgen"><a class="viewcode-back" href="../../libs.oldlibs.html#libs.oldlibs.htmlgen">[docs]</a><span class="k">def</span> <span class="nf">htmlgen</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param str jsonfile: json file name(path)</span>
+
+<span class="sd">    :return: None</span>
+
+<span class="sd">    .. role:: raw-html(raw)</span>
+<span class="sd">       :format: html</span>
+
+<span class="sd">    .. deprecated:: 0.0.1</span>
+<span class="sd">       :raw-html:`&lt;br /&gt;`</span>
+<span class="sd">       **Only kept as a reference as pandas will use different methods**</span>
+
+
+<span class="sd">    | Generates and opens a html file for the given jsonfile </span>
+<span class="sd">    | A html page is generated and opened.</span>
+<span class="sd">    | Note: A defualt brower must be set by windows </span>
+
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="n">latesthtmldict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&lt;/a&gt;&#39;</span>
+            <span class="n">latesthtmldict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">jsonfile</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">htmltabel</span> <span class="o">=</span> <span class="n">json2html</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span>
+            <span class="n">json</span><span class="o">=</span><span class="n">latesthtmldict</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">writefile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">.html&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+        <span class="n">writefile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&lt;center&gt;&quot;</span><span class="o">+</span><span class="n">htmltabel</span><span class="o">+</span><span class="s2">&quot;&lt;/center&gt;&lt;/div&gt;&quot;</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">writefile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;start </span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">.html&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="deviant_scrapper_pages"><a class="viewcode-back" href="../../libs.oldlibs.html#libs.oldlibs.deviant_scrapper_pages">[docs]</a><span class="k">def</span> <span class="nf">deviant_scrapper_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nextpage</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>

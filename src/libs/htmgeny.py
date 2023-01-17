@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from streamlit.components.v1 import html
-import streamlit as st
 import shutil
 import os
 import pathlib
