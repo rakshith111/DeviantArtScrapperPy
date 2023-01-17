@@ -8,7 +8,9 @@ import datetime
 
 from bs4 import BeautifulSoup
 
-from libs import steamget, urlextractor
+from libs import steamget
+from libs import  urlextractor
+from libs import  htmgeny
 from libs import deviantartapi
 
 
@@ -47,7 +49,7 @@ class scrapper:
                 password = input('Password: ')
                 with open(os.path.abspath(os.path.join(self.data_path, 'Credentials.json')), 'w') as f:
                     json.dump({'username': username, 'password': password}, f)
-                print('[+] Logging in with credentials')
+                print('[+] Starting login process...')
                 self.deviantartapi = deviantartapi.selenium_scrapper(
                     username, password)
             else:
@@ -60,7 +62,7 @@ class scrapper:
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'deviantXsteam.csv')))):
             print('[x] deviantXsteam.csv not found, creating new file')
             print('[+] Creating deviantXsteam.csv')
-            pd.DataFrame(columns=['SteamUrl', 'DeviantUrls']).to_csv(
+            pd.DataFrame(columns=['SteamUrl', 'DeviantUrl']).to_csv(
                 os.path.abspath(os.path.join(self.data_path, 'deviantXsteam.csv')), index=False)
             self.deviantxsteamdf = pd.read_csv(os.path.abspath(
                 os.path.join(self.data_path, 'deviantXsteam.csv')))
@@ -72,7 +74,7 @@ class scrapper:
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'localprice.csv')))):
             print('[x] localprice.csv not found, creating new file')
             print('[+] Creating localprice.csv')
-            pd.DataFrame(columns=['App_Tag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate', ]).to_csv(
+            pd.DataFrame(columns=['AppTag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate']).to_csv(
                 os.path.abspath(os.path.join(self.data_path, 'localprice.csv')), index=False)
             self.localpricedf = pd.read_csv(os.path.abspath(
                 os.path.join(self.data_path, 'localprice.csv'))
@@ -86,7 +88,7 @@ class scrapper:
         if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'failed.csv')))):
             print('[x] failed.csv not found, creating new file')
             print('[+] Creating failed.csv')
-            pd.DataFrame(columns=['SteamUrl', 'App_Tag']).to_csv(
+            pd.DataFrame(columns=['SteamUrl', 'AppTag']).to_csv(
                 os.path.abspath(os.path.join(self.data_path, 'failed.csv')), index=False)
             self.faileddf = pd.read_csv(os.path.abspath(
                 os.path.join(self.data_path, 'failed.csv')))
@@ -132,7 +134,7 @@ class scrapper:
         datacount = 0
         self.saveafter = saveafter
         difflinks = set(deviantartpages) - \
-            set(self.deviantxsteamdf['DeviantUrls'])
+            set(self.deviantxsteamdf['DeviantUrl'])
         for deviantartpage in difflinks:
             print(f"[+] Accessing {deviantartpage}....")
             page = requests.get(deviantartpage)
@@ -149,7 +151,7 @@ class scrapper:
                 rowdata.append((steamlink, deviantartpage))
                 datacount += 1
             else:
-                print('[X] No steam link found')
+                print('[x] No steam link found')
                 rowdata.append((None, deviantartpage))
                 datacount += 1
 
@@ -157,7 +159,7 @@ class scrapper:
             if datacount > self.saveafter:
                 print('[+] Saving data to deviantXsteam.csv')
                 merger = pd.DataFrame(
-                    rowdata, columns=['SteamUrl', 'DeviantUrls'])
+                    rowdata, columns=['SteamUrl', 'DeviantUrl'])
                 self.deviantxsteamdf = pd.concat(
                     [self.deviantxsteamdf, merger], ignore_index=True)
                 self.deviantxsteamdf.to_csv(os.path.abspath(os.path.join(
@@ -168,7 +170,7 @@ class scrapper:
         # save remaining data if any
         if len(rowdata) > 0:
             print(f'[+] Saving {len(rowdata)} data to deviantXsteam.csv')
-            merger = pd.DataFrame(rowdata, columns=['SteamUrl', 'DeviantUrls'])
+            merger = pd.DataFrame(rowdata, columns=['SteamUrl', 'DeviantUrl'])
             self.deviantxsteamdf = pd.concat(
                 [self.deviantxsteamdf, merger], ignore_index=True)
             self.deviantxsteamdf.to_csv(os.path.abspath(os.path.join(
@@ -207,7 +209,7 @@ class scrapper:
             if datacount > self.saveafter:
                 print('[+] Saving data to localprice.csv')
                 merger = pd.DataFrame(
-                    rowdata, columns=['App_Tag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate'])
+                    rowdata, columns=['AppTag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate'])
                 self.localpricedf = pd.concat(
                     [self.localpricedf, merger], ignore_index=True)
                 self.localpricedf.to_csv(os.path.abspath(os.path.join(
@@ -219,7 +221,7 @@ class scrapper:
         if len(rowdata) > 0:
             print(f'[+] Saving {len(rowdata)} data to localprice.csv')
             merger = pd.DataFrame(
-                rowdata, columns=['App_Tag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate'])
+                rowdata, columns=['AppTag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate'])
             self.localpricedf = pd.concat(
                 [self.localpricedf, merger], ignore_index=True)
             self.localpricedf.to_csv(os.path.abspath(os.path.join(
@@ -234,7 +236,8 @@ if __name__ == "__main__":
     with open(os.path.abspath("src\data\links.txt")) as f:
         links = f.readlines()
 
-    artlinks = mainscrapper.deviantartapi.get_deviant_links(links[:2], 4)
-
+    artlinks = mainscrapper.deviantartapi.get_deviant_links(links[:2], 1)
     mainscrapper.steamlinks_scrapper(list(artlinks))
     mainscrapper.price_finder()
+    htmlgen = htmgeny.htmlGeny()
+    htmlgen.generate_html(mainscrapper.localpricedf,mainscrapper.deviantxsteamdf)
