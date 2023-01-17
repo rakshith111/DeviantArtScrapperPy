@@ -1,0 +1,48 @@
+table.steelBlueCols tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+table.steelBlueCols {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  border: 10px solid #555555;
+  background-color: #555555;
+  width: 100%;
+  height: 100px;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.steelBlueCols th {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+table.steelBlueCols td,
+table.steelBlueCols th {
+  border: 9px solid #555555;
+  padding: 10px 10px;
+}
+table.steelBlueCols tbody td {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+}
+table.steelBlueCols thead {
+  background: #00919f;
+  background: -moz-linear-gradient(top, #40acb7 0%, #199ca8 66%, #00919f 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #40acb7 0%,
+    #199ca8 66%,
+    #00919f 100%
+  );
+  background: linear-gradient(to bottom, #40acb7 0%, #199ca8 66%, #00919f 100%);
+  border-bottom: 10px solid #00a49c;
+}
+table.steelBlueCols thead th {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+  border-left: 10px solid #555555;
+}
+
+
