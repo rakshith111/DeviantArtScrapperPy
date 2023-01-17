@@ -75,6 +75,7 @@ def remove_filter(steamurl: str) -> str:
     | if no filter part is found returns the same url
 
     '''
+    steamurl = steamurl.replace("#", "")
     posifilter = steamurl.find('?filter')
     if posifilter == -1:
         return steamurl
