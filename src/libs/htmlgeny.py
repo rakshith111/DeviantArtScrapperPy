@@ -62,7 +62,7 @@ class htmlGeny:
         
         '''
 
-        st.set_page_config(layout="wide")
+        st.set_page_config(layout="wide",page_title = "Steam Deviant Price Checker",page_icon = "🎮")
         st.title('Results')
         st.title("Steam Prices")
 
