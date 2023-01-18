@@ -6,7 +6,7 @@
 :maxdepth: 2
 
 libs.deviantartapi
-libs.htmgeny
+libs.htmlgeny
 libs.oldlibs
 libs.steamget
 libs.urlextractor

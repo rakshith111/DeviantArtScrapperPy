@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -201,14 +201,73 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="libs-htmgeny-module">
-<h1>libs.htmgeny module<a class="headerlink" href="#libs-htmgeny-module" title="Permalink to this heading">#</a></h1>
+          <section id="module-libs.htmlgeny">
+<span id="libs-htmgeny-module"></span><h1>libs.htmgeny module<a class="headerlink" href="#module-libs.htmlgeny" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libs.htmlgeny.</span></span><span class="sig-name descname"><span class="pre">htmlGeny</span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initiate the class and Creates a copy of the table-sort.js file in the streamlit static folder</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.generate_html">
+<span class="sig-name descname"><span class="pre">generate_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviantdata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.generate_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.generate_html" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>steamdata</strong> (<em>pd.DataFrame</em>) – Steam data</p></li>
+<li><p><strong>deviantdata</strong> (<em>pd.DataFrame</em>) – Deviant data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p>generate_html(steamdata, deviantdata)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line">Generates the html for the streamlit app</div>
+<div class="line">Uses the table-sort.js file to sort the tables</div>
+<div class="line">Uses the scripts/style.css file to style the tables</div>
+<div class="line">Creates a temporary dataframe where all the attributes are converted to clickable links using the <cite>make_clickable()</cite> function</div>
+<div class="line">then converts the dataframe to html and adds the table-sort.js and style.css files to the html</div>
+<div class="line">finally writes the html to the streamlit app</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.make_clickable">
+<span class="sig-name descname"><span class="pre">make_clickable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.make_clickable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.make_clickable" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>link</strong> (<em>str</em>) – link to be made clickable</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p>make_clickable(”<a class="reference external" href="https://steamcommunity.com/market/listings/753/746850-Chinatown">https://steamcommunity.com/market/listings/753/746850-Chinatown</a>” )</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>&lt;a target=”_blank” href=”<a class="reference external" href="https://steamcommunity.com/market/listings/753/746850-Chinatown">https://steamcommunity.com/market/listings/753/746850-Chinatown</a>”&gt;https://steamcommunity.com/market/listings/753/746850-Chinatown&lt;/a&gt;</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line">Takes a link and returns a clickable link</div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -254,8 +313,31 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">libs.htmgeny module</a><ul>
+<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny"><code class="docutils literal notranslate"><span class="pre">htmlGeny</span></code></a><ul>
+<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny.generate_html"><code class="docutils literal notranslate"><span class="pre">htmlGeny.generate_html()</span></code></a></li>
+<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny.make_clickable"><code class="docutils literal notranslate"><span class="pre">htmlGeny.make_clickable()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

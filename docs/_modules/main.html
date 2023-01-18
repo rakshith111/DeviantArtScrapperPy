@@ -217,7 +217,6 @@
 
 <span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">steamget</span>
 <span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">urlextractor</span>
-<span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">htmgeny</span>
 <span class="kn">from</span> <span class="nn">libs</span> <span class="kn">import</span> <span class="n">deviantartapi</span>
 
 
@@ -439,15 +438,16 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 
     <span class="n">mainscrapper</span> <span class="o">=</span> <span class="n">scrapper</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;src\data\links.txt&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">links</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">links</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;src\data\links.txt&quot;</span><span class="p">),</span><span class="s2">&quot;r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
     <span class="n">artlinks</span> <span class="o">=</span> <span class="n">mainscrapper</span><span class="o">.</span><span class="n">deviantartapi</span><span class="o">.</span><span class="n">get_deviant_links</span><span class="p">(</span><span class="n">links</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">mainscrapper</span><span class="o">.</span><span class="n">steamlinks_scrapper</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">artlinks</span><span class="p">))</span>
     <span class="n">mainscrapper</span><span class="o">.</span><span class="n">price_finder</span><span class="p">()</span>
-    <span class="n">htmlgen</span> <span class="o">=</span> <span class="n">htmgeny</span><span class="o">.</span><span class="n">htmlGeny</span><span class="p">()</span>
-
-    <span class="n">htmlgen</span><span class="o">.</span><span class="n">generate_html</span><span class="p">(</span><span class="n">mainscrapper</span><span class="o">.</span><span class="n">localpricedf</span><span class="p">,</span>
-                          <span class="n">mainscrapper</span><span class="o">.</span><span class="n">deviantxsteamdf</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">streamlit.web</span> <span class="kn">import</span> <span class="n">cli</span> <span class="k">as</span> <span class="n">stcli</span>
+    <span class="kn">from</span> <span class="nn">streamlit</span> <span class="kn">import</span> <span class="n">runtime</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">runtime</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;streamlit&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;src\libs\htmlgeny.py&quot;</span><span class="p">)]</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">stcli</span><span class="o">.</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
         </article>
       </div>

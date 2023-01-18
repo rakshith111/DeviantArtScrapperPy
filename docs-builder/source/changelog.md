@@ -6,7 +6,8 @@ Any notable changes to this project that I deem necessary will be documented in 
 
 - Moved Old html generater to `oldlibs.py` 
 - html generator now uses `Streamlit` to generate the html file
-- Added a new `HtmlGeny`  to `main.py` to use the new html generator
+- htmlgeny runs separately from the main program now
+- <s>Added a new `HtmlGeny`  to `main.py` to use the new html generator </s>
 - Added minimilistic UI to the html generator and table sorter
 
 

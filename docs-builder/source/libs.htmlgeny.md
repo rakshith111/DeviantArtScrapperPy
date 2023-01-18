@@ -1,7 +1,7 @@
 # libs.htmgeny module
 
 ```{eval-rst}
-.. automodule:: libs.htmgeny
+.. automodule:: libs.htmlgeny
    :members:
    :undoc-members:
    :show-inheritance:
