@@ -92,3 +92,11 @@ class htmlGeny:
         html('''
         <script src='./static/js/table-sort.js'>
         </script>''')
+if __name__ == "__main__":
+
+    steamdata = pd.read_csv(os.path.join(os.path.dirname(
+            os.path.dirname(__file__)), "data", "localprice.csv"))
+    deviantdata = pd.read_csv(os.path.join(os.path.dirname(
+            os.path.dirname(__file__)), "data", "deviantXsteam.csv")
+    )
+    htmlGeny().generate_html(steamdata, deviantdata)

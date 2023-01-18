@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 
 from libs import steamget
 from libs import urlextractor
-from libs import htmgeny
 from libs import deviantartapi
 
 
@@ -231,12 +230,13 @@ class scrapper:
 if __name__ == '__main__':
 
     mainscrapper = scrapper(dev=False)
-    with open(os.path.abspath("src\data\links.txt")) as f:
-        links = f.readlines()
+    links = open(os.path.abspath("src\data\links.txt"),"r").readlines()
     artlinks = mainscrapper.deviantartapi.get_deviant_links(links[:2], 1)
     mainscrapper.steamlinks_scrapper(list(artlinks))
     mainscrapper.price_finder()
-    htmlgen = htmgeny.htmlGeny()
-
-    htmlgen.generate_html(mainscrapper.localpricedf,
-                          mainscrapper.deviantxsteamdf)
+    from streamlit.web import cli as stcli
+    from streamlit import runtime
+    import sys
+    if not runtime.exists():
+            sys.argv = ["streamlit", "run", os.path.abspath("src\libs\htmlgeny.py")]
+            sys.exit(stcli.main())
