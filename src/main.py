@@ -3,6 +3,7 @@ import os
 import re
 import datetime
 import json
+import time
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -135,11 +136,12 @@ class scrapper:
             set(self.deviantxsteamdf['DeviantUrl'])
         for deviantartpage in difflinks:
             print(f"[+] Accessing {deviantartpage}....")
+            time.sleep(2)
             page = requests.get(deviantartpage)
             soup = BeautifulSoup(page.content, 'html.parser')
             outgoingsteam = soup.find('a', {'class': "external"}, href=re.compile(
                 "steamcommunity.com/market/listings"))
-            # if steam market link is found
+
             if outgoingsteam:
                 outgoingsteam = (outgoingsteam.get('href'))  # type: ignore
                 outgoingsteam = urlextractor.remove_filter(str(outgoingsteam))
@@ -153,7 +155,6 @@ class scrapper:
                 rowdata.append((None, deviantartpage))
                 datacount += 1
 
-            # save after 5 links
             if datacount > self.saveafter:
                 print('[+] Saving data to deviantXsteam.csv')
                 merger = pd.DataFrame(
@@ -165,7 +166,7 @@ class scrapper:
                 print('[+] Data saved to deviantXsteam.csv')
                 datacount = 0
                 rowdata = []
-        # save remaining data if any
+
         if len(rowdata) > 0:
             print(f'[+] Saving {len(rowdata)} data to deviantXsteam.csv')
             merger = pd.DataFrame(rowdata, columns=['SteamUrl', 'DeviantUrl'])
@@ -197,12 +198,18 @@ class scrapper:
         self.steam_urls = self.deviantxsteamdf["SteamUrl"].dropna()
         difflinks = set(self.steam_urls) - \
             set(self.localpricedf['SteamUrl'])
-        for steamlinks in difflinks:
-            price = steamget.get_item(steamlinks).replace("₹ ", "")
-            app_tag = re.findall(self.patfortag, steamlinks)[
-                0].replace("-", "")
-            rowdata.append((app_tag, steamlinks, price, self.today))
-            datacount += 1
+        for steamlink in difflinks:
+            price = steamget.get_item(steamlink)
+            if len(price) >= 3:
+                price = price.replace("₹ ", "")
+                app_tag = re.findall(self.patfortag, steamlink)[
+                    0].replace("-", "")
+                rowdata.append((app_tag, steamlink, price, self.today))
+                datacount += 1
+            else:
+                price = 0
+                rowdata.append((app_tag, steamlink, price, self.today))
+                datacount += 1
 
             if datacount > self.saveafter:
                 print('[+] Saving data to localprice.csv')
@@ -230,13 +237,14 @@ class scrapper:
 if __name__ == '__main__':
 
     mainscrapper = scrapper(dev=False)
-    links = open(os.path.abspath("src\data\links.txt"),"r").readlines()
-    artlinks = mainscrapper.deviantartapi.get_deviant_links(links[:2], 1)
+    links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
+    artlinks = mainscrapper.deviantartapi.get_deviant_links(links, 4)
     mainscrapper.steamlinks_scrapper(list(artlinks))
     mainscrapper.price_finder()
     from streamlit.web import cli as stcli
     from streamlit import runtime
     import sys
     if not runtime.exists():
-            sys.argv = ["streamlit", "run", os.path.abspath("src\libs\htmlgeny.py")]
-            sys.exit(stcli.main())
+        sys.argv = ["streamlit", "run",
+                    os.path.abspath("src\libs\htmlgeny.py")]
+        sys.exit(stcli.main())
