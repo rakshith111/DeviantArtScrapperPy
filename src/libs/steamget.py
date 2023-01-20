@@ -6,7 +6,7 @@ import requests
 
 # add proxy support
 
-def get_item(steam_url: str, country_code=24) -> str:  # type: ignore
+def get_item(steam_url: str, country_code:int=24) -> str:  # type: ignore
     """
     :param str steam_url: Steam url 
     :param int country_code: country code
@@ -35,7 +35,8 @@ def get_item(steam_url: str, country_code=24) -> str:  # type: ignore
     # print(f'[+] Got Name for  Steamurl:{steam_url}  {patforname}')
 
     url = f'https://steamcommunity.com/market/priceoverview/?currency={country_code}&appid={appid[0].replace("/","")}&market_hash_name={patforname[0].replace("/","")}'
-    time.sleep(0.5)
+    time.sleep(1)
+    print(f'[+] Getting Price for SteamItem: {patforname[0].replace("/","")}')
     resp = requests.get(url)
     steamjsondata = {"NO DATA": "NO DATA"}
     try:
@@ -45,13 +46,11 @@ def get_item(steam_url: str, country_code=24) -> str:  # type: ignore
                 print(
                     f'[+] Got Price for  Steamurl:{steam_url}  {steamjsondata["lowest_price"]}')
                 return steamjsondata["lowest_price"]
-            else:
-                return "NP"
         else:
             print("[-] Possible timeout, trying again")
-            print(resp.url+" going to sleep for 5 sec ")
+            print(resp.url+" going to sleep for 30 sec ")
             print(steamjsondata)
-            time.sleep(5)
-            get_item(steam_url)
+            time.sleep(30)
+            return get_item(steam_url)
     except KeyError:
         return "FA"
