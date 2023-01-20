@@ -2,6 +2,14 @@
 
 Any notable changes to this project that I deem necessary will be documented in this file.
 
+## 0.0.9 - 21/1/2023
+
+- Add Supoort for normal link(href)
+- Add SteamCardExchange redirector
+- Seperate Empty data from real data
+- Fix 'None' return type for steam price (returns the `get_item(url)` function which calls it again)
+
+
 ## 0.0.8 -17/1/2023
 
 - Moved Old html generater to `oldlibs.py` 
