@@ -8,7 +8,7 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 
-from libs import steamget
+from libs import steamapi
 from libs import urlextractor
 from libs import deviantartapi
 
@@ -31,70 +31,65 @@ class scrapper:
         '''
         self.remove_string = "https://www.deviantart.com/users/outgoing?"
         self.match_string = "https://steamcommunity.com/market/listings/"
-        self.patfortag = ("[\d]+-")
+        self.patfortag = "[\d]+-"
         self.data_path = r'src\data'
         self.today = datetime.datetime.now().strftime(r'%d-%m-%Y')
-
-        # self.data_files = ['deviantXsteam.csv', 'localprice.csv', 'failed.csv']
+        self.data_files = ['deviantXsteam.csv', 'localprice.csv', 'failed.csv']
 
         if dev:
             print("[+] Dev mode enabled, skipping login")
         else:
-            if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'Credentials.json')))):
-                print('[x] Credentials not found, creating new file')
-                print('[+] Creating Credentials.json')
-                print('[+] Please enter your credentials')
-                username = input('Username: ')
-                password = input('Password: ')
-                with open(os.path.abspath(os.path.join(self.data_path, 'Credentials.json')), 'w') as f:
-                    json.dump({'username': username, 'password': password}, f)
-                print('[+] Starting login process...')
-                self.deviantartapi = deviantartapi.selenium_scrapper(
-                    username, password)
+            self._check_credentials()
+
+        self._check_data_files()
+
+    def _check_credentials(self):
+        credentials_path = os.path.abspath(
+            os.path.join(self.data_path, 'Credentials.json'))
+        if (not os.path.isfile(credentials_path)):
+            print('[x] Credentials not found, creating new file')
+            print('[+] Creating Credentials.json')
+            print('[+] Please enter your credentials')
+            username = input('Username: ')
+            password = input('Password: ')
+            with open(credentials_path, 'w') as f:
+                json.dump({'username': username, 'password': password}, f)
+            print('[+] Starting login process...')
+            self.deviantartapi = deviantartapi.selenium_scrapper(
+                username, password)
+        else:
+            print('[+] Logging in with credentials')
+            with open(credentials_path, 'r') as f:
+                credentials = json.load(f)
+            self.deviantartapi = deviantartapi.selenium_scrapper(
+                credentials['username'], credentials['password'])
+
+    def _check_data_files(self):
+        for file in self.data_files:
+            file_path = os.path.abspath(os.path.join(self.data_path, file))
+            if (not os.path.isfile(file_path)):
+                print(f'[x] {file} not found, creating new file')
+                print(f'[+] Creating {file}')
+                if file == 'deviantXsteam.csv':
+                    pd.DataFrame(columns=['SteamUrl', 'DeviantUrl']).to_csv(
+                        file_path, index=False)
+                    self.deviantxsteamdf = pd.read_csv(file_path)
+                elif file == 'localprice.csv':
+                    pd.DataFrame(columns=['AppTag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate']).to_csv(
+                        file_path, index=False)
+                    self.localpricedf = pd.read_csv(file_path)
+                elif file == 'failed.csv':
+                    pd.DataFrame(columns=['AppTag', 'SteamUrl', 'Date']).to_csv(
+                        file_path, index=False)
+                    self.faileddf = pd.read_csv(file_path)
             else:
-                print('[+] Logging in with credentials')
-                with open(os.path.abspath(os.path.join(self.data_path, 'Credentials.json')), 'r') as f:
-                    credentials = json.load(f)
-                self.deviantartapi = deviantartapi.selenium_scrapper(
-                    credentials['username'], credentials['password'])
-        # check if files exists or not and create it
-        if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'deviantXsteam.csv')))):
-            print('[x] deviantXsteam.csv not found, creating new file')
-            print('[+] Creating deviantXsteam.csv')
-            pd.DataFrame(columns=['SteamUrl', 'DeviantUrl']).to_csv(
-                os.path.abspath(os.path.join(self.data_path, 'deviantXsteam.csv')), index=False)
-            self.deviantxsteamdf = pd.read_csv(os.path.abspath(
-                os.path.join(self.data_path, 'deviantXsteam.csv')))
-        else:
-            print('[+] Loading deviantXsteam.csv')
-            self.deviantxsteamdf = pd.read_csv(os.path.abspath(
-                os.path.join(self.data_path, 'deviantXsteam.csv')))
-
-        if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'localprice.csv')))):
-            print('[x] localprice.csv not found, creating new file')
-            print('[+] Creating localprice.csv')
-            pd.DataFrame(columns=['AppTag', 'SteamUrl', 'SteamPrice', 'SteamPriceDate']).to_csv(
-                os.path.abspath(os.path.join(self.data_path, 'localprice.csv')), index=False)
-            self.localpricedf = pd.read_csv(os.path.abspath(
-                os.path.join(self.data_path, 'localprice.csv'))
-            )
-        else:
-            print('[+] Loading localprice.csv')
-            self.localpricedf = pd.read_csv(os.path.abspath(
-                os.path.join(self.data_path, 'localprice.csv'))
-            )
-
-        if (not os.path.isfile(os.path.abspath(os.path.join(self.data_path, 'failed.csv')))):
-            print('[x] failed.csv not found, creating new file')
-            print('[+] Creating failed.csv')
-            pd.DataFrame(columns=['SteamUrl', 'AppTag']).to_csv(
-                os.path.abspath(os.path.join(self.data_path, 'failed.csv')), index=False)
-            self.faileddf = pd.read_csv(os.path.abspath(
-                os.path.join(self.data_path, 'failed.csv')))
-        else:
-            print('[+] Loading failed.csv')
-            self.faileddf = pd.read_csv(os.path.abspath(
-                os.path.join(self.data_path, 'failed.csv')))
+                print(f'[+] Loading {file}')
+                if file == 'deviantXsteam.csv':
+                    self.deviantxsteamdf = pd.read_csv(file_path)
+                elif file == 'localprice.csv':
+                    self.localpricedf = pd.read_csv(file_path)
+                elif file == 'failed.csv':
+                    self.faileddf = pd.read_csv(file_path)
         print('#'*50+' Done loading '+'#'*50)
 
     def file_reload(self) -> None:
@@ -104,15 +99,15 @@ class scrapper:
 
         :return: None
         '''
-        print('[+] Re-Loading failed.csv')
-        self.faileddf = pd.read_csv(os.path.abspath(
-            os.path.join(self.data_path, 'failed.csv')))
-        print('[+] Re-Loading localprice.csv')
-        self.localpricedf = pd.read_csv(os.path.abspath(
-            os.path.join(self.data_path, 'localprice.csv')))
-        print('[+] Re-Loading deviantXsteam.csv')
-        self.deviantxsteamdf = pd.read_csv(os.path.abspath(
-            os.path.join(self.data_path, 'deviantXsteam.csv')))
+        print("[+] Re-loading data files")
+        for file in self.data_files:
+            file_path = os.path.abspath(os.path.join(self.data_path, file))
+            if file == 'deviantXsteam.csv':
+                self.deviantxsteamdf = pd.read_csv(file_path)
+            elif file == 'localprice.csv':
+                self.localpricedf = pd.read_csv(file_path)
+            elif file == 'failed.csv':
+                self.faileddf = pd.read_csv(file_path)
 
     # Add a rerun function to rerun the failed links
 
@@ -199,7 +194,7 @@ class scrapper:
         difflinks = set(self.steam_urls) - \
             set(self.localpricedf['SteamUrl'])
         for steamlink in difflinks:
-            price = steamget.get_item(steamlink)
+            price = steamapi.get_item(steamlink)
             if len(price) >= 3:
                 price = price.replace("₹ ", "")
                 app_tag = re.findall(self.patfortag, steamlink)[
@@ -238,7 +233,7 @@ if __name__ == '__main__':
 
     mainscrapper = scrapper(dev=False)
     links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
-    artlinks = mainscrapper.deviantartapi.get_deviant_links(links, 4)
+    artlinks = mainscrapper.deviantartapi.get_deviant_links(links[:2], 2)
     mainscrapper.steamlinks_scrapper(list(artlinks))
     mainscrapper.price_finder()
     from streamlit.web import cli as stcli

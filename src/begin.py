@@ -7,7 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from libs.urlextractor import *
-from libs.steamget import get_item
+from libs.steamapi import get_item
 
 
 class scrapper:
@@ -105,8 +105,8 @@ class scrapper:
         # Pickling the final links to file
         with open('failed.pkl', "wb") as file:
             pickle.dump(self.failedlinks, file)
-        #htmlgen("data.json")
-        #htmlgen("latest.json")
+        # htmlgen("data.json")
+        # htmlgen("latest.json")
         print("Check latest.html For Latest data")
         print("Done")
 
