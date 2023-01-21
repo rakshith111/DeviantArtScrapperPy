@@ -33,6 +33,7 @@ def get_item(steam_url: str, country_code:int=24) -> str:  # type: ignore
         return "RE"
     # print(f'[+] Got Appid for  Steamurl:{steam_url}  {appid[0].replace("/","")}')
     # print(f'[+] Got Name for  Steamurl:{steam_url}  {patforname}')
+    # https://steamcommunity.com/market/priceoverview/?currency=24&appid=753&market_hash_name=746850-Chinatown
 
     url = f'https://steamcommunity.com/market/priceoverview/?currency={country_code}&appid={appid[0].replace("/","")}&market_hash_name={patforname[0].replace("/","")}'
     time.sleep(1)
@@ -54,3 +55,5 @@ def get_item(steam_url: str, country_code:int=24) -> str:  # type: ignore
             return get_item(steam_url)
     except KeyError:
         return "FA"
+
+
