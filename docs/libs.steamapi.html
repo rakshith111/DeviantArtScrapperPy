@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs.oldlibs module" href="libs.oldlibs.html" /><link rel="prev" title="libs.deviantartapi module" href="libs.deviantartapi.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs.urlextractor module" href="libs.urlextractor.html" /><link rel="prev" title="libs.oldlibs module" href="libs.oldlibs.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>libs.htmgeny module - DeviantArtScrapper 0.0.9 documentation</title>
+        <title>libs.steamapi module - DeviantArtScrapper 0.0.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -158,9 +158,9 @@
 <li class="toctree-l1 current has-children"><a class="reference internal" href="Modules.html">CURRENT MODULES</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current has-children"><a class="reference internal" href="libs.html">libs package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="libs.deviantartapi.html">libs.deviantartapi module</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">libs.htmgeny module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libs.htmlgeny.html">libs.htmgeny module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.oldlibs.html">libs.oldlibs module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libs.steamget.html">libs.steamget module</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">libs.steamapi module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libs.urlextractor.html">libs.urlextractor module</a></li>
 </ul>
 </li>
@@ -207,92 +207,41 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-libs.htmlgeny">
-<span id="libs-htmgeny-module"></span><h1>libs.htmgeny module<a class="headerlink" href="#module-libs.htmlgeny" title="Permalink to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libs.htmlgeny.</span></span><span class="sig-name descname"><span class="pre">htmlGeny</span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Initiate the class and Creates a copy of the table-sort.js file in the streamlit static folder</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.addCheckbox">
-<span class="sig-name descname"><span class="pre">addCheckbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">appid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.addCheckbox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.addCheckbox" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>appid</strong> (<em>str</em>) – Appid of the game</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>addCheckbox(“123456)</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>&lt;input type=”checkbox” data-id=”123456”&gt;</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Takes a appid and returns a checkbox with data-id as the appid</div>
-<div class="line">This is useful for adding a checkbox to a dataframe </div>
-<div class="line">then using the data-id to get the appid of the game for a persistent checkbox using local storage</div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.generate_html">
-<span class="sig-name descname"><span class="pre">generate_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviantdata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.generate_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.generate_html" title="Permalink to this definition">#</a></dt>
+          <section id="module-libs.steamapi">
+<span id="libs-steamapi-module"></span><h1>libs.steamapi module<a class="headerlink" href="#module-libs.steamapi" title="Permalink to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="libs.steamapi.get_item">
+<span class="sig-prename descclassname"><span class="pre">libs.steamapi.</span></span><span class="sig-name descname"><span class="pre">get_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steam_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">24</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/steamapi.html#get_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.steamapi.get_item" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>steamdata</strong> (<em>pd.DataFrame</em>) – Steam data</p></li>
-<li><p><strong>deviantdata</strong> (<em>pd.DataFrame</em>) – Deviant data</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-<dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>generate_html(steamdata, deviantdata)</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line">Generates the html for the streamlit app</div>
-<div class="line">Uses the table-sort.js file to sort the tables</div>
-<div class="line">Uses the scripts/style.css file to style the tables</div>
-<div class="line">Creates a temporary dataframe where all the attributes are converted to clickable links using the <cite>make_clickable()</cite> function</div>
-<div class="line">then converts the dataframe to html and adds the table-sort.js and style.css files to the html</div>
-<div class="line">finally writes the html to the streamlit app</div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.make_clickable">
-<span class="sig-name descname"><span class="pre">make_clickable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">market</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.make_clickable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.make_clickable" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>link</strong> (<em>str</em>) – link to be made clickable</p></li>
-<li><p><strong>market</strong> (<em>bool</em>) – if true makes the text as just “LINK” and connects it to market</p></li>
+<li><p><strong>steam_url</strong> (<em>str</em>) – Steam url</p></li>
+<li><p><strong>country_code</strong> (<em>int</em>) – country code</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 <dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>make_clickable(”<a class="reference external" href="https://steamcommunity.com/market/listings/753/746850-Chinatown">https://steamcommunity.com/market/listings/753/746850-Chinatown</a>” )</p>
+<dd class="field-odd"><p>get_item(”<a class="reference external" href="https://steamcommunity.com/market/listings/753/746850-Chinatown">https://steamcommunity.com/market/listings/753/746850-Chinatown</a>” )</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>&lt;a target=”_blank” href=”<a class="reference external" href="https://steamcommunity.com/market/listings/753/746850-Chinatown">https://steamcommunity.com/market/listings/753/746850-Chinatown</a>”&gt;https://steamcommunity.com/market/listings/753/746850-Chinatown&lt;/a&gt;</p>
+<dd class="field-even"><p>price of the item  returns ₹ 269.36  (price of the item)</p>
+</dd>
+<dt class="field-odd">Exception<span class="colon">:</span></dt>
+<dd class="field-odd"><p>IndexError :  RE: Error in regex</p>
+</dd>
+<dt class="field-even">Exception<span class="colon">:</span></dt>
+<dd class="field-even"><p>NP: No price found</p>
+</dd>
+<dt class="field-odd">Exception<span class="colon">:</span></dt>
+<dd class="field-odd"><p>KeyError :  FA: Failed to get price</p>
 </dd>
 </dl>
 <div class="line-block">
-<div class="line">Takes a link and returns a clickable link</div>
+<div class="line">Takes a steammarket url and returns its price</div>
+<div class="line">Optional country code, default is 24 for Indian-INR, 1 for US-USD</div>
 </div>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -302,23 +251,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="libs.oldlibs.html">
+          <a class="next-page" href="libs.urlextractor.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">libs.oldlibs module</div>
+                <div class="title">libs.urlextractor module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="libs.deviantartapi.html">
+          <a class="prev-page" href="libs.oldlibs.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">libs.deviantartapi module</div>
+                <div class="title">libs.oldlibs module</div>
                 
               </div>
             </a>
@@ -352,13 +301,8 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">libs.htmgeny module</a><ul>
-<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny"><code class="docutils literal notranslate"><span class="pre">htmlGeny</span></code></a><ul>
-<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny.addCheckbox"><code class="docutils literal notranslate"><span class="pre">htmlGeny.addCheckbox()</span></code></a></li>
-<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny.generate_html"><code class="docutils literal notranslate"><span class="pre">htmlGeny.generate_html()</span></code></a></li>
-<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny.make_clickable"><code class="docutils literal notranslate"><span class="pre">htmlGeny.make_clickable()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">libs.steamapi module</a><ul>
+<li><a class="reference internal" href="#libs.steamapi.get_item"><code class="docutils literal notranslate"><span class="pre">get_item()</span></code></a></li>
 </ul>
 </li>
 </ul>

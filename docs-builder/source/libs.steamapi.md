@@ -1,7 +1,7 @@
-# libs.steamget module
+# libs.steamapi module
 
 ```{eval-rst}
-.. automodule:: libs.steamget
+.. automodule:: libs.steamapi
    :members:
    :undoc-members:
    :show-inheritance:

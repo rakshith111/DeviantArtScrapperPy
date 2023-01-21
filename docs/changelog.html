@@ -211,26 +211,35 @@
 <h1>CHANGELOG<a class="headerlink" href="#changelog" title="Permalink to this heading">#</a></h1>
 <p>Any notable changes to this project that I deem necessary will be documented in this file.</p>
 <section id="id1">
-<h2>0.0.9 - 21/1/2023<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2>0.1.0 - 21/1/2023<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Add Supoort for normal link(href)</p></li>
-<li><p>Add SteamCardExchange redirector</p></li>
-<li><p>Seperate Empty data from real data</p></li>
-<li><p>Fix ‘None’ return type for steam price (returns the <code class="docutils literal notranslate"><span class="pre">get_item(url)</span></code> function which calls it again)</p></li>
+<li><p>Renamed <code class="docutils literal notranslate"><span class="pre">steamget.py</span></code> to <code class="docutils literal notranslate"><span class="pre">steamapi.py</span></code></p></li>
+<li><p>Optimized <code class="docutils literal notranslate"><span class="pre">main.py</span></code>’s init and file reload functions ( now more readable !!)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">htmlgeny.py</span></code> now also generates a checkbox for each item which can be used to check whether the item has been visited or not</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">visitor.js</span></code> this is a script that will be injected into the html file to track whether the user has visited the page or not</p></li>
 </ul>
 </section>
 <section id="id2">
-<h2>0.0.8 -17/1/2023<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2>0.0.9 - 21/1/2023<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Added Support for normal link(href)</p></li>
+<li><p>Added SteamCardExchange redirector</p></li>
+<li><p>Now shows sparated data i.e Empty data from real data</p></li>
+<li><p>Fixed ‘None’ return type for steam price (returns the <code class="docutils literal notranslate"><span class="pre">get_item(url)</span></code> function which calls it again)</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>0.0.8 -17/1/2023<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Moved Old html generater to <code class="docutils literal notranslate"><span class="pre">oldlibs.py</span></code></p></li>
 <li><p>html generator now uses <code class="docutils literal notranslate"><span class="pre">Streamlit</span></code> to generate the html file</p></li>
 <li><p>htmlgeny runs separately from the main program now</p></li>
-<li><p><s>Added a new <code class="docutils literal notranslate"><span class="pre">HtmlGeny</span></code>  to <code class="docutils literal notranslate"><span class="pre">main.py</span></code> to use the new html generator </s></p></li>
+<li><p><s>Added a new <code class="docutils literal notranslate"><span class="pre">HtmlGeny</span></code> to <code class="docutils literal notranslate"><span class="pre">main.py</span></code> to use the new html generator </s></p></li>
 <li><p>Added minimilistic UI to the html generator and table sorter</p></li>
 </ul>
 </section>
-<section id="id3">
-<h2>0.0.7 - 6/1/2023<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<section id="id4">
+<h2>0.0.7 - 6/1/2023<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <ul class="simple">
@@ -243,8 +252,8 @@
 <li><p>Added a few options to the program</p></li>
 </ul>
 </section>
-<section id="id4">
-<h2>0.0.6 -3/1/2023<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h2>0.0.6 -3/1/2023<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <ul class="simple">
@@ -257,31 +266,31 @@
 <li><p>Added a new login method to fix cookie expire/ failures</p></li>
 </ul>
 </section>
-<section id="id5">
-<h2>0.0.5 - 25/12/2022<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h2>0.0.5 - 25/12/2022<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Updated <code class="docutils literal notranslate"><span class="pre">main.py</span></code> to use all the modules and scrap the website</p></li>
 <li><p>Fixed an issue where the login failes due to expired cookies</p></li>
 <li><p>Now slow mode is enabled by default to avoid getting flagged as bot</p></li>
 </ul>
 </section>
-<section id="id6">
-<h2>0.0.4 - 24/12/2022<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h2>0.0.4 - 24/12/2022<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Added steam price fetecher</p></li>
 <li><p>Saves the steam price to a file</p></li>
 <li><p>Updated module <code class="docutils literal notranslate"><span class="pre">steam_price.py</span></code> to fetch the steam price</p></li>
 </ul>
 </section>
-<section id="id7">
-<h2>0.0.3 - 16/12/2022<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<section id="id8">
+<h2>0.0.3 - 16/12/2022<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Update the way the links are checked for redundancy, now it uses a <code class="docutils literal notranslate"><span class="pre">set</span></code> instead <code class="docutils literal notranslate"><span class="pre">in</span></code></p></li>
 <li><p>Split the library documentation based on modules rather than one long file</p></li>
 </ul>
 </section>
-<section id="id8">
-<h2>0.0.2 - 04/12/2022<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<section id="id9">
+<h2>0.0.2 - 04/12/2022<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Added Headless option for firefox</p></li>
 <li><p>Optimized searching for steam links using regex instead of string matching</p></li>
@@ -289,8 +298,8 @@
 <li><p>Writes steam links to file</p></li>
 </ul>
 </section>
-<section id="id9">
-<h2>0.0.2 - 01/12/2022<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<section id="id10">
+<h2>0.0.2 - 01/12/2022<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <ul class="simple">
@@ -304,8 +313,8 @@
 <li><p>Other minor changes</p></li>
 </ul>
 </section>
-<section id="id10">
-<h2>0.0.1 - 29/11/2022<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<section id="id11">
+<h2>0.0.1 - 29/11/2022<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>DeviantArt Website Changes they added a login system to the website, which kinda broke the scraper.</p>
@@ -314,8 +323,8 @@
 </ul>
 </div>
 </section>
-<section id="id11">
-<h2>0.0.1 - 22/11/2022<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<section id="id12">
+<h2>0.0.1 - 22/11/2022<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Changed the way the program is structured. Now it is a module, and the main program is in the <code class="docutils literal notranslate"><span class="pre">main.py</span></code> file.</p></li>
 <li><p>Add sphinx doc gen</p></li>
@@ -382,17 +391,18 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">CHANGELOG</a><ul>
-<li><a class="reference internal" href="#id1">0.0.9 - 21/1/2023</a></li>
-<li><a class="reference internal" href="#id2">0.0.8 -17/1/2023</a></li>
-<li><a class="reference internal" href="#id3">0.0.7 - 6/1/2023</a></li>
-<li><a class="reference internal" href="#id4">0.0.6 -3/1/2023</a></li>
-<li><a class="reference internal" href="#id5">0.0.5 - 25/12/2022</a></li>
-<li><a class="reference internal" href="#id6">0.0.4 - 24/12/2022</a></li>
-<li><a class="reference internal" href="#id7">0.0.3 - 16/12/2022</a></li>
-<li><a class="reference internal" href="#id8">0.0.2 - 04/12/2022</a></li>
-<li><a class="reference internal" href="#id9">0.0.2 - 01/12/2022</a></li>
-<li><a class="reference internal" href="#id10">0.0.1 - 29/11/2022</a></li>
-<li><a class="reference internal" href="#id11">0.0.1 - 22/11/2022</a></li>
+<li><a class="reference internal" href="#id1">0.1.0 - 21/1/2023</a></li>
+<li><a class="reference internal" href="#id2">0.0.9 - 21/1/2023</a></li>
+<li><a class="reference internal" href="#id3">0.0.8 -17/1/2023</a></li>
+<li><a class="reference internal" href="#id4">0.0.7 - 6/1/2023</a></li>
+<li><a class="reference internal" href="#id5">0.0.6 -3/1/2023</a></li>
+<li><a class="reference internal" href="#id6">0.0.5 - 25/12/2022</a></li>
+<li><a class="reference internal" href="#id7">0.0.4 - 24/12/2022</a></li>
+<li><a class="reference internal" href="#id8">0.0.3 - 16/12/2022</a></li>
+<li><a class="reference internal" href="#id9">0.0.2 - 04/12/2022</a></li>
+<li><a class="reference internal" href="#id10">0.0.2 - 01/12/2022</a></li>
+<li><a class="reference internal" href="#id11">0.0.1 - 29/11/2022</a></li>
+<li><a class="reference internal" href="#id12">0.0.1 - 22/11/2022</a></li>
 </ul>
 </li>
 </ul>

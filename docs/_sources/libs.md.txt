@@ -8,7 +8,7 @@
 libs.deviantartapi
 libs.htmlgeny
 libs.oldlibs
-libs.steamget
+libs.steamapi
 libs.urlextractor
 ```
 

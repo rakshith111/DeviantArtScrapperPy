@@ -1,23 +1,23 @@
 
-.cont {
+.cool-theme {
   border-collapse: collapse;
   width: 100%;
 }
-.cont tr:hover {
+.cool-theme tr:hover {
   background-color: rgb(235, 4, 4);
 }
-.cont tr:nth-child(even) {
+.cool-theme tr:nth-child(even) {
   background-color: rgb(43, 42, 42);
 }
-.cont th,
-.cont td {
+.cool-theme th,
+.cool-theme td {
   border: 1px solid #ddd;
   padding: 8px;
   color: white;
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.cont th {
+.cool-theme th {
   padding-top: 24px;
   padding-bottom: 24px;
   text-align: left;
