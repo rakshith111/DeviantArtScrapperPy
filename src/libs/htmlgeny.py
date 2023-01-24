@@ -9,17 +9,17 @@ import pathlib
 class htmlGeny:
     def __init__(self) -> None:
         '''
-        Initiate the class and Creates a copy of the table-sort.js file in the streamlit static folder
+        Initiate the class and Creates a copy of the sort-table.js file in the streamlit static folder
 
         '''
         streamlit_jspath = pathlib.Path(
             st.__path__[0]) / 'static' / 'static' / 'js'
 
         table_sortjs = os.path.join(os.path.dirname(
-            os.path.dirname(__file__)), "scripts", "table-sort.js")
+            os.path.dirname(__file__)), "scripts", "sort-table.js")
         visitorjs = os.path.join(os.path.dirname(
             os.path.dirname(__file__)), "scripts", "visitor.js")
-        target_jable_sortjs = streamlit_jspath / 'table-sort.js'
+        target_jable_sortjs = streamlit_jspath / 'sort-table.js'
         target_visitorjs = streamlit_jspath / 'visitor.js'
         self.css_path = os.path.join(os.path.dirname(
             os.path.dirname(__file__)), "scripts", "style.css")
@@ -81,10 +81,10 @@ class htmlGeny:
         :return: None
 
         | Generates the html for the streamlit app
-        | Uses the table-sort.js file to sort the tables
+        | Uses the sort-table.js file to sort the tables
         | Uses the scripts/style.css file to style the tables
         | Creates a temporary dataframe where all the attributes are converted to clickable links using the `make_clickable()` function
-        | then converts the dataframe to html and adds the table-sort.js and style.css files to the html
+        | then converts the dataframe to html and adds the sort-table.js and style.css files to the html
         | finally writes the html to the streamlit app
 
         '''
@@ -105,10 +105,14 @@ class htmlGeny:
         to_outdata_steamdata["CardExchangeMarket"] = steamdata['AppTag'].apply(
             self.make_clickable, market=True)
         tablehtml = to_outdata_steamdata.to_html(
-            escape=False, index=False, classes="table-sort table-arrows visitor cool-theme")
+            escape=False, index=False, classes="js-sort-table visitor cool-theme")
+        tablehtml = tablehtml.replace(
+            '<th>SteamPrice</th>', '<th class="js-sort-number" >SteamPrice</th>')
+        tablehtml = tablehtml.replace(
+            '<th>Visited</th>', '<th class="js-sort-0" >Visited</th>')
         cssdata = open(f"{self.css_path}", 'r').read()
         tablehtml = tablehtml + f'<style>{cssdata}</style>'
-        with open('steamdata.html', 'w') as f:
+        with open("temp.html", "w") as f:
             f.write(tablehtml)
         st.write(tablehtml, unsafe_allow_html=True)
 
@@ -123,7 +127,7 @@ class htmlGeny:
         to_out_deviantdata['SteamUrl'] = fulldata['SteamUrl'].apply(
             self.make_clickable)
         tablehtml = to_out_deviantdata.to_html(
-            escape=False, index=False, classes="table-sort cool-theme  table-arrows ")
+            escape=False, index=False, classes="js-sort-table cool-theme  table-arrows ")
 
         st.write(tablehtml, unsafe_allow_html=True)
         st.title("No Steam Data")
@@ -133,12 +137,12 @@ class htmlGeny:
         to_out_deviantdata['SteamUrl'] = emptydata['SteamUrl'].apply(
             self.make_clickable)
         tablehtml = to_out_deviantdata.to_html(
-            escape=False, index=False, classes="table-sort cool-theme table-arrows")
+            escape=False, index=False, classes="js-sort-table cool-theme table-arrows")
 
         st.write(tablehtml, unsafe_allow_html=True)
 
         html('''
-        <script src='./static/js/table-sort.js'>
+        <script src='./static/js/sort-table.js'>
         </script>''')
         html('''
         <script src='./static/js/visitor.js'>
