@@ -252,16 +252,14 @@ sortTable.getClickHandler = function (Table, col) {
  *  first row
  */
 sortTable.init = function () {
-  console.log("sortTable.init()");
+  console.log("Sort Table Init");
   var THead, Tables, Handler;
   if (window.parent.document.querySelectorAll) {
     Tables = window.parent.document.querySelectorAll("table.js-sort-table");
   } else {
     Tables = window.parent.document.getElementsByTagName("table");
   }
-  console.log(Tables);
-  console.log(Tables.length);
-  console.log("yes ");
+
   for (var i = 0; i < Tables.length; i++) {
     // Because IE<8 doesn't support querySelectorAll, skip unclassed tables
     if (
