@@ -71,7 +71,7 @@ class scrapper:
                 print(f'[x] {file} not found, creating new file')
                 print(f'[+] Creating {file}')
                 if file == 'deviantXsteam.csv':
-                    pd.DataFrame(columns=['SteamUrl', 'DeviantUrl']).to_csv(
+                    pd.DataFrame(columns=['SteamUrl', 'DeviantUrl','visited?']).to_csv(
                         file_path, index=False)
                     self.deviantxsteamdf = pd.read_csv(file_path)
                 elif file == 'localprice.csv':
@@ -143,19 +143,19 @@ class scrapper:
                 steamlink = (str(outgoingsteam).replace(
                     self.remove_string, ""))
                 print('[+] Steam link found')
-                rowdata.append((steamlink, deviantartpage))
+                rowdata.append((steamlink, deviantartpage, "yes"))
                 datacount += 1
             else:
                 print('[x] No steam link found')
-                rowdata.append((None, deviantartpage))
+                rowdata.append((None, deviantartpage, "yes-nolink"))
                 datacount += 1
 
             if datacount > self.saveafter:
                 print('[+] Saving data to deviantXsteam.csv')
-                merger = pd.DataFrame(
-                    rowdata, columns=['SteamUrl', 'DeviantUrl'])
+                new_data = pd.DataFrame(
+                    rowdata, columns=['SteamUrl', 'DeviantUrl','visited?'])
                 self.deviantxsteamdf = pd.concat(
-                    [self.deviantxsteamdf, merger], ignore_index=True)
+                    [self.deviantxsteamdf, new_data], ignore_index=True)
                 self.deviantxsteamdf.to_csv(os.path.abspath(os.path.join(
                     self.data_path, 'deviantXsteam.csv')), index=False)
                 print('[+] Data saved to deviantXsteam.csv')
@@ -164,9 +164,10 @@ class scrapper:
 
         if len(rowdata) > 0:
             print(f'[+] Saving {len(rowdata)} data to deviantXsteam.csv')
-            merger = pd.DataFrame(rowdata, columns=['SteamUrl', 'DeviantUrl'])
+            new_data = pd.DataFrame(rowdata, columns=['SteamUrl', 'DeviantUrl','visited?'])
             self.deviantxsteamdf = pd.concat(
-                [self.deviantxsteamdf, merger], ignore_index=True)
+                [self.deviantxsteamdf, new_data], ignore_index=True)
+            #self.deviantartapi.drop_duplicates( inplace=True)
             self.deviantxsteamdf.to_csv(os.path.abspath(os.path.join(
                 self.data_path, 'deviantXsteam.csv')), index=False)
             print('[+] Data saved to deviantXsteam.csv')
@@ -233,7 +234,7 @@ if __name__ == '__main__':
 
     mainscrapper = scrapper(dev=False)
     links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
-    artlinks = mainscrapper.deviantartapi.get_deviant_links(links[:2], 2)
+    artlinks = mainscrapper.deviantartapi.get_deviant_links(links, 3)
     mainscrapper.steamlinks_scrapper(list(artlinks))
     mainscrapper.price_finder()
     from streamlit.web import cli as stcli
