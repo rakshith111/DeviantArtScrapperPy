@@ -236,8 +236,8 @@ if __name__ == '__main__':
     links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
     links_to_scrape = len(links)
     pages_to_check = 4
-    artlinks = scrapper.deviant_art_api.get_deviant_links(links[0:links_to_scrape], 4)
-    scrapper.steam_links_scrapper(list(artlinks))
+    art_links = scrapper.deviant_art_api.get_deviant_links(links[0:links_to_scrape], 4)
+    scrapper.steam_links_scrapper(list(art_links))
     scrapper.price_finder()
     from streamlit.web import cli as stcli
     from streamlit import runtime
