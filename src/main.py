@@ -234,7 +234,9 @@ if __name__ == '__main__':
 
     scrapper = DeviantArtScrapper(dev=False)
     links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
-    artlinks = scrapper.deviant_art_api.get_deviant_links(links, 3)
+    links_to_scrape = len(links)
+    pages_to_check = 4
+    artlinks = scrapper.deviant_art_api.get_deviant_links(links[0:links_to_scrape], 4)
     scrapper.steam_links_scrapper(list(artlinks))
     scrapper.price_finder()
     from streamlit.web import cli as stcli
