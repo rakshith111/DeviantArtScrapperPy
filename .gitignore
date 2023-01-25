@@ -1,4 +1,4 @@
-data
+
 testingstf
 doctrees
 geckodriver.log
@@ -6,3 +6,9 @@ src/__pycache__/
 src/libs/__pycache__/
 docs/.doctrees/
 .vscode/settings.json
+.gitignore
+src/data/Credentials.json
+src/data/deviantXsteam.csv
+src/data/failed.csv
+src/data/cookie.pkl
+src/data/localprice.csv
