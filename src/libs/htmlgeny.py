@@ -4,6 +4,7 @@ from streamlit.components.v1 import html
 import shutil
 import os
 import pathlib
+import hashlib
 
 
 class htmlGeny:
@@ -19,10 +20,10 @@ class htmlGeny:
             os.path.dirname(__file__)), "scripts", "sort-table.js")
         visitorjs = os.path.join(os.path.dirname(
             os.path.dirname(__file__)), "scripts", "visitor.js")
-        target_jable_sortjs = streamlit_jspath / 'sort-table.js'
-        target_visitorjs = streamlit_jspath / 'visitor.js'
         self.css_path = os.path.join(os.path.dirname(
             os.path.dirname(__file__)), "scripts", "style.css")
+        target_jable_sortjs = streamlit_jspath / 'sort-table.js'
+        target_visitorjs = streamlit_jspath / 'visitor.js'
 
         files_to_check = [(table_sortjs, target_jable_sortjs),
                           (visitorjs, target_visitorjs)]
@@ -34,20 +35,22 @@ class htmlGeny:
                 shutil.copy(file_pair[0], streamlit_jspath)
                 print(f'[+] {file_pair[1]} copied')
 
-    def addCheckbox(self, appid: str) -> str:
+    def addCheckbox(self, steamurl: str, length=6) -> str:
         '''
-        :param str appid: Appid of the game
+        :param str steamurl: steamurl of the game
+        :param int length: length of the hash default is 6
         :rtype: str
-        :example: addCheckbox("123456)
-        :return: <input type="checkbox" data-id="123456">
+        :example: addCheckbox("https://steamcommunity.com/market/listings/753/470260-Lower%20deck")
+        :return: <input type="checkbox" data-id="a395d9">
 
-        | Takes a appid and returns a checkbox with data-id as the appid
-        | This is useful for adding a checkbox to a dataframe 
-        | then using the data-id to get the appid of the game for a persistent checkbox using local storage
+        | Takes a steamurl and returns a checkbox with data-id as the hash of the steamurl
+        | using the data-id  for a persistent checkbox via local storage
 
         '''
-
-        return f'<input type="checkbox" data-id="{appid}">'
+        hash = hashlib.sha1()
+        hash.update(str(steamurl).encode("utf-8"))
+        dataid = hash.hexdigest()[:length]
+        return f'<input type="checkbox" data-id="{dataid}">'
 
     def make_clickable(self, link: str, market: bool = False) -> str:
         '''
@@ -67,12 +70,11 @@ class htmlGeny:
         if market:
             text = f"{link}"
             return f'<a target="_blank" href="https://www.steamcardexchange.net/index.php?gamepage-appid-{link}">LINK</a>'
-
         else:
             text = f"{link}"
             return f'<a target="_blank" href="{link}">{text}</a>'
 
-    def generate_html(self, steamdata, deviantdata):
+    def generate_html(self, steamdata: pd.DataFrame, deviantdata: pd.DataFrame) -> None:
         '''
         :param pd.DataFrame steamdata: Steam data
         :param pd.DataFrame deviantdata: Deviant data
@@ -98,12 +100,13 @@ class htmlGeny:
         to_outdata_steamdata['SteamUrl'] = steamdata['SteamUrl'].apply(
             self.make_clickable)
         to_outdata_steamdata["AppTag"] = steamdata['AppTag']
-        to_outdata_steamdata["Visited"] = to_outdata_steamdata["AppTag"].apply(
+        to_outdata_steamdata["Visited"] = steamdata["SteamUrl"].apply(
             self.addCheckbox)
         to_outdata_steamdata["SteamPrice"] = steamdata['SteamPrice']
         to_outdata_steamdata["SteamPriceDate"] = steamdata['SteamPriceDate']
         to_outdata_steamdata["CardExchangeMarket"] = steamdata['AppTag'].apply(
             self.make_clickable, market=True)
+        to_outdata_steamdata.drop_duplicates(inplace=True)
         tablehtml = to_outdata_steamdata.to_html(
             escape=False, index=False, classes="js-sort-table visitor cool-theme")
         tablehtml = tablehtml.replace(
@@ -112,8 +115,6 @@ class htmlGeny:
             '<th>Visited</th>', '<th class="js-sort-0" >Visited</th>')
         cssdata = open(f"{self.css_path}", 'r').read()
         tablehtml = tablehtml + f'<style>{cssdata}</style>'
-        with open("temp.html", "w") as f:
-            f.write(tablehtml)
         st.write(tablehtml, unsafe_allow_html=True)
 
         st.title("Deviant Data")
