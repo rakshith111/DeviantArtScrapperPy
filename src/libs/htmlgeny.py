@@ -1,32 +1,34 @@
-import streamlit as st
-import pandas as pd
-from streamlit.components.v1 import html
 import shutil
 import os
 import pathlib
 import hashlib
 
+import streamlit as st
+import pandas as pd
 
-class htmlGeny:
+from streamlit.components.v1 import html
+
+
+class HtmlGeny:
     def __init__(self) -> None:
         '''
-        Initiate the class and Creates a copy of the sort-table.js file in the streamlit static folder
+        Initiate the class and creates a copy of the sort-table.js and visitor.js files in the streamlit static folder
 
         '''
         streamlit_jspath = pathlib.Path(
             st.__path__[0]) / 'static' / 'static' / 'js'
 
-        table_sortjs = os.path.join(os.path.dirname(
+        sort_table_js_path = os.path.join(os.path.dirname(
             os.path.dirname(__file__)), "scripts", "sort-table.js")
-        visitorjs = os.path.join(os.path.dirname(
+        visitor_js_path = os.path.join(os.path.dirname(
             os.path.dirname(__file__)), "scripts", "visitor.js")
         self.css_path = os.path.join(os.path.dirname(
             os.path.dirname(__file__)), "scripts", "style.css")
-        target_jable_sortjs = streamlit_jspath / 'sort-table.js'
-        target_visitorjs = streamlit_jspath / 'visitor.js'
+        target_sort_table_js_path = streamlit_jspath / 'sort-table.js'
+        target_visitor_js = streamlit_jspath / 'visitor.js'
 
-        files_to_check = [(table_sortjs, target_jable_sortjs),
-                          (visitorjs, target_visitorjs)]
+        files_to_check = [(sort_table_js_path, target_sort_table_js_path),
+                          (visitor_js_path, target_visitor_js)]
         for file_pair in files_to_check:
             if os.path.exists(file_pair[1]):
                 print(f'[+] {file_pair[1]} exists')
@@ -35,12 +37,12 @@ class htmlGeny:
                 shutil.copy(file_pair[0], streamlit_jspath)
                 print(f'[+] {file_pair[1]} copied')
 
-    def addCheckbox(self, steamurl: str, length=6) -> str:
+    def add_check_box(self, steam_url: str, length=6) -> str:
         '''
         :param str steamurl: steamurl of the game
         :param int length: length of the hash default is 6
         :rtype: str
-        :example: addCheckbox("https://steamcommunity.com/market/listings/753/470260-Lower%20deck")
+        :example: add_check_box("https://steamcommunity.com/market/listings/753/470260-Lower%20deck")
         :return: <input type="checkbox" data-id="a395d9">
 
         | Takes a steamurl and returns a checkbox with data-id as the hash of the steamurl
@@ -48,9 +50,9 @@ class htmlGeny:
 
         '''
         hash = hashlib.sha1()
-        hash.update(str(steamurl).encode("utf-8"))
-        dataid = hash.hexdigest()[:length]
-        return f'<input type="checkbox" data-id="{dataid}">'
+        hash.update(str(steam_url).encode("utf-8"))
+        data_id = hash.hexdigest()[:length]
+        return f'<input type="checkbox" data-id="{data_id}">'
 
     def make_clickable(self, link: str, market: bool = False) -> str:
         '''
@@ -74,12 +76,12 @@ class htmlGeny:
             text = f"{link}"
             return f'<a target="_blank" href="{link}">{text}</a>'
 
-    def generate_html(self, steamdata: pd.DataFrame, deviantdata: pd.DataFrame) -> None:
+    def generate_html(self, steam_data: pd.DataFrame, deviant_data: pd.DataFrame) -> None:
         '''
-        :param pd.DataFrame steamdata: Steam data
-        :param pd.DataFrame deviantdata: Deviant data
+        :param pd.DataFrame steam_data: Steam data
+        :param pd.DataFrame deviant_data: Deviant data
         :rtype: None
-        :example: generate_html(steamdata, deviantdata)
+        :example: generate_html(steam_data, deviant_data)
         :return: None
 
         | Generates the html for the streamlit app
@@ -96,51 +98,51 @@ class htmlGeny:
         st.title('Results')
         st.title("Steam Prices")
 
-        to_outdata_steamdata = pd.DataFrame()
-        to_outdata_steamdata['SteamUrl'] = steamdata['SteamUrl'].apply(
+        to_outdata_steam_data = pd.DataFrame()
+        to_outdata_steam_data['SteamUrl'] = steam_data['SteamUrl'].apply(
             self.make_clickable)
-        to_outdata_steamdata["AppTag"] = steamdata['AppTag']
-        to_outdata_steamdata["Visited"] = steamdata["SteamUrl"].apply(
-            self.addCheckbox)
-        to_outdata_steamdata["SteamPrice"] = steamdata['SteamPrice']
-        to_outdata_steamdata["SteamPriceDate"] = steamdata['SteamPriceDate']
-        to_outdata_steamdata["CardExchangeMarket"] = steamdata['AppTag'].apply(
+        to_outdata_steam_data["AppTag"] = steam_data['AppTag']
+        to_outdata_steam_data["Visited"] = steam_data["SteamUrl"].apply(
+            self.add_check_box)
+        to_outdata_steam_data["SteamPrice"] = steam_data['SteamPrice']
+        to_outdata_steam_data["SteamPriceDate"] = steam_data['SteamPriceDate']
+        to_outdata_steam_data["CardExchangeMarket"] = steam_data['AppTag'].apply(
             self.make_clickable, market=True)
-        to_outdata_steamdata.drop_duplicates(inplace=True)
-        tablehtml = to_outdata_steamdata.to_html(
+        to_outdata_steam_data.drop_duplicates(inplace=True)
+        table_html = to_outdata_steam_data.to_html(
             escape=False, index=False, classes="js-sort-table visitor cool-theme")
-        tablehtml = tablehtml.replace(
+        table_html = table_html.replace(
             '<th>SteamPrice</th>', '<th class="js-sort-number" >SteamPrice</th>')
-        tablehtml = tablehtml.replace(
+        table_html = table_html.replace(
             '<th>Visited</th>', '<th class="js-sort-0" >Visited</th>')
-        cssdata = open(f"{self.css_path}", 'r').read()
-        tablehtml = tablehtml + f'<style>{cssdata}</style>'
-        st.write(tablehtml, unsafe_allow_html=True)
+        css_data = open(f"{self.css_path}", 'r').read()
+        table_html = table_html + f'<style>{css_data}</style>'
+        st.write(table_html, unsafe_allow_html=True)
 
         st.title("Deviant Data")
-        emptydata = deviantdata[deviantdata["SteamUrl"].isnull()]
-        fulldata = pd.concat([deviantdata, emptydata]
-                             ).drop_duplicates(keep=False)
+        empty_data = deviant_data[deviant_data["SteamUrl"].isnull()]
+        full_data = pd.concat([deviant_data, empty_data]
+                              ).drop_duplicates(keep=False)
 
         to_out_deviantdata = pd.DataFrame()
-        to_out_deviantdata['DeviantUrl'] = fulldata['DeviantUrl'].apply(
+        to_out_deviantdata['DeviantUrl'] = full_data['DeviantUrl'].apply(
             self.make_clickable)
-        to_out_deviantdata['SteamUrl'] = fulldata['SteamUrl'].apply(
+        to_out_deviantdata['SteamUrl'] = full_data['SteamUrl'].apply(
             self.make_clickable)
-        tablehtml = to_out_deviantdata.to_html(
+        table_html = to_out_deviantdata.to_html(
             escape=False, index=False, classes="js-sort-table cool-theme  table-arrows ")
 
-        st.write(tablehtml, unsafe_allow_html=True)
+        st.write(table_html, unsafe_allow_html=True)
         st.title("No Steam Data")
         to_out_deviantdata = pd.DataFrame()
-        to_out_deviantdata['DeviantUrl'] = emptydata['DeviantUrl'].apply(
+        to_out_deviantdata['DeviantUrl'] = empty_data['DeviantUrl'].apply(
             self.make_clickable)
-        to_out_deviantdata['SteamUrl'] = emptydata['SteamUrl'].apply(
+        to_out_deviantdata['SteamUrl'] = empty_data['SteamUrl'].apply(
             self.make_clickable)
-        tablehtml = to_out_deviantdata.to_html(
+        table_html = to_out_deviantdata.to_html(
             escape=False, index=False, classes="js-sort-table cool-theme table-arrows")
 
-        st.write(tablehtml, unsafe_allow_html=True)
+        st.write(table_html, unsafe_allow_html=True)
 
         html('''
         <script src='./static/js/sort-table.js'>
@@ -152,9 +154,9 @@ class htmlGeny:
 
 if __name__ == "__main__":
 
-    steamdata = pd.read_csv(os.path.join(os.path.dirname(
+    steam_data = pd.read_csv(os.path.join(os.path.dirname(
         os.path.dirname(__file__)), "data", "localprice.csv"))
-    deviantdata = pd.read_csv(os.path.join(os.path.dirname(
+    deviant_data = pd.read_csv(os.path.join(os.path.dirname(
         os.path.dirname(__file__)), "data", "deviantXsteam.csv")
     )
-    htmlGeny().generate_html(steamdata, deviantdata)
+    HtmlGeny().generate_html(steam_data, deviant_data)

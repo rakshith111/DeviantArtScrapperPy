@@ -83,7 +83,7 @@ def deviant_scrapper_pages(self, baseurl: str, nextpage: int = 2) -> list:
         deviantartpages.append(hrefval)
     # will retrive 24 urls
     NextBtnClicker += 1
-    nexts = urlextractor.nextcursor_requests(baseurl, page_cookie)
+    nexts = urlextractor.next_cursor_requests(baseurl, page_cookie)
     while NextBtnClicker <= nextpage-1 and nexts:
 
         joinedurl = "https://www.deviantart.com"+nexts
@@ -95,7 +95,7 @@ def deviant_scrapper_pages(self, baseurl: str, nextpage: int = 2) -> list:
             hrefval = deviantdata.select(
                 'a[data-hook="deviation_link"]')[0]['href']
             deviantartpages.append(hrefval)
-        nexts = urlextractor.nextcursor_requests(joinedurl, mp_cookie)
+        nexts = urlextractor.next_cursor_requests(joinedurl, mp_cookie)
         NextBtnClicker += 1
         sleep(2)
 

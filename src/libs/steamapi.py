@@ -24,33 +24,30 @@ def get_item(steam_url: str, country_code:int=24) -> str:  # type: ignore
 
     """
     try:
-        patforid = ("[\d]+/")
-        patforname = ("[\d]+-[\w%()'!$%&*+,-.:;<=>?@[\]^_`{|}~]+")
-        appid = re.findall(patforid, steam_url)
-        patforname = re.findall(patforname, steam_url)
+        pattern_for_id = ("[\d]+/")
+        pattern_for_name = ("[\d]+-[\w%()'!$%&*+,-.:;<=>?@[\]^_`{|}~]+")
+        app_id = re.findall(pattern_for_id, steam_url)
+        market_hash_name = re.findall(pattern_for_name, steam_url)
     except IndexError:
         print("[-] Error in regex")
         return "RE"
-    # print(f'[+] Got Appid for  Steamurl:{steam_url}  {appid[0].replace("/","")}')
-    # print(f'[+] Got Name for  Steamurl:{steam_url}  {patforname}')
-    # https://steamcommunity.com/market/priceoverview/?currency=24&appid=753&market_hash_name=746850-Chinatown
 
-    url = f'https://steamcommunity.com/market/priceoverview/?currency={country_code}&appid={appid[0].replace("/","")}&market_hash_name={patforname[0].replace("/","")}'
+    url = f'https://steamcommunity.com/market/priceoverview/?currency={country_code}&appid={app_id[0].replace("/","")}&market_hash_name={market_hash_name[0].replace("/","")}'
     time.sleep(1)
-    print(f'[+] Getting Price for SteamItem: {patforname[0].replace("/","")}')
+    print(f'[+] Getting Price for SteamItem: {market_hash_name[0].replace("/","")}')
     resp = requests.get(url)
-    steamjsondata = {"NO DATA": "NO DATA"}
+    steam_json_data = {"NO DATA": "NO DATA"}
     try:
         if resp.ok:
-            steamjsondata = json.loads(resp.content)
-            if steamjsondata["lowest_price"]:  # if item exits  returns price
+            steam_json_data = json.loads(resp.content)
+            if steam_json_data["lowest_price"]:  # if item exits  returns price
                 print(
-                    f'[+] Got Price for  Steamurl:{steam_url}  {steamjsondata["lowest_price"]}')
-                return steamjsondata["lowest_price"]
+                    f'[+] Got Price for  Steamurl:{steam_url}  {steam_json_data["lowest_price"]}')
+                return steam_json_data["lowest_price"]
         else:
             print("[-] Possible timeout, trying again")
             print(resp.url+" going to sleep for 30 sec ")
-            print(steamjsondata)
+            print(steam_json_data)
             time.sleep(30)
             return get_item(steam_url)
     except KeyError:
