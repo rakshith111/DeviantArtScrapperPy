@@ -165,7 +165,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
 </ul>
 </li>
 </ul>
@@ -210,12 +209,12 @@
           <section id="module-libs.urlextractor">
 <span id="libs-urlextractor-module"></span><h1>libs.urlextractor module<a class="headerlink" href="#module-libs.urlextractor" title="Permalink to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="libs.urlextractor.nextcursor_requests">
-<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">nextcursor_requests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baseurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/urlextractor.html#nextcursor_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.nextcursor_requests" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="libs.urlextractor.next_cursor_requests">
+<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">next_cursor_requests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/urlextractor.html#next_cursor_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.next_cursor_requests" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>baseurl</strong> (<em>str</em>) – Deviant art page url</p></li>
+<li><p><strong>base_url</strong> (<em>str</em>) – Deviant art page url</p></li>
 <li><p><strong>cookie</strong> (<em>cookie</em>) – cookie of the parent page</p></li>
 </ul>
 </dd>
@@ -243,8 +242,8 @@ the requests version doesn’t render js</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="libs.urlextractor.nextcursor_selenium">
-<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">nextcursor_selenium</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/urlextractor.html#nextcursor_selenium"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.nextcursor_selenium" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="libs.urlextractor.next_cursor_selenium">
+<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">next_cursor_selenium</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/urlextractor.html#next_cursor_selenium"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.next_cursor_selenium" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>page_data</strong> (<em>str</em>) – raw page source data of the page</p>
@@ -270,8 +269,8 @@ the requests version doesn’t render js</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="libs.urlextractor.remove_filter">
-<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">remove_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/urlextractor.html#remove_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.remove_filter" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="libs.urlextractor.url_cleaner">
+<span class="sig-prename descclassname"><span class="pre">libs.urlextractor.</span></span><span class="sig-name descname"><span class="pre">url_cleaner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steam_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/urlextractor.html#url_cleaner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.urlextractor.url_cleaner" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>steamurl</strong> (<em>str</em>) – Steam url</p>
@@ -287,6 +286,8 @@ the requests version doesn’t render js</p>
 <div class="line">Accepts a steam url and removes the filter part of the url and returns the url</div>
 <div class="line">Some urls have a filter part which is not needed for the program to work, this function removes the filter part and returns the url</div>
 <div class="line">if no filter part is found returns the same url</div>
+<div class="line">Removes # from the url as well</div>
+<div class="line">converts http to https</div>
 </div>
 </dd></dl>
 
@@ -348,9 +349,9 @@ the requests version doesn’t render js</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">libs.urlextractor module</a><ul>
-<li><a class="reference internal" href="#libs.urlextractor.nextcursor_requests"><code class="docutils literal notranslate"><span class="pre">nextcursor_requests()</span></code></a></li>
-<li><a class="reference internal" href="#libs.urlextractor.nextcursor_selenium"><code class="docutils literal notranslate"><span class="pre">nextcursor_selenium()</span></code></a></li>
-<li><a class="reference internal" href="#libs.urlextractor.remove_filter"><code class="docutils literal notranslate"><span class="pre">remove_filter()</span></code></a></li>
+<li><a class="reference internal" href="#libs.urlextractor.next_cursor_requests"><code class="docutils literal notranslate"><span class="pre">next_cursor_requests()</span></code></a></li>
+<li><a class="reference internal" href="#libs.urlextractor.next_cursor_selenium"><code class="docutils literal notranslate"><span class="pre">next_cursor_selenium()</span></code></a></li>
+<li><a class="reference internal" href="#libs.urlextractor.url_cleaner"><code class="docutils literal notranslate"><span class="pre">url_cleaner()</span></code></a></li>
 </ul>
 </li>
 </ul>

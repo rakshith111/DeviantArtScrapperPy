@@ -164,7 +164,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../main.html">main module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../begin.html">begin module</a></li>
 </ul>
 </li>
 </ul>
@@ -206,35 +205,37 @@
         </div>
         <article role="main">
           <h1>Source code for libs.htmlgeny</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">streamlit.components.v1</span> <span class="kn">import</span> <span class="n">html</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
+<span></span><span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pathlib</span>
 <span class="kn">import</span> <span class="nn">hashlib</span>
 
+<span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<div class="viewcode-block" id="htmlGeny"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny">[docs]</a><span class="k">class</span> <span class="nc">htmlGeny</span><span class="p">:</span>
+<span class="kn">from</span> <span class="nn">streamlit.components.v1</span> <span class="kn">import</span> <span class="n">html</span>
+
+
+<div class="viewcode-block" id="HtmlGeny"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.HtmlGeny">[docs]</a><span class="k">class</span> <span class="nc">HtmlGeny</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Initiate the class and Creates a copy of the sort-table.js file in the streamlit static folder</span>
+<span class="sd">        Initiate the class and creates a copy of the sort-table.js and visitor.js files in the streamlit static folder</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">streamlit_jspath</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span>
             <span class="n">st</span><span class="o">.</span><span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="s1">&#39;static&#39;</span> <span class="o">/</span> <span class="s1">&#39;static&#39;</span> <span class="o">/</span> <span class="s1">&#39;js&#39;</span>
 
-        <span class="n">table_sortjs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+        <span class="n">sort_table_js_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="s2">&quot;sort-table.js&quot;</span><span class="p">)</span>
-        <span class="n">visitorjs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+        <span class="n">visitor_js_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="s2">&quot;visitor.js&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">css_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="s2">&quot;style.css&quot;</span><span class="p">)</span>
-        <span class="n">target_jable_sortjs</span> <span class="o">=</span> <span class="n">streamlit_jspath</span> <span class="o">/</span> <span class="s1">&#39;sort-table.js&#39;</span>
-        <span class="n">target_visitorjs</span> <span class="o">=</span> <span class="n">streamlit_jspath</span> <span class="o">/</span> <span class="s1">&#39;visitor.js&#39;</span>
+        <span class="n">target_sort_table_js_path</span> <span class="o">=</span> <span class="n">streamlit_jspath</span> <span class="o">/</span> <span class="s1">&#39;sort-table.js&#39;</span>
+        <span class="n">target_visitor_js</span> <span class="o">=</span> <span class="n">streamlit_jspath</span> <span class="o">/</span> <span class="s1">&#39;visitor.js&#39;</span>
 
-        <span class="n">files_to_check</span> <span class="o">=</span> <span class="p">[(</span><span class="n">table_sortjs</span><span class="p">,</span> <span class="n">target_jable_sortjs</span><span class="p">),</span>
-                          <span class="p">(</span><span class="n">visitorjs</span><span class="p">,</span> <span class="n">target_visitorjs</span><span class="p">)]</span>
+        <span class="n">files_to_check</span> <span class="o">=</span> <span class="p">[(</span><span class="n">sort_table_js_path</span><span class="p">,</span> <span class="n">target_sort_table_js_path</span><span class="p">),</span>
+                          <span class="p">(</span><span class="n">visitor_js_path</span><span class="p">,</span> <span class="n">target_visitor_js</span><span class="p">)]</span>
         <span class="k">for</span> <span class="n">file_pair</span> <span class="ow">in</span> <span class="n">files_to_check</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] </span><span class="si">{</span><span class="n">file_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> exists&#39;</span><span class="p">)</span>
@@ -243,12 +244,12 @@
                 <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">file_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">streamlit_jspath</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] </span><span class="si">{</span><span class="n">file_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> copied&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="htmlGeny.addCheckbox"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny.addCheckbox">[docs]</a>    <span class="k">def</span> <span class="nf">addCheckbox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steamurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="HtmlGeny.add_check_box"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.HtmlGeny.add_check_box">[docs]</a>    <span class="k">def</span> <span class="nf">add_check_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steam_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param str steamurl: steamurl of the game</span>
 <span class="sd">        :param int length: length of the hash default is 6</span>
 <span class="sd">        :rtype: str</span>
-<span class="sd">        :example: addCheckbox(&quot;https://steamcommunity.com/market/listings/753/470260-Lower%20deck&quot;)</span>
+<span class="sd">        :example: add_check_box(&quot;https://steamcommunity.com/market/listings/753/470260-Lower%20deck&quot;)</span>
 <span class="sd">        :return: &lt;input type=&quot;checkbox&quot; data-id=&quot;a395d9&quot;&gt;</span>
 
 <span class="sd">        | Takes a steamurl and returns a checkbox with data-id as the hash of the steamurl</span>
@@ -256,11 +257,11 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="nb">hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">()</span>
-        <span class="nb">hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">steamurl</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
-        <span class="n">dataid</span> <span class="o">=</span> <span class="nb">hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="n">length</span><span class="p">]</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;input type=&quot;checkbox&quot; data-id=&quot;</span><span class="si">{</span><span class="n">dataid</span><span class="si">}</span><span class="s1">&quot;&gt;&#39;</span></div>
+        <span class="nb">hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">steam_url</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="n">data_id</span> <span class="o">=</span> <span class="nb">hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="n">length</span><span class="p">]</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;input type=&quot;checkbox&quot; data-id=&quot;</span><span class="si">{</span><span class="n">data_id</span><span class="si">}</span><span class="s1">&quot;&gt;&#39;</span></div>
 
-<div class="viewcode-block" id="htmlGeny.make_clickable"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny.make_clickable">[docs]</a>    <span class="k">def</span> <span class="nf">make_clickable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">market</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="HtmlGeny.make_clickable"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.HtmlGeny.make_clickable">[docs]</a>    <span class="k">def</span> <span class="nf">make_clickable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">market</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param str link: link to be made clickable</span>
 <span class="sd">        :param bool market: if true makes the text as just &quot;LINK&quot; and connects it to market</span>
@@ -282,12 +283,12 @@
             <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;a target=&quot;_blank&quot; href=&quot;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1">&lt;/a&gt;&#39;</span></div>
 
-<div class="viewcode-block" id="htmlGeny.generate_html"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny.generate_html">[docs]</a>    <span class="k">def</span> <span class="nf">generate_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steamdata</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">deviantdata</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="HtmlGeny.generate_html"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.HtmlGeny.generate_html">[docs]</a>    <span class="k">def</span> <span class="nf">generate_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steam_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">deviant_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        :param pd.DataFrame steamdata: Steam data</span>
-<span class="sd">        :param pd.DataFrame deviantdata: Deviant data</span>
+<span class="sd">        :param pd.DataFrame steam_data: Steam data</span>
+<span class="sd">        :param pd.DataFrame deviant_data: Deviant data</span>
 <span class="sd">        :rtype: None</span>
-<span class="sd">        :example: generate_html(steamdata, deviantdata)</span>
+<span class="sd">        :example: generate_html(steam_data, deviant_data)</span>
 <span class="sd">        :return: None</span>
 
 <span class="sd">        | Generates the html for the streamlit app</span>
@@ -304,51 +305,51 @@
         <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Results&#39;</span><span class="p">)</span>
         <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Steam Prices&quot;</span><span class="p">)</span>
 
-        <span class="n">to_outdata_steamdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-        <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="n">to_outdata_steam_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">to_outdata_steam_data</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steam_data</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">)</span>
-        <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;AppTag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;AppTag&#39;</span><span class="p">]</span>
-        <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;Visited&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s2">&quot;SteamUrl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addCheckbox</span><span class="p">)</span>
-        <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;SteamPrice&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;SteamPrice&#39;</span><span class="p">]</span>
-        <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;SteamPriceDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;SteamPriceDate&#39;</span><span class="p">]</span>
-        <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;CardExchangeMarket&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;AppTag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="n">to_outdata_steam_data</span><span class="p">[</span><span class="s2">&quot;AppTag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steam_data</span><span class="p">[</span><span class="s1">&#39;AppTag&#39;</span><span class="p">]</span>
+        <span class="n">to_outdata_steam_data</span><span class="p">[</span><span class="s2">&quot;Visited&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steam_data</span><span class="p">[</span><span class="s2">&quot;SteamUrl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_check_box</span><span class="p">)</span>
+        <span class="n">to_outdata_steam_data</span><span class="p">[</span><span class="s2">&quot;SteamPrice&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steam_data</span><span class="p">[</span><span class="s1">&#39;SteamPrice&#39;</span><span class="p">]</span>
+        <span class="n">to_outdata_steam_data</span><span class="p">[</span><span class="s2">&quot;SteamPriceDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steam_data</span><span class="p">[</span><span class="s1">&#39;SteamPriceDate&#39;</span><span class="p">]</span>
+        <span class="n">to_outdata_steam_data</span><span class="p">[</span><span class="s2">&quot;CardExchangeMarket&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steam_data</span><span class="p">[</span><span class="s1">&#39;AppTag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">,</span> <span class="n">market</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">to_outdata_steamdata</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">to_outdata_steamdata</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
+        <span class="n">to_outdata_steam_data</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">table_html</span> <span class="o">=</span> <span class="n">to_outdata_steam_data</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
             <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;js-sort-table visitor cool-theme&quot;</span><span class="p">)</span>
-        <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">tablehtml</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="n">table_html</span> <span class="o">=</span> <span class="n">table_html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
             <span class="s1">&#39;&lt;th&gt;SteamPrice&lt;/th&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;th class=&quot;js-sort-number&quot; &gt;SteamPrice&lt;/th&gt;&#39;</span><span class="p">)</span>
-        <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">tablehtml</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="n">table_html</span> <span class="o">=</span> <span class="n">table_html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
             <span class="s1">&#39;&lt;th&gt;Visited&lt;/th&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;th class=&quot;js-sort-0&quot; &gt;Visited&lt;/th&gt;&#39;</span><span class="p">)</span>
-        <span class="n">cssdata</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">css_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">tablehtml</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;&lt;style&gt;</span><span class="si">{</span><span class="n">cssdata</span><span class="si">}</span><span class="s1">&lt;/style&gt;&#39;</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tablehtml</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">css_data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">css_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">table_html</span> <span class="o">=</span> <span class="n">table_html</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;&lt;style&gt;</span><span class="si">{</span><span class="n">css_data</span><span class="si">}</span><span class="s1">&lt;/style&gt;&#39;</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">table_html</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Deviant Data&quot;</span><span class="p">)</span>
-        <span class="n">emptydata</span> <span class="o">=</span> <span class="n">deviantdata</span><span class="p">[</span><span class="n">deviantdata</span><span class="p">[</span><span class="s2">&quot;SteamUrl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span>
-        <span class="n">fulldata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">deviantdata</span><span class="p">,</span> <span class="n">emptydata</span><span class="p">]</span>
-                             <span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">empty_data</span> <span class="o">=</span> <span class="n">deviant_data</span><span class="p">[</span><span class="n">deviant_data</span><span class="p">[</span><span class="s2">&quot;SteamUrl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span>
+        <span class="n">full_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">deviant_data</span><span class="p">,</span> <span class="n">empty_data</span><span class="p">]</span>
+                              <span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="n">to_out_deviantdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-        <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;DeviantUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fulldata</span><span class="p">[</span><span class="s1">&#39;DeviantUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;DeviantUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_data</span><span class="p">[</span><span class="s1">&#39;DeviantUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">)</span>
-        <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fulldata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_data</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">)</span>
-        <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">to_out_deviantdata</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
+        <span class="n">table_html</span> <span class="o">=</span> <span class="n">to_out_deviantdata</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
             <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;js-sort-table cool-theme  table-arrows &quot;</span><span class="p">)</span>
 
-        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tablehtml</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">table_html</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;No Steam Data&quot;</span><span class="p">)</span>
         <span class="n">to_out_deviantdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-        <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;DeviantUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">emptydata</span><span class="p">[</span><span class="s1">&#39;DeviantUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;DeviantUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">empty_data</span><span class="p">[</span><span class="s1">&#39;DeviantUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">)</span>
-        <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">emptydata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">empty_data</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">)</span>
-        <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">to_out_deviantdata</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
+        <span class="n">table_html</span> <span class="o">=</span> <span class="n">to_out_deviantdata</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
             <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;js-sort-table cool-theme table-arrows&quot;</span><span class="p">)</span>
 
-        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tablehtml</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">table_html</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">html</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">        &lt;script src=&#39;./static/js/sort-table.js&#39;&gt;</span>
@@ -360,12 +361,12 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-    <span class="n">steamdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+    <span class="n">steam_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;localprice.csv&quot;</span><span class="p">))</span>
-    <span class="n">deviantdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+    <span class="n">deviant_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
         <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;deviantXsteam.csv&quot;</span><span class="p">)</span>
     <span class="p">)</span>
-    <span class="n">htmlGeny</span><span class="p">()</span><span class="o">.</span><span class="n">generate_html</span><span class="p">(</span><span class="n">steamdata</span><span class="p">,</span> <span class="n">deviantdata</span><span class="p">)</span>
+    <span class="n">HtmlGeny</span><span class="p">()</span><span class="o">.</span><span class="n">generate_html</span><span class="p">(</span><span class="n">steam_data</span><span class="p">,</span> <span class="n">deviant_data</span><span class="p">)</span>
 </pre></div>
         </article>
       </div>

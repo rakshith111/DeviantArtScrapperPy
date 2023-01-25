@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="begin module" href="begin.html" /><link rel="prev" title="libs.urlextractor module" href="libs.urlextractor.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="CHANGELOG" href="changelog.html" /><link rel="prev" title="libs.urlextractor module" href="libs.urlextractor.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>main module - DeviantArtScrapper 0.1.1 documentation</title>
@@ -165,7 +165,6 @@
 </ul>
 </li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">main module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
 </ul>
 </li>
 </ul>
@@ -214,8 +213,8 @@
 <p>Module under heavy development</p>
 </div>
 <span class="target" id="module-main"></span><dl class="py class">
-<dt class="sig sig-object py" id="main.scrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="main.DeviantArtScrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">DeviantArtScrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#DeviantArtScrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.DeviantArtScrapper" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">File<span class="colon">:</span></dt>
@@ -242,8 +241,8 @@
 <div class="line">Dev mode is used to skip the login process</div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="main.scrapper.file_reload">
-<span class="sig-name descname"><span class="pre">file_reload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.file_reload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.file_reload" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="main.DeviantArtScrapper.file_reload">
+<span class="sig-name descname"><span class="pre">file_reload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#DeviantArtScrapper.file_reload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.DeviantArtScrapper.file_reload" title="Permalink to this definition">#</a></dt>
 <dd><div class="line-block">
 <div class="line">Reloads the data from the csv files</div>
 <div class="line">This is used when the data is updated in the csv files</div>
@@ -256,11 +255,11 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="main.scrapper.price_finder">
-<span class="sig-name descname"><span class="pre">price_finder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">saveafter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.price_finder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.price_finder" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="main.DeviantArtScrapper.price_finder">
+<span class="sig-name descname"><span class="pre">price_finder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_after</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#DeviantArtScrapper.price_finder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.DeviantArtScrapper.price_finder" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>saveafter</strong> (<em>int</em>) – number of links to be searched before saving the data</p>
+<dd class="field-odd"><p><strong>save_after</strong> (<em>int</em>) – number of links to be searched before saving the data</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -271,18 +270,18 @@
 <div class="line">If steam market link is found its added to the deviantXsteam.csv file along with the deviant art page link if not already present</div>
 <div class="line">If no steam market link is found, its still added but with a None value for the steam market link</div>
 <div class="line">Saves data every 5 links to avoid data loss in case of an error</div>
-<div class="line"><cite>saveafter</cite> Can be overriden</div>
+<div class="line"><cite>save_after</cite> Can be overriden</div>
 </div>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="main.scrapper.steamlinks_scrapper">
-<span class="sig-name descname"><span class="pre">steamlinks_scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deviantartpages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveafter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#scrapper.steamlinks_scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.scrapper.steamlinks_scrapper" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="main.DeviantArtScrapper.steam_links_scrapper">
+<span class="sig-name descname"><span class="pre">steam_links_scrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deviant_art_pages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_after</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#DeviantArtScrapper.steam_links_scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.DeviantArtScrapper.steam_links_scrapper" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>deviantartpages</strong> (<em>list</em>) – list of deviant art page links which are to be searched for steam links</p></li>
-<li><p><strong>saveafter</strong> (<em>int</em>) – number of links to be searched before saving the data</p></li>
+<li><p><strong>deviant_art_pages</strong> (<em>list</em>) – list of deviant art page links which are to be searched for steam links</p></li>
+<li><p><strong>save_after</strong> (<em>int</em>) – number of links to be searched before saving the data default is 5</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -307,12 +306,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="begin.html">
+          <a class="next-page" href="changelog.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">begin module</div>
+                <div class="title">CHANGELOG</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -358,10 +357,10 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">main module</a><ul>
-<li><a class="reference internal" href="#main.scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper</span></code></a><ul>
-<li><a class="reference internal" href="#main.scrapper.file_reload"><code class="docutils literal notranslate"><span class="pre">scrapper.file_reload()</span></code></a></li>
-<li><a class="reference internal" href="#main.scrapper.price_finder"><code class="docutils literal notranslate"><span class="pre">scrapper.price_finder()</span></code></a></li>
-<li><a class="reference internal" href="#main.scrapper.steamlinks_scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper.steamlinks_scrapper()</span></code></a></li>
+<li><a class="reference internal" href="#main.DeviantArtScrapper"><code class="docutils literal notranslate"><span class="pre">DeviantArtScrapper</span></code></a><ul>
+<li><a class="reference internal" href="#main.DeviantArtScrapper.file_reload"><code class="docutils literal notranslate"><span class="pre">DeviantArtScrapper.file_reload()</span></code></a></li>
+<li><a class="reference internal" href="#main.DeviantArtScrapper.price_finder"><code class="docutils literal notranslate"><span class="pre">DeviantArtScrapper.price_finder()</span></code></a></li>
+<li><a class="reference internal" href="#main.DeviantArtScrapper.steam_links_scrapper"><code class="docutils literal notranslate"><span class="pre">DeviantArtScrapper.steam_links_scrapper()</span></code></a></li>
 </ul>
 </li>
 </ul>

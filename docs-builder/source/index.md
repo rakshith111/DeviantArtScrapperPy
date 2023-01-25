@@ -29,6 +29,13 @@ Make sure you have the latest version of firefox installed as selenium uses it f
 - Visit the external links to view the artworks on steamcardexchange and steam and make your bet.
 - 📈📈📈Enjoy!📈📈📈
 
+### Optional:
+
+- You can add new links to the `links.txt` file to scrape more artworks.
+- You can change the number of links to check by changing the `links_to_scrape` variable in the `main.py` file. For example, if you want to scrape 10 links from the `links.txt`, change the `links_to_scrape` variable to 10.(Note: The links are scraped in the order they are in the `links.txt` file. Also make sure that the links are valid and are within the length of the file.)
+- You can adjust the number of pages to visit by changing the `pages_to_check` variable in the `main.py` file. For example, if you want to visit 5 pages per link, change the `pages_to_check` variable to 5.
+
+
 
 ```{note}
 Please note that this program is not affiliated with deviantart in any way.

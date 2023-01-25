@@ -165,7 +165,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="begin.html">begin module</a></li>
 </ul>
 </li>
 </ul>
@@ -210,13 +209,13 @@
           <section id="module-libs.htmlgeny">
 <span id="libs-htmgeny-module"></span><h1>libs.htmgeny module<a class="headerlink" href="#module-libs.htmlgeny" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libs.htmlgeny.</span></span><span class="sig-name descname"><span class="pre">htmlGeny</span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="libs.htmlgeny.HtmlGeny">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libs.htmlgeny.</span></span><span class="sig-name descname"><span class="pre">HtmlGeny</span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#HtmlGeny"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.HtmlGeny" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Initiate the class and Creates a copy of the sort-table.js file in the streamlit static folder</p>
+<p>Initiate the class and creates a copy of the sort-table.js and visitor.js files in the streamlit static folder</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.addCheckbox">
-<span class="sig-name descname"><span class="pre">addCheckbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.addCheckbox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.addCheckbox" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="libs.htmlgeny.HtmlGeny.add_check_box">
+<span class="sig-name descname"><span class="pre">add_check_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steam_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#HtmlGeny.add_check_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.HtmlGeny.add_check_box" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -228,7 +227,7 @@
 <dd class="field-even"><p>str</p>
 </dd>
 <dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>addCheckbox(”<a class="reference external" href="https://steamcommunity.com/market/listings/753/470260-Lower%20deck">https://steamcommunity.com/market/listings/753/470260-Lower%20deck</a>”)</p>
+<dd class="field-odd"><p>add_check_box(”<a class="reference external" href="https://steamcommunity.com/market/listings/753/470260-Lower%20deck">https://steamcommunity.com/market/listings/753/470260-Lower%20deck</a>”)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>&lt;input type=”checkbox” data-id=”a395d9”&gt;</p>
@@ -241,20 +240,20 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.generate_html">
-<span class="sig-name descname"><span class="pre">generate_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviantdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.generate_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.generate_html" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="libs.htmlgeny.HtmlGeny.generate_html">
+<span class="sig-name descname"><span class="pre">generate_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steam_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviant_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#HtmlGeny.generate_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.HtmlGeny.generate_html" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>steamdata</strong> (<em>pd.DataFrame</em>) – Steam data</p></li>
-<li><p><strong>deviantdata</strong> (<em>pd.DataFrame</em>) – Deviant data</p></li>
+<li><p><strong>steam_data</strong> (<em>pd.DataFrame</em>) – Steam data</p></li>
+<li><p><strong>deviant_data</strong> (<em>pd.DataFrame</em>) – Deviant data</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>generate_html(steamdata, deviantdata)</p>
+<dd class="field-odd"><p>generate_html(steam_data, deviant_data)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -271,8 +270,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.make_clickable">
-<span class="sig-name descname"><span class="pre">make_clickable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">market</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.make_clickable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.make_clickable" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="libs.htmlgeny.HtmlGeny.make_clickable">
+<span class="sig-name descname"><span class="pre">make_clickable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">market</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#HtmlGeny.make_clickable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.HtmlGeny.make_clickable" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -355,10 +354,10 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">libs.htmgeny module</a><ul>
-<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny"><code class="docutils literal notranslate"><span class="pre">htmlGeny</span></code></a><ul>
-<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny.addCheckbox"><code class="docutils literal notranslate"><span class="pre">htmlGeny.addCheckbox()</span></code></a></li>
-<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny.generate_html"><code class="docutils literal notranslate"><span class="pre">htmlGeny.generate_html()</span></code></a></li>
-<li><a class="reference internal" href="#libs.htmlgeny.htmlGeny.make_clickable"><code class="docutils literal notranslate"><span class="pre">htmlGeny.make_clickable()</span></code></a></li>
+<li><a class="reference internal" href="#libs.htmlgeny.HtmlGeny"><code class="docutils literal notranslate"><span class="pre">HtmlGeny</span></code></a><ul>
+<li><a class="reference internal" href="#libs.htmlgeny.HtmlGeny.add_check_box"><code class="docutils literal notranslate"><span class="pre">HtmlGeny.add_check_box()</span></code></a></li>
+<li><a class="reference internal" href="#libs.htmlgeny.HtmlGeny.generate_html"><code class="docutils literal notranslate"><span class="pre">HtmlGeny.generate_html()</span></code></a></li>
+<li><a class="reference internal" href="#libs.htmlgeny.HtmlGeny.make_clickable"><code class="docutils literal notranslate"><span class="pre">HtmlGeny.make_clickable()</span></code></a></li>
 </ul>
 </li>
 </ul>
