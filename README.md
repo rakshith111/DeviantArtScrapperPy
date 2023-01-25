@@ -3,7 +3,7 @@
 This is a python program which scrapes using `beautifulsoup4`,`selenim` and `requests` the deviantart website for popular steam artworks.
 Then using the steam links, it fetches the steam price of the game and saves it to a file.
 The program also generates a html file using `streamlit` with the data.
-
+## Check out the documentation here [Documentation](https://rakshith111.github.io/DeviantArtScrapperPy)
 ---
 **NOTE**
 - Have an account on deviantart and be logged in.
