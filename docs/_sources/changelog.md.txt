@@ -2,11 +2,17 @@
 
 Any notable changes to this project that I deem necessary will be documented in this file.
 
+## 0.1.1 - 25/1/2023
+
+- Now uses `sort-table.js` to sort the table
+- Fixed a bug where the table would forget the checked items after sorting
+- Added a hash generator to `htmlgeny.py` to generate a unique hash for each item (used to identify the item), this was causing the table to generate multiple data-id for the same item (causing the table to not check the item properly)
+
 ## 0.1.0 - 21/1/2023
 
 - Renamed `steamget.py` to `steamapi.py`
 - Optimized `main.py`'s init and file reload functions ( now more readable !!)
-- `htmlgeny.py` now also generates a checkbox for each item which can be used to check whether the item has been visited or not
+- `htmlgeny.py` now also generates a checkbox for each item based on steam app id which can be used to check whether the item has been visited or not
 - Added `visitor.js` this is a script that will be injected into the html file to track whether the user has visited the page or not
 
 ## 0.0.9 - 21/1/2023

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="CHANGELOG" href="changelog.html" /><link rel="prev" title="main module" href="main.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>begin module - DeviantArtScrapper 0.1.0 documentation</title>
+        <title>begin module - DeviantArtScrapper 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">DeviantArtScrapper 0.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">DeviantArtScrapper 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">DeviantArtScrapper 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">DeviantArtScrapper 0.1.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -201,123 +201,14 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="module-begin">
-<span id="begin-module"></span><h1>begin module<a class="headerlink" href="#module-begin" title="Permalink to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="begin.scrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">begin.</span></span><span class="sig-name descname"><span class="pre">scrapper</span></span><a class="reference internal" href="_modules/begin.html#scrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#begin.scrapper" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Deprecated - need to update Only kept as a reference</p>
-</div>
-<p>(visited)    links.pkl:consists of previously visited deviantart page links so that they arent visited more than once
-(failedlinks)failed.pkl:contains steam links which failed to get steam price due to naming or unknown error 
-(data)       data.json: contains all visited steam links with prices , if the steam link appears again in another art page its price will be updated
-(url)        links.txt: list of all the links to check with</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="begin.scrapper.D_link_extractor">
-<span class="sig-name descname"><span class="pre">D_link_extractor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/begin.html#scrapper.D_link_extractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#begin.scrapper.D_link_extractor" title="Permalink to this definition">#</a></dt>
-<dd><p>Extracts the deviant art links from the deviantart page</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="begin.scrapper.S_link_extractor">
-<span class="sig-name descname"><span class="pre">S_link_extractor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/begin.html#scrapper.S_link_extractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#begin.scrapper.S_link_extractor" title="Permalink to this definition">#</a></dt>
-<dd><p>Extracts the steam lins links from the art pages</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.availablelinks">
-<span class="sig-name descname"><span class="pre">availablelinks</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#begin.scrapper.availablelinks" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.availcount">
-<span class="sig-name descname"><span class="pre">availcount</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#begin.scrapper.availcount" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.currcount">
-<span class="sig-name descname"><span class="pre">currcount</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#begin.scrapper.currcount" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.data">
-<span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#begin.scrapper.data" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.data_keys">
-<span class="sig-name descname"><span class="pre">data_keys</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#begin.scrapper.data_keys" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.devianturls">
-<span class="sig-name descname"><span class="pre">devianturls</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#begin.scrapper.devianturls" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.failedlinks">
-<span class="sig-name descname"><span class="pre">failedlinks</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#begin.scrapper.failedlinks" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.latest">
-<span class="sig-name descname"><span class="pre">latest</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#begin.scrapper.latest" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.match_string">
-<span class="sig-name descname"><span class="pre">match_string</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://steamcommunity.com/market/listings/'</span></em><a class="headerlink" href="#begin.scrapper.match_string" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="begin.scrapper.pricefetch">
-<span class="sig-name descname"><span class="pre">pricefetch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/begin.html#scrapper.pricefetch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#begin.scrapper.pricefetch" title="Permalink to this definition">#</a></dt>
-<dd><p>Fetches the price of the steam links</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.remove_string">
-<span class="sig-name descname"><span class="pre">remove_string</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://www.deviantart.com/users/outgoing?'</span></em><a class="headerlink" href="#begin.scrapper.remove_string" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="begin.scrapper.rerunner">
-<span class="sig-name descname"><span class="pre">rerunner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/begin.html#scrapper.rerunner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#begin.scrapper.rerunner" title="Permalink to this definition">#</a></dt>
-<dd><p>Reruns the scrapper for the failed links</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.steamlinks">
-<span class="sig-name descname"><span class="pre">steamlinks</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#begin.scrapper.steamlinks" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.urls">
-<span class="sig-name descname"><span class="pre">urls</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#begin.scrapper.urls" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="begin.scrapper.visited">
-<span class="sig-name descname"><span class="pre">visited</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#begin.scrapper.visited" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="begin.scrapper.writer">
-<span class="sig-name descname"><span class="pre">writer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/begin.html#scrapper.writer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#begin.scrapper.writer" title="Permalink to this definition">#</a></dt>
-<dd><p>Writes the data to json file</p>
-</dd></dl>
-
-</dd></dl>
-
+          <section id="begin-module">
+<h1>begin module<a class="headerlink" href="#begin-module" title="Permalink to this heading">#</a></h1>
 </section>
 
         </article>
@@ -363,47 +254,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">begin module</a><ul>
-<li><a class="reference internal" href="#begin.scrapper"><code class="docutils literal notranslate"><span class="pre">scrapper</span></code></a><ul>
-<li><a class="reference internal" href="#begin.scrapper.D_link_extractor"><code class="docutils literal notranslate"><span class="pre">scrapper.D_link_extractor()</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.S_link_extractor"><code class="docutils literal notranslate"><span class="pre">scrapper.S_link_extractor()</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.availablelinks"><code class="docutils literal notranslate"><span class="pre">scrapper.availablelinks</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.availcount"><code class="docutils literal notranslate"><span class="pre">scrapper.availcount</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.currcount"><code class="docutils literal notranslate"><span class="pre">scrapper.currcount</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.data"><code class="docutils literal notranslate"><span class="pre">scrapper.data</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.data_keys"><code class="docutils literal notranslate"><span class="pre">scrapper.data_keys</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.devianturls"><code class="docutils literal notranslate"><span class="pre">scrapper.devianturls</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.failedlinks"><code class="docutils literal notranslate"><span class="pre">scrapper.failedlinks</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.latest"><code class="docutils literal notranslate"><span class="pre">scrapper.latest</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.match_string"><code class="docutils literal notranslate"><span class="pre">scrapper.match_string</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.pricefetch"><code class="docutils literal notranslate"><span class="pre">scrapper.pricefetch()</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.remove_string"><code class="docutils literal notranslate"><span class="pre">scrapper.remove_string</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.rerunner"><code class="docutils literal notranslate"><span class="pre">scrapper.rerunner()</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.steamlinks"><code class="docutils literal notranslate"><span class="pre">scrapper.steamlinks</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.urls"><code class="docutils literal notranslate"><span class="pre">scrapper.urls</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.visited"><code class="docutils literal notranslate"><span class="pre">scrapper.visited</span></code></a></li>
-<li><a class="reference internal" href="#begin.scrapper.writer"><code class="docutils literal notranslate"><span class="pre">scrapper.writer()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

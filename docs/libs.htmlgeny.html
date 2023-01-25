@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="libs.oldlibs module" href="libs.oldlibs.html" /><link rel="prev" title="libs.deviantartapi module" href="libs.deviantartapi.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>libs.htmgeny module - DeviantArtScrapper 0.1.0 documentation</title>
+        <title>libs.htmgeny module - DeviantArtScrapper 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">DeviantArtScrapper 0.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">DeviantArtScrapper 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">DeviantArtScrapper 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">DeviantArtScrapper 0.1.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -213,34 +213,36 @@
 <dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">libs.htmlgeny.</span></span><span class="sig-name descname"><span class="pre">htmlGeny</span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Initiate the class and Creates a copy of the table-sort.js file in the streamlit static folder</p>
+<p>Initiate the class and Creates a copy of the sort-table.js file in the streamlit static folder</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.addCheckbox">
-<span class="sig-name descname"><span class="pre">addCheckbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">appid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.addCheckbox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.addCheckbox" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">addCheckbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamurl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.addCheckbox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.addCheckbox" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>appid</strong> (<em>str</em>) – Appid of the game</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>steamurl</strong> (<em>str</em>) – steamurl of the game</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – length of the hash default is 6</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 <dt class="field-odd">Example<span class="colon">:</span></dt>
-<dd class="field-odd"><p>addCheckbox(“123456)</p>
+<dd class="field-odd"><p>addCheckbox(”<a class="reference external" href="https://steamcommunity.com/market/listings/753/470260-Lower%20deck">https://steamcommunity.com/market/listings/753/470260-Lower%20deck</a>”)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>&lt;input type=”checkbox” data-id=”123456”&gt;</p>
+<dd class="field-even"><p>&lt;input type=”checkbox” data-id=”a395d9”&gt;</p>
 </dd>
 </dl>
 <div class="line-block">
-<div class="line">Takes a appid and returns a checkbox with data-id as the appid</div>
-<div class="line">This is useful for adding a checkbox to a dataframe </div>
-<div class="line">then using the data-id to get the appid of the game for a persistent checkbox using local storage</div>
+<div class="line">Takes a steamurl and returns a checkbox with data-id as the hash of the steamurl</div>
+<div class="line">using the data-id  for a persistent checkbox via local storage</div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="libs.htmlgeny.htmlGeny.generate_html">
-<span class="sig-name descname"><span class="pre">generate_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviantdata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.generate_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.generate_html" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">generate_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steamdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviantdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/libs/htmlgeny.html#htmlGeny.generate_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#libs.htmlgeny.htmlGeny.generate_html" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -260,10 +262,10 @@
 </dl>
 <div class="line-block">
 <div class="line">Generates the html for the streamlit app</div>
-<div class="line">Uses the table-sort.js file to sort the tables</div>
+<div class="line">Uses the sort-table.js file to sort the tables</div>
 <div class="line">Uses the scripts/style.css file to style the tables</div>
 <div class="line">Creates a temporary dataframe where all the attributes are converted to clickable links using the <cite>make_clickable()</cite> function</div>
-<div class="line">then converts the dataframe to html and adds the table-sort.js and style.css files to the html</div>
+<div class="line">then converts the dataframe to html and adds the sort-table.js and style.css files to the html</div>
 <div class="line">finally writes the html to the streamlit app</div>
 </div>
 </dd></dl>

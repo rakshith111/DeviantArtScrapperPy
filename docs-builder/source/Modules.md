@@ -5,8 +5,5 @@
 :caption: Current Modules
 libs
 main
-begin
 ```
-```{warning}
-⚠️begin (old module)
-```
+

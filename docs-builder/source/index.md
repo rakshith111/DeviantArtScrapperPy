@@ -4,9 +4,43 @@
 % contain the root `toctree` directive.
 
 # Welcome to DeviantArtScrapper's documentation!
-```{warning}
-Module under heavy development
+
+## Current version: 0.1.1
+
+## About:
+
+This is a python program which scrapes using `beautifulsoup4`,`selenim` and `requests` the deviantart website for popular steam artworks.
+Then using the steam links, it fetches the steam price of the game and saves it to a file.
+The program also generates a html file using `streamlit` with the data.
+
+```{note}
+Have an account on deviantart and be logged in.
+Make sure you have the latest version of firefox installed as selenium uses it for logging in.
 ```
+- Visit the [changelog](changelog.md) to know what's new in the latest version.
+- Visit the [Modules](Modules.md) page to know more about the modules used in this program.
+## Basic Usage:
+
+- Install the requirements using `pip install -r requirements.txt`
+- Run the program using `python main.py`
+- Enter your deviantart username and password
+- Wait for the program to finish
+- The script will automatically open the html file in your default browser
+- Visit the external links to view the artworks on steamcardexchange and steam and make your bet.
+- 📈📈📈Enjoy!📈📈📈
+
+
+```{note}
+Please note that this program is not affiliated with deviantart in any way.
+This program is made for the sole purpose of learning and is not meant to be used for any other purpose.
+
+```
+
+```{note}
+Please read the [To-do](To-do.md) list to know what features are planned for the future.
+This is a work in progress. If you have any suggestions, please let me know.
+```
+[Mail](mailto:rakshithbabu111@gmail.com)
 ## Contents:
 ```{toctree}
 :maxdepth: 1

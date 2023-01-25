@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>libs.htmlgeny - DeviantArtScrapper 0.0.9 documentation</title>
+        <title>libs.htmlgeny - DeviantArtScrapper 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">DeviantArtScrapper 0.0.9 documentation</div></a>
+      <a href="../../index.html"><div class="brand">DeviantArtScrapper 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -145,7 +145,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">DeviantArtScrapper 0.0.9 documentation</span>
+  <span class="sidebar-brand-text">DeviantArtScrapper 0.1.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -159,7 +159,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../libs.deviantartapi.html">libs.deviantartapi module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../libs.htmlgeny.html">libs.htmgeny module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../libs.oldlibs.html">libs.oldlibs module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../libs.steamget.html">libs.steamget module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../libs.steamapi.html">libs.steamapi module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../libs.urlextractor.html">libs.urlextractor module</a></li>
 </ul>
 </li>
@@ -212,25 +212,26 @@
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
 
 
 <div class="viewcode-block" id="htmlGeny"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny">[docs]</a><span class="k">class</span> <span class="nc">htmlGeny</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Initiate the class and Creates a copy of the table-sort.js file in the streamlit static folder</span>
+<span class="sd">        Initiate the class and Creates a copy of the sort-table.js file in the streamlit static folder</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">streamlit_jspath</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span>
             <span class="n">st</span><span class="o">.</span><span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="s1">&#39;static&#39;</span> <span class="o">/</span> <span class="s1">&#39;static&#39;</span> <span class="o">/</span> <span class="s1">&#39;js&#39;</span>
 
         <span class="n">table_sortjs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="s2">&quot;table-sort.js&quot;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="s2">&quot;sort-table.js&quot;</span><span class="p">)</span>
         <span class="n">visitorjs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="s2">&quot;visitor.js&quot;</span><span class="p">)</span>
-        <span class="n">target_jable_sortjs</span> <span class="o">=</span> <span class="n">streamlit_jspath</span> <span class="o">/</span> <span class="s1">&#39;table-sort.js&#39;</span>
-        <span class="n">target_visitorjs</span> <span class="o">=</span> <span class="n">streamlit_jspath</span> <span class="o">/</span> <span class="s1">&#39;visitor.js&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">css_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;scripts&quot;</span><span class="p">,</span> <span class="s2">&quot;style.css&quot;</span><span class="p">)</span>
+        <span class="n">target_jable_sortjs</span> <span class="o">=</span> <span class="n">streamlit_jspath</span> <span class="o">/</span> <span class="s1">&#39;sort-table.js&#39;</span>
+        <span class="n">target_visitorjs</span> <span class="o">=</span> <span class="n">streamlit_jspath</span> <span class="o">/</span> <span class="s1">&#39;visitor.js&#39;</span>
 
         <span class="n">files_to_check</span> <span class="o">=</span> <span class="p">[(</span><span class="n">table_sortjs</span><span class="p">,</span> <span class="n">target_jable_sortjs</span><span class="p">),</span>
                           <span class="p">(</span><span class="n">visitorjs</span><span class="p">,</span> <span class="n">target_visitorjs</span><span class="p">)]</span>
@@ -242,20 +243,22 @@
                 <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">file_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">streamlit_jspath</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] </span><span class="si">{</span><span class="n">file_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> copied&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="htmlGeny.addCheckbox"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny.addCheckbox">[docs]</a>    <span class="k">def</span> <span class="nf">addCheckbox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="htmlGeny.addCheckbox"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny.addCheckbox">[docs]</a>    <span class="k">def</span> <span class="nf">addCheckbox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steamurl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        :param str appid: Appid of the game</span>
+<span class="sd">        :param str steamurl: steamurl of the game</span>
+<span class="sd">        :param int length: length of the hash default is 6</span>
 <span class="sd">        :rtype: str</span>
-<span class="sd">        :example: addCheckbox(&quot;123456)</span>
-<span class="sd">        :return: &lt;input type=&quot;checkbox&quot; data-id=&quot;123456&quot;&gt;</span>
+<span class="sd">        :example: addCheckbox(&quot;https://steamcommunity.com/market/listings/753/470260-Lower%20deck&quot;)</span>
+<span class="sd">        :return: &lt;input type=&quot;checkbox&quot; data-id=&quot;a395d9&quot;&gt;</span>
 
-<span class="sd">        | Takes a appid and returns a checkbox with data-id as the appid</span>
-<span class="sd">        | This is useful for adding a checkbox to a dataframe </span>
-<span class="sd">        | then using the data-id to get the appid of the game for a persistent checkbox using local storage</span>
+<span class="sd">        | Takes a steamurl and returns a checkbox with data-id as the hash of the steamurl</span>
+<span class="sd">        | using the data-id  for a persistent checkbox via local storage</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;input type=&quot;checkbox&quot; data-id=&quot;</span><span class="si">{</span><span class="n">appid</span><span class="si">}</span><span class="s1">&quot;&gt;&#39;</span></div>
+        <span class="nb">hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">()</span>
+        <span class="nb">hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">steamurl</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="n">dataid</span> <span class="o">=</span> <span class="nb">hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="n">length</span><span class="p">]</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;input type=&quot;checkbox&quot; data-id=&quot;</span><span class="si">{</span><span class="n">dataid</span><span class="si">}</span><span class="s1">&quot;&gt;&#39;</span></div>
 
 <div class="viewcode-block" id="htmlGeny.make_clickable"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny.make_clickable">[docs]</a>    <span class="k">def</span> <span class="nf">make_clickable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">market</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
@@ -275,12 +278,11 @@
         <span class="k">if</span> <span class="n">market</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;a target=&quot;_blank&quot; href=&quot;https://www.steamcardexchange.net/index.php?gamepage-appid-</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s1">&quot;&gt;LINK&lt;/a&gt;&#39;</span>
-
         <span class="k">else</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;a target=&quot;_blank&quot; href=&quot;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1">&lt;/a&gt;&#39;</span></div>
 
-<div class="viewcode-block" id="htmlGeny.generate_html"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny.generate_html">[docs]</a>    <span class="k">def</span> <span class="nf">generate_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steamdata</span><span class="p">,</span> <span class="n">deviantdata</span><span class="p">):</span>
+<div class="viewcode-block" id="htmlGeny.generate_html"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.htmlGeny.generate_html">[docs]</a>    <span class="k">def</span> <span class="nf">generate_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steamdata</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">deviantdata</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param pd.DataFrame steamdata: Steam data</span>
 <span class="sd">        :param pd.DataFrame deviantdata: Deviant data</span>
@@ -289,10 +291,10 @@
 <span class="sd">        :return: None</span>
 
 <span class="sd">        | Generates the html for the streamlit app</span>
-<span class="sd">        | Uses the table-sort.js file to sort the tables</span>
+<span class="sd">        | Uses the sort-table.js file to sort the tables</span>
 <span class="sd">        | Uses the scripts/style.css file to style the tables</span>
 <span class="sd">        | Creates a temporary dataframe where all the attributes are converted to clickable links using the `make_clickable()` function</span>
-<span class="sd">        | then converts the dataframe to html and adds the table-sort.js and style.css files to the html</span>
+<span class="sd">        | then converts the dataframe to html and adds the sort-table.js and style.css files to the html</span>
 <span class="sd">        | finally writes the html to the streamlit app</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -306,18 +308,21 @@
         <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">)</span>
         <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;AppTag&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;AppTag&#39;</span><span class="p">]</span>
-        <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;Visited&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;AppTag&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;Visited&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s2">&quot;SteamUrl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">addCheckbox</span><span class="p">)</span>
         <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;SteamPrice&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;SteamPrice&#39;</span><span class="p">]</span>
         <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;SteamPriceDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;SteamPriceDate&#39;</span><span class="p">]</span>
         <span class="n">to_outdata_steamdata</span><span class="p">[</span><span class="s2">&quot;CardExchangeMarket&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steamdata</span><span class="p">[</span><span class="s1">&#39;AppTag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">,</span> <span class="n">market</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">to_outdata_steamdata</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">to_outdata_steamdata</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
-            <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;table-sort table-arrows visitor cool-theme&quot;</span><span class="p">)</span>
+            <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;js-sort-table visitor cool-theme&quot;</span><span class="p">)</span>
+        <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">tablehtml</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+            <span class="s1">&#39;&lt;th&gt;SteamPrice&lt;/th&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;th class=&quot;js-sort-number&quot; &gt;SteamPrice&lt;/th&gt;&#39;</span><span class="p">)</span>
+        <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">tablehtml</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+            <span class="s1">&#39;&lt;th&gt;Visited&lt;/th&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;th class=&quot;js-sort-0&quot; &gt;Visited&lt;/th&gt;&#39;</span><span class="p">)</span>
         <span class="n">cssdata</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">css_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
         <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">tablehtml</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;&lt;style&gt;</span><span class="si">{</span><span class="n">cssdata</span><span class="si">}</span><span class="s1">&lt;/style&gt;&#39;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;steamdata.html&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tablehtml</span><span class="p">)</span>
         <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tablehtml</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Deviant Data&quot;</span><span class="p">)</span>
@@ -331,7 +336,7 @@
         <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fulldata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">)</span>
         <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">to_out_deviantdata</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
-            <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;table-sort cool-theme  table-arrows &quot;</span><span class="p">)</span>
+            <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;js-sort-table cool-theme  table-arrows &quot;</span><span class="p">)</span>
 
         <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tablehtml</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;No Steam Data&quot;</span><span class="p">)</span>
@@ -341,12 +346,12 @@
         <span class="n">to_out_deviantdata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">emptydata</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">make_clickable</span><span class="p">)</span>
         <span class="n">tablehtml</span> <span class="o">=</span> <span class="n">to_out_deviantdata</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
-            <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;table-sort cool-theme table-arrows&quot;</span><span class="p">)</span>
+            <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;js-sort-table cool-theme table-arrows&quot;</span><span class="p">)</span>
 
         <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tablehtml</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">html</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">        &lt;script src=&#39;./static/js/table-sort.js&#39;&gt;</span>
+<span class="s1">        &lt;script src=&#39;./static/js/sort-table.js&#39;&gt;</span>
 <span class="s1">        &lt;/script&gt;&#39;&#39;&#39;</span><span class="p">)</span>
         <span class="n">html</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">        &lt;script src=&#39;./static/js/visitor.js&#39;&gt;</span>
