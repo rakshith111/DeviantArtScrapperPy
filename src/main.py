@@ -129,6 +129,9 @@ class DeviantArtScrapper:
         self.save_after = save_after
         difference_links = set(deviant_art_pages) - \
             set(self.deviant_x_steam_df['DeviantUrl'])
+        print(f"[+] Total links found = {len(deviant_art_pages)}")
+        print(f"[+] Removing already searched links = {len(deviant_art_pages) - len(difference_links)}")
+        print(f"[+] Total links to be searched: {len(difference_links)}")
         for deviantartpage in difference_links:
             print(f"[+] Accessing {deviantartpage}....")
             time.sleep(2)
@@ -194,6 +197,9 @@ class DeviantArtScrapper:
         self.steam_urls = self.deviant_x_steam_df["SteamUrl"].dropna()
         difference_links = set(self.steam_urls) - \
             set(self.local_price_df['SteamUrl'])
+        print(f"[+] Total links found = {len(self.steam_urls)}")
+        print(f"[+] Removing already searched links = {len(self.steam_urls) - len(difference_links)}")
+        print(f"[+] Total links to be searched: {len(difference_links)}")
         for steam_link in difference_links:
             price = steamapi.get_item(steam_link)
             if len(price) >= 3:
@@ -233,11 +239,11 @@ class DeviantArtScrapper:
 if __name__ == '__main__':
 
     scrapper = DeviantArtScrapper(dev=False)
-    links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
-    links_to_scrape = len(links)
-    pages_to_check = 4
-    art_links = scrapper.deviant_art_api.get_deviant_links(links[0:links_to_scrape], 4)
-    scrapper.steam_links_scrapper(list(art_links))
+    # links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
+    # links_to_scrape = 14
+    # pages_to_check = 4
+    # art_links = scrapper.deviant_art_api.get_deviant_links(links[0:links_to_scrape], pages_to_check)
+    # scrapper.steam_links_scrapper(list(art_links))
     scrapper.price_finder()
     from streamlit.web import cli as stcli
     from streamlit import runtime
