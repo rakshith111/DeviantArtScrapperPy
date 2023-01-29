@@ -36,6 +36,10 @@ class HtmlGeny:
                 print(f'[x] {file_pair[1]} does not exist')
                 shutil.copy(file_pair[0], streamlit_jspath)
                 print(f'[+] {file_pair[1]} copied')
+        st.set_page_config(
+            layout="wide", page_title="Steam Deviant Price Checker", page_icon="🎮")
+        st.title('Results')
+        st.title("Steam Prices")
 
     def add_check_box(self, steam_url: str, length=6) -> str:
         '''
@@ -75,7 +79,7 @@ class HtmlGeny:
         else:
             text = f"{link}"
             return f'<a target="_blank" href="{link}">{text}</a>'
-
+            
     def generate_html(self, steam_data: pd.DataFrame, deviant_data: pd.DataFrame) -> None:
         '''
         :param pd.DataFrame steam_data: Steam data
@@ -93,10 +97,7 @@ class HtmlGeny:
 
         '''
 
-        st.set_page_config(
-            layout="wide", page_title="Steam Deviant Price Checker", page_icon="🎮")
-        st.title('Results')
-        st.title("Steam Prices")
+        
 
         to_outdata_steam_data = pd.DataFrame()
         to_outdata_steam_data['SteamUrl'] = steam_data['SteamUrl'].apply(

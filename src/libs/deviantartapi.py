@@ -120,7 +120,6 @@ class SeleniumScrapper:
                 print(
                     f"[+] Current links found = {len(self.deviant_art_pages)}")
         self.driver.close()
-        print(f"[+] Total links found = {len(self.deviant_art_pages)}")
         return self.deviant_art_pages
 
     def scroll(self, scroll_pause_time: float = 1.5,) -> str:
