@@ -243,6 +243,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[x] </span><span class="si">{</span><span class="n">file_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> does not exist&#39;</span><span class="p">)</span>
                 <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">file_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">streamlit_jspath</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[+] </span><span class="si">{</span><span class="n">file_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> copied&#39;</span><span class="p">)</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span>
+            <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span><span class="p">,</span> <span class="n">page_title</span><span class="o">=</span><span class="s2">&quot;Steam Deviant Price Checker&quot;</span><span class="p">,</span> <span class="n">page_icon</span><span class="o">=</span><span class="s2">&quot;🎮&quot;</span><span class="p">)</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Results&#39;</span><span class="p">)</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Steam Prices&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="HtmlGeny.add_check_box"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.HtmlGeny.add_check_box">[docs]</a>    <span class="k">def</span> <span class="nf">add_check_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steam_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
@@ -282,7 +286,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;a target=&quot;_blank&quot; href=&quot;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1">&lt;/a&gt;&#39;</span></div>
-
+            
 <div class="viewcode-block" id="HtmlGeny.generate_html"><a class="viewcode-back" href="../../libs.htmlgeny.html#libs.htmlgeny.HtmlGeny.generate_html">[docs]</a>    <span class="k">def</span> <span class="nf">generate_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steam_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">deviant_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param pd.DataFrame steam_data: Steam data</span>
@@ -300,10 +304,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
 
-        <span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span>
-            <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span><span class="p">,</span> <span class="n">page_title</span><span class="o">=</span><span class="s2">&quot;Steam Deviant Price Checker&quot;</span><span class="p">,</span> <span class="n">page_icon</span><span class="o">=</span><span class="s2">&quot;🎮&quot;</span><span class="p">)</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Results&#39;</span><span class="p">)</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Steam Prices&quot;</span><span class="p">)</span>
+        
 
         <span class="n">to_outdata_steam_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
         <span class="n">to_outdata_steam_data</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">steam_data</span><span class="p">[</span><span class="s1">&#39;SteamUrl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
