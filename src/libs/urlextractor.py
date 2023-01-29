@@ -42,9 +42,11 @@ def url_cleaner(steam_url: str) -> str:
     | converts http to https
 
     '''
-    steam_url = steam_url.replace("#", "")
-    steam_url="https://"+steam_url[steam_url.find("w"):]
-    position_filter = steam_url.find('?filter')
+    remove_stf=["#","]","["]
+    for item in remove_stf:
+        steam_url=steam_url.replace(item,"")
+    steam_url="https://"+steam_url[steam_url.find("s"):]
+    position_filter = steam_url.find('?')
     if position_filter == -1:
         return steam_url
     return steam_url[:position_filter]
