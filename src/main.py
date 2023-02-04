@@ -152,10 +152,10 @@ class DeviantArtScrapper:
                     self.remove_string, ""))
                 steam_link = urlextractor.url_cleaner(
                     str(steam_link))
-                
-                print('[+] Steam link found')
-                row_data.append((steam_link, deviantartpage, "yes"))
-                data_count += 1
+                if len(steam_link) > 46:
+                    print('[+] Steam link found')
+                    row_data.append((steam_link, deviantartpage, "yes"))
+                    data_count += 1
             else:
                 print('[x] No steam link found')
                 row_data.append((None, deviantartpage, "yes-nolink"))
