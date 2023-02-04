@@ -45,7 +45,7 @@ def url_cleaner(steam_url: str) -> str:
     remove_stf = ["#", "]", "["]
     for item in remove_stf:
         steam_url = steam_url.replace(item, "")
-    steam_url = "https://"+steam_url[steam_url.find("s",7):]
+    steam_url = "https://"+steam_url[steam_url.find("s",6):]
     position_filter = steam_url.find('?')
     if position_filter == -1:
         return steam_url
