@@ -105,11 +105,11 @@ class SeleniumScrapper:
                 self.driver.page_source)
 
             while next_btn_clicker <= next_page-1 and find_next_cursor:
-                print(f"[+] Next page cursor = {find_next_cursor}")
+               # print(f"[+] Next page cursor = {find_next_cursor}")
                 joined_url = "https://www.deviantart.com"+find_next_cursor
                 self.driver.get(joined_url)
                 print(
-                    f"[+] Accessing page {next_btn_clicker+1} = {joined_url}....")
+                    f"[+] Accessing page {next_btn_clicker+1} = {joined_url[:48]}....")
                 soup = BeautifulSoup(self.driver.page_source, 'html.parser')
                 for a in soup.find_all('a', {'data-hook': "deviation_link"}, href=True):
                     self.deviant_art_pages.add(a['href'])
