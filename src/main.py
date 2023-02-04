@@ -4,9 +4,13 @@ import re
 import datetime
 import json
 import time
+import sys
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
+from streamlit.web import cli as stcli
+from streamlit import runtime
+
 
 from libs import steamapi
 from libs import urlextractor
@@ -71,7 +75,7 @@ class DeviantArtScrapper:
                 print(f'[x] {file} not found, creating new file')
                 print(f'[+] Creating {file}')
                 if file == 'deviantXsteam.csv':
-                    pd.DataFrame(columns=['SteamUrl', 'DeviantUrl','visited?']).to_csv(
+                    pd.DataFrame(columns=['SteamUrl', 'DeviantUrl', 'visited?']).to_csv(
                         file_path, index=False)
                     self.deviant_x_steam_df = pd.read_csv(file_path)
                 elif file == 'localprice.csv':
@@ -130,7 +134,8 @@ class DeviantArtScrapper:
         difference_links = set(deviant_art_pages) - \
             set(self.deviant_x_steam_df['DeviantUrl'])
         print(f"[+] Total links found = {len(deviant_art_pages)}")
-        print(f"[+] Removing already searched links = {len(deviant_art_pages) - len(difference_links)}")
+        print(
+            f"[+] Removing already searched links = {len(deviant_art_pages) - len(difference_links)}")
         print(f"[+] Total links to be searched: {len(difference_links)}")
         for deviantartpage in difference_links:
             print(f"[+] Accessing {deviantartpage}....")
@@ -141,8 +146,10 @@ class DeviantArtScrapper:
                 "steamcommunity.com/market/listings"))
 
             if outgoing_steam_link:
-                outgoing_steam_link = (outgoing_steam_link.get('href'))  # type: ignore
-                outgoing_steam_link = urlextractor.url_cleaner(str(outgoing_steam_link))
+                outgoing_steam_link = (
+                    outgoing_steam_link.get('href'))  # type: ignore
+                outgoing_steam_link = urlextractor.url_cleaner(
+                    str(outgoing_steam_link))
                 steam_link = (str(outgoing_steam_link).replace(
                     self.remove_string, ""))
                 print('[+] Steam link found')
@@ -156,7 +163,7 @@ class DeviantArtScrapper:
             if data_count > self.save_after:
                 print('[+] Saving data to deviantXsteam.csv')
                 new_data = pd.DataFrame(
-                    row_data, columns=['SteamUrl', 'DeviantUrl','visited?'])
+                    row_data, columns=['SteamUrl', 'DeviantUrl', 'visited?'])
                 self.deviant_x_steam_df = pd.concat(
                     [self.deviant_x_steam_df, new_data], ignore_index=True)
                 self.deviant_x_steam_df.to_csv(os.path.abspath(os.path.join(
@@ -167,10 +174,11 @@ class DeviantArtScrapper:
 
         if len(row_data) > 0:
             print(f'[+] Saving {len(row_data)} data to deviantXsteam.csv')
-            new_data = pd.DataFrame(row_data, columns=['SteamUrl', 'DeviantUrl','visited?'])
+            new_data = pd.DataFrame(
+                row_data, columns=['SteamUrl', 'DeviantUrl', 'visited?'])
             self.deviant_x_steam_df = pd.concat(
                 [self.deviant_x_steam_df, new_data], ignore_index=True)
-            #self.deviantartapi.drop_duplicates( inplace=True)
+            # self.deviantartapi.drop_duplicates( inplace=True)
             self.deviant_x_steam_df.to_csv(os.path.abspath(os.path.join(
                 self.data_path, 'deviantXsteam.csv')), index=False)
             print('[+] Data saved to deviantXsteam.csv')
@@ -198,7 +206,8 @@ class DeviantArtScrapper:
         difference_links = set(self.steam_urls) - \
             set(self.local_price_df['SteamUrl'])
         print(f"[+] Total links found = {len(self.steam_urls)}")
-        print(f"[+] Removing already searched links = {len(self.steam_urls) - len(difference_links)}")
+        print(
+            f"[+] Removing already searched links = {len(self.steam_urls) - len(difference_links)}")
         print(f"[+] Total links to be searched: {len(difference_links)}")
         for steam_link in difference_links:
             price = steamapi.get_item(steam_link)
@@ -239,15 +248,13 @@ class DeviantArtScrapper:
 if __name__ == '__main__':
 
     scrapper = DeviantArtScrapper(dev=False)
-    # links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
-    # links_to_scrape = 14
-    # pages_to_check = 4
-    # art_links = scrapper.deviant_art_api.get_deviant_links(links[0:links_to_scrape], pages_to_check)
-    # scrapper.steam_links_scrapper(list(art_links))
+    links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
+    links_to_scrape = 14
+    pages_to_check = 4
+    art_links = scrapper.deviant_art_api.get_deviant_links(
+        links[0:links_to_scrape], pages_to_check)
+    scrapper.steam_links_scrapper(list(art_links))
     scrapper.price_finder()
-    from streamlit.web import cli as stcli
-    from streamlit import runtime
-    import sys
     if not runtime.exists():
         sys.argv = ["streamlit", "run",
                     os.path.abspath("src\libs\htmlgeny.py")]
