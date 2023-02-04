@@ -42,10 +42,10 @@ def url_cleaner(steam_url: str) -> str:
     | converts http to https
 
     '''
-    remove_stf=["#","]","["]
+    remove_stf = ["#", "]", "["]
     for item in remove_stf:
-        steam_url=steam_url.replace(item,"")
-    steam_url="https://"+steam_url[steam_url.find("s"):]
+        steam_url = steam_url.replace(item, "")
+    steam_url = "https://"+steam_url[steam_url.find("s",7):]
     position_filter = steam_url.find('?')
     if position_filter == -1:
         return steam_url

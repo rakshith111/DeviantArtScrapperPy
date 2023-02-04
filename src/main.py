@@ -138,7 +138,7 @@ class DeviantArtScrapper:
             f"[+] Removing already searched links = {len(deviant_art_pages) - len(difference_links)}")
         print(f"[+] Total links to be searched: {len(difference_links)}")
         for deviantartpage in difference_links:
-            print(f"[+] Accessing {deviantartpage}....")
+            print(f"[+] Accessing {deviantartpage[:55]}....")
             time.sleep(2)
             page = requests.get(deviantartpage)
             soup = BeautifulSoup(page.content, 'html.parser')
@@ -148,10 +148,11 @@ class DeviantArtScrapper:
             if outgoing_steam_link:
                 outgoing_steam_link = (
                     outgoing_steam_link.get('href'))  # type: ignore
-                outgoing_steam_link = urlextractor.url_cleaner(
-                    str(outgoing_steam_link))
                 steam_link = (str(outgoing_steam_link).replace(
                     self.remove_string, ""))
+                steam_link = urlextractor.url_cleaner(
+                    str(steam_link))
+                
                 print('[+] Steam link found')
                 row_data.append((steam_link, deviantartpage, "yes"))
                 data_count += 1
@@ -249,7 +250,7 @@ if __name__ == '__main__':
 
     scrapper = DeviantArtScrapper(dev=False)
     links = open(os.path.abspath("src\data\links.txt"), "r").readlines()
-    links_to_scrape = 14
+    links_to_scrape = 25
     pages_to_check = 4
     art_links = scrapper.deviant_art_api.get_deviant_links(
         links[0:links_to_scrape], pages_to_check)
