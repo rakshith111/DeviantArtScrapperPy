@@ -249,10 +249,10 @@
 <span class="sd">    | converts http to https</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">remove_stf</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#&quot;</span><span class="p">,</span><span class="s2">&quot;]&quot;</span><span class="p">,</span><span class="s2">&quot;[&quot;</span><span class="p">]</span>
+    <span class="n">remove_stf</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="s2">&quot;[&quot;</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">remove_stf</span><span class="p">:</span>
-        <span class="n">steam_url</span><span class="o">=</span><span class="n">steam_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">steam_url</span><span class="o">=</span><span class="s2">&quot;https://&quot;</span><span class="o">+</span><span class="n">steam_url</span><span class="p">[</span><span class="n">steam_url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">):]</span>
+        <span class="n">steam_url</span> <span class="o">=</span> <span class="n">steam_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">steam_url</span> <span class="o">=</span> <span class="s2">&quot;https://&quot;</span><span class="o">+</span><span class="n">steam_url</span><span class="p">[</span><span class="n">steam_url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span><span class="mi">6</span><span class="p">):]</span>
     <span class="n">position_filter</span> <span class="o">=</span> <span class="n">steam_url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">position_filter</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">steam_url</span>

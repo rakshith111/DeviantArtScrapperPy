@@ -1,7 +1,10 @@
 # CHANGELOG
 
 Any notable changes to this project that I deem necessary will be documented in this file.
+## 0.1.2 - 6/2/2023
 
+- Updated filters 
+- Fix some issues
 ## 0.1.1 - 25/1/2023
 
 - Now uses `sort-table.js` to sort the table
