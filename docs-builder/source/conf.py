@@ -28,7 +28,9 @@ pygments_dark_style = "monokai"
 # add __init__ to the folder of files to add into documentation
 autoclass_content = 'both'
 
-# To generate new files in the source folder
+
+# Installation
+# pip install -U sphinx myst_parser furo rst-to-myst[sphinx]
+# To generate new files in the source folder (Gen rst for files )
 # run the command: sphinx-apidoc -o docs-builder/source src
 # usage: sphinx-apidoc [OPTIONS] -o <OUTPUT_PATH> <MODULE_PATH> [EXCLUDE_PATTERN, ...]
-# pip install -U sphinx myst_parser furo
