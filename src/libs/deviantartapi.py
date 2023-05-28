@@ -45,7 +45,7 @@ class SeleniumScrapper:
                 self.driver.add_cookie(cookie)
             self.driver.get(self.login_url)
             if self.driver.current_url == self.login_url:
-                print('[x] Error in loding cookies, logging in manually')
+                print('[x] Error in loading cookies, logging in manually')
                 self.login()
             print('[+] Cookies loaded')
 

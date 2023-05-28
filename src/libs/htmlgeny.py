@@ -79,7 +79,7 @@ class HtmlGeny:
         else:
             text = f"{link}"
             return f'<a target="_blank" href="{link}">{text}</a>'
-            
+
     def generate_html(self, steam_data: pd.DataFrame, deviant_data: pd.DataFrame) -> None:
         '''
         :param pd.DataFrame steam_data: Steam data
@@ -96,8 +96,6 @@ class HtmlGeny:
         | finally writes the html to the streamlit app
 
         '''
-
-        
 
         to_outdata_steam_data = pd.DataFrame()
         to_outdata_steam_data['SteamUrl'] = steam_data['SteamUrl'].apply(
@@ -116,6 +114,8 @@ class HtmlGeny:
             '<th>SteamPrice</th>', '<th class="js-sort-number" >SteamPrice</th>')
         table_html = table_html.replace(
             '<th>Visited</th>', '<th class="js-sort-0" >Visited</th>')
+        table_html = table_html.replace(
+            '<th>SteamPriceDate</th>', '<th class="js-sort-date" >SteamPriceDate</th>')
         css_data = open(f"{self.css_path}", 'r').read()
         table_html = table_html + f'<style>{css_data}</style>'
         st.write(table_html, unsafe_allow_html=True)
